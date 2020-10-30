@@ -53,7 +53,7 @@ public class Main extends Application {
         primaryStage.setTitle("Color Switch");
         primaryStage.setScene(scene);
         primaryStage.show();
-        circle= new Circle(15);
+        circle= new Circle(14);
         circle.setFill(Color.BLUE);
         circle.relocate(135,450);
         rectangle=new Rectangle();
