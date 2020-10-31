@@ -13,11 +13,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
@@ -38,6 +41,7 @@ public class Main extends Application {
     }
 
     public static Circle circle;
+    public static Arc arc[];
     public static Rectangle rectangle;
     public static Pane canvas;
     public static Bounds bounds;
@@ -53,41 +57,43 @@ public class Main extends Application {
         primaryStage.setTitle("Color Switch");
         primaryStage.setScene(scene);
         primaryStage.show();
-        circle= new Circle(14);
+        circle= new Circle(10);
         circle.setFill(Color.BLUE);
         circle.relocate(135,450);
-        rectangle=new Rectangle();
-        rectangle.setHeight(100);
-        rectangle.setWidth(100);
-        rectangle.setX(100);
-        rectangle.setY(200);
-        rectangle.setStroke(Color.RED);
-        RotateTransition r=new RotateTransition();
-        r.setAxis(Rotate.Z_AXIS);
-        r.setByAngle(360);
-        r.setCycleCount(Timeline.INDEFINITE);
-        r.setDuration(Duration.millis(4000));
-        r.setNode(rectangle);
-        r.play();
-        canvas.getChildren().addAll(rectangle);
+        arc=new Arc[4];
+        arc[0]=new Arc(150,250,70,70,0,90);
+        arc[0].setStrokeWidth(10);
+        arc[0].setType(ArcType.OPEN);
+        arc[0].setStroke(Color.RED);
+
+        arc[1]=new Arc(150,250,70,70,90,90);
+        arc[1].setStrokeWidth(10);
+        arc[1].setType(ArcType.OPEN);
+        arc[1].setStroke(Color.GREEN);
+        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(1),new KeyValue(arc[0].startAngleProperty(),360)));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+        Timeline timeline1=new Timeline(new KeyFrame(Duration.seconds(1),new KeyValue(arc[1].startAngleProperty(),450)));
+        timeline1.setCycleCount(Timeline.INDEFINITE);
+        timeline1.play();
+        canvas.getChildren().addAll(arc[0],arc[1]);
         canvas.getChildren().addAll(circle);
 
         bounds=canvas.getBoundsInLocal();
         //move_ball(bounds);
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(KeyEvent keyEvent) {
-                if(keyEvent.getCode()== KeyCode.SPACE)
-                    jump(bounds);
+            public void handle(MouseEvent keyEvent) {
+                jump(bounds);
             }
         });
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+        scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(KeyEvent keyEvent) {
-                if(keyEvent.getCode()== KeyCode.SPACE)
-                    move_ball(bounds);
+            public void handle(MouseEvent mouseEvent) {
+                move_ball(bounds);
             }
         });
+
     }
 
 
