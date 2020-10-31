@@ -58,38 +58,51 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         circle= new Circle(10);
-        circle.setFill(Color.BLUE);
-        circle.relocate(135,450);
-        arc=new Arc[4];
-        arc[0]=new Arc(150,250,70,70,0,90);
-        arc[0].setStrokeWidth(10);
-        arc[0].setType(ArcType.OPEN);
-        arc[0].setStroke(Color.RED);
+        circle.setFill(Color.CYAN);
+        circle.relocate(150-circle.getRadius(),450-circle.getRadius());
+//        arc=new Arc[4];
+//        arc[0]=new Arc(150,250,70,70,0,78);
+//        arc[0].setStrokeWidth(15);
+//        arc[0].setType(ArcType.OPEN);
+//        arc[0].setStroke(Color.DARKVIOLET);
+//
+//        arc[1]=new Arc(150,250,70,70,90,78);
+//        arc[1].setStrokeWidth(15);
+//        arc[1].setType(ArcType.OPEN);
+//        arc[1].setStroke(Color.YELLOW);
+//
+//        arc[2]=new Arc(150,250,70,70,180,78);
+//        arc[2].setStrokeWidth(15);
+//        arc[2].setType(ArcType.OPEN);
+//        arc[2].setStroke(Color.CYAN);
+//
+//        arc[3]=new Arc(150,250,70,70,270,78);
+//        arc[3].setStrokeWidth(15);
+//        arc[3].setType(ArcType.OPEN);
+//        arc[3].setStroke(Color.DARKMAGENTA);
+//
+//        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(5),new KeyValue(arc[0].startAngleProperty(),360),new KeyValue(arc[1].startAngleProperty(),450),new KeyValue(arc[2].startAngleProperty(),540),new KeyValue(arc[3].startAngleProperty(),630)));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
+//        canvas.getChildren().addAll(arc[0],arc[1],arc[2],arc[3]);
 
-        arc[1]=new Arc(150,250,70,70,90,90);
-        arc[1].setStrokeWidth(10);
-        arc[1].setType(ArcType.OPEN);
-        arc[1].setStroke(Color.GREEN);
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(1),new KeyValue(arc[0].startAngleProperty(),360)));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-        Timeline timeline1=new Timeline(new KeyFrame(Duration.seconds(1),new KeyValue(arc[1].startAngleProperty(),450)));
-        timeline1.setCycleCount(Timeline.INDEFINITE);
-        timeline1.play();
-        canvas.getChildren().addAll(arc[0],arc[1]);
+        //RingObs ring=new RingObs();
+        //ring.create(canvas);
+        LineObs line=new LineObs();
+        line.create(canvas);
         canvas.getChildren().addAll(circle);
 
         bounds=canvas.getBoundsInLocal();
         //move_ball(bounds);
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(MouseEvent keyEvent) {
+            public void handle(KeyEvent keyEvent) {
                 jump(bounds);
             }
         });
-        scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(MouseEvent mouseEvent) {
+            public void handle(KeyEvent keyEvent) {
                 move_ball(bounds);
             }
         });
