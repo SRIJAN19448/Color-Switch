@@ -15,5 +15,6 @@ public class LineObs extends Obstacle {
     }
     public void create(Pane canvas){
         Line line[]=new Line[4];
+
     }
 }
