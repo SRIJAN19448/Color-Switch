@@ -58,7 +58,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         circle= new Circle(10);
-        circle.setFill(Color.CYAN);
+        circle.setFill(Color.DARKMAGENTA);
         circle.relocate(150-circle.getRadius(),450-circle.getRadius());
 //        arc=new Arc[4];
 //        arc[0]=new Arc(150,250,70,70,0,78);
@@ -86,10 +86,18 @@ public class Main extends Application {
 //        timeline.play();
 //        canvas.getChildren().addAll(arc[0],arc[1],arc[2],arc[3]);
 
-        //RingObs ring=new RingObs();
-        //ring.create(canvas);
-        LineObs line=new LineObs();
-        line.create(canvas);
+//        RingObs ring=new RingObs();
+//        ring.create(canvas);
+//        LineObs line=new LineObs(150,1);
+//        line.create(canvas);
+//        LineObs line2=new LineObs(350,-1);
+//        line2.create(canvas);
+//        CrossObs cross=new CrossObs(250);
+//        cross.create(canvas);
+//        SquareObs square=new SquareObs();
+//        square.create(canvas);
+        TriangleObs tri=new TriangleObs();
+        tri.create(canvas);
         canvas.getChildren().addAll(circle);
 
         bounds=canvas.getBoundsInLocal();
