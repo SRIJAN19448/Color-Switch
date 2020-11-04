@@ -2,6 +2,7 @@ package sample;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -32,9 +33,9 @@ public class CrossObs extends Obstacle {
         degree[2]=180;
         degree[3]=270;
 
-        pivot=new Circle(10);
+        pivot=new Circle(9);
         pivot.setCenterX(120);
-        pivot.setCenterY(250);
+        pivot.setCenterY(pos);
         pivot.setFill(Color.WHITE);
 
         line[0]=new Line(120,pos,120+length ,pos);
@@ -60,8 +61,11 @@ public class CrossObs extends Obstacle {
         Timeline timeline=new Timeline(new KeyFrame(Duration.millis(20),e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20),e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20),e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20),e->rotateX(line[3],3)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        canvas.getChildren().addAll(line);
-        canvas.getChildren().addAll(pivot);
+        Group g =new Group();
+        g.getChildren().addAll(line);
+        g.getChildren().add(pivot);
+        canvas.getChildren().addAll(g);
+//        canvas.getChildren().addAll(pivot);
 
     }
     public void rotateX(Line line, int number){
@@ -69,25 +73,25 @@ public class CrossObs extends Obstacle {
         if(number==0) {
             degree[0] = (degree[0] + 1) % 360;
             line.setEndX(120+ length * Math.cos(Math.toRadians(degree[0])));
-            line.setEndY(250- length * Math.sin(Math.toRadians(degree[0])));
+            line.setEndY(line.getStartY()- length * Math.sin(Math.toRadians(degree[0])));
         }
         else if(number==1) {
             degree[1] = (degree[1] + 1) % 360;
             line.setEndX(120+ length * Math.cos(Math.toRadians(degree[1])));
-            line.setEndY(250- length * Math.sin(Math.toRadians(degree[1])));
+            line.setEndY(line.getStartY()- length * Math.sin(Math.toRadians(degree[1])));
 
         }
         else if(number==2){
             degree[2] = (degree[2] + 1) % 360;
             line.setEndX(120+ length * Math.cos(Math.toRadians(degree[2])));
-            line.setEndY(250- length * Math.sin(Math.toRadians(degree[2])));
+            line.setEndY(line.getStartY()- length * Math.sin(Math.toRadians(degree[2])));
 
 
         }
         else if(number==3){
             degree[3] = (degree[3] + 1) % 360;
             line.setEndX(120+ length * Math.cos(Math.toRadians(degree[3])));
-            line.setEndY(250- length * Math.sin(Math.toRadians(degree[3])));
+            line.setEndY(line.getStartY()- length * Math.sin(Math.toRadians(degree[3])));
 
 
         }

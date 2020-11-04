@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -61,7 +62,9 @@ public class LineObs extends Obstacle {
             timeline=new Timeline(new KeyFrame(Duration.millis(10),e -> move2(line[0])),new KeyFrame(Duration.millis(10),e1 -> move2(line[1])),new KeyFrame(Duration.millis(10),e2 -> move2(line[2])),new KeyFrame(Duration.millis(10),e3 -> move2(line[3])),new KeyFrame(Duration.millis(10),e4 -> move2(line[4])),new KeyFrame(Duration.millis(10),e5 -> move2(line[5])),new KeyFrame(Duration.millis(10),e6 -> move2(line[6])),new KeyFrame(Duration.millis(10),e7 -> move2(line[7])));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        canvas.getChildren().addAll(line);
+        Group g=new Group();
+        g.getChildren().addAll(line);
+        canvas.getChildren().addAll(g);
     }
 
 

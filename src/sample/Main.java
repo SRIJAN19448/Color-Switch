@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -26,6 +27,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
 
 
 public class Main extends Application {
@@ -49,6 +52,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         canvas = new Pane();
         Scene scene=new Scene(canvas, 300, 500);
+        scene.setFill(Color.BLACK);
 
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
@@ -57,9 +61,9 @@ public class Main extends Application {
         primaryStage.setTitle("Color Switch");
         primaryStage.setScene(scene);
         primaryStage.show();
-        circle= new Circle(10);
-        circle.setFill(Color.DARKMAGENTA);
-        circle.relocate(150-circle.getRadius(),450-circle.getRadius());
+//        circle= new Circle(10);
+//        circle.setFill(Color.DARKMAGENTA);
+//        circle.relocate(150-circle.getRadius(),450-circle.getRadius());
 //        arc=new Arc[4];
 //        arc[0]=new Arc(150,250,70,70,0,78);
 //        arc[0].setStrokeWidth(15);
@@ -86,32 +90,54 @@ public class Main extends Application {
 //        timeline.play();
 //        canvas.getChildren().addAll(arc[0],arc[1],arc[2],arc[3]);
 
-//        RingObs ring=new RingObs();
-//        ring.create(canvas);
-//        LineObs line=new LineObs(150,1);
-//        line.create(canvas);
+        SquareObs square=new SquareObs(250);
+        square.create(canvas);
+        ColorChanger clr=new ColorChanger(100,canvas);
+        clr.create(canvas);
+        RingObs ring=new RingObs(-50);
+        ring.create(canvas);
+        ColorChanger clr2=new ColorChanger(-200,canvas);
+        clr2.create(canvas);
+        CrossObs cross=new CrossObs(-350);
+        cross.create(canvas);
+        ColorChanger clr3=new ColorChanger(-500,canvas);
+        clr3.create(canvas);
+        LineObs line=new LineObs(-650,1);
+        line.create(canvas);
+        ColorChanger clr4=new ColorChanger(-800,canvas);
+        clr4.create(canvas);
 //        LineObs line2=new LineObs(350,-1);
 //        line2.create(canvas);
-//        CrossObs cross=new CrossObs(250);
-//        cross.create(canvas);
-//        SquareObs square=new SquareObs();
-//        square.create(canvas);
-        TriangleObs tri=new TriangleObs();
-        tri.create(canvas);
-        canvas.getChildren().addAll(circle);
+
+
+//        TriangleObs tri=new TriangleObs();
+//        tri.create(canvas);
+
+
+
+        ArrayList<ColorChanger> clrs=new ArrayList<>();
+        clrs.add(clr);
+        clrs.add(clr2);
+        clrs.add(clr3);
+        clrs.add(clr4);
+        Ball ball=new Ball(150,490,10,canvas);
+        ball.create(canvas,clrs);
 
         bounds=canvas.getBoundsInLocal();
-        //move_ball(bounds);
+
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                jump(bounds);
+//                ball.down.pause();
+                ball.make_jump();
             }
         });
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                move_ball(bounds);
+//                ball.up.pause();
+//                ball.down.play();
+                ball.make_move();
             }
         });
 
