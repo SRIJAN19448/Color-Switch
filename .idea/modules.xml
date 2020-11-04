@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ColorSwitch.iml" filepath="$PROJECT_DIR$/ColorSwitch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Colour_Switch.iml" filepath="$PROJECT_DIR$/Colour_Switch.iml" />
     </modules>
   </component>
 </project>
