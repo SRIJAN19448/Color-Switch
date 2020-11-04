@@ -106,6 +106,7 @@ public class Main extends Application {
         line.create(canvas);
         ColorChanger clr4=new ColorChanger(-800,canvas);
         clr4.create(canvas);
+
 //        LineObs line2=new LineObs(350,-1);
 //        line2.create(canvas);
 
