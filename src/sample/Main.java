@@ -61,6 +61,7 @@ public class Main extends Application {
         primaryStage.setTitle("Color Switch");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
 //        circle= new Circle(10);
 //        circle.setFill(Color.DARKMAGENTA);
 //        circle.relocate(150-circle.getRadius(),450-circle.getRadius());
