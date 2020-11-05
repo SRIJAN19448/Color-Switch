@@ -10,6 +10,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class Controller_of_Sample {
+    @FXML
+    Pane pane1;
+
 
 
 }
