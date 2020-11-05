@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller_of_Sample">
    <children>
       <ImageView fitHeight="400.0" fitWidth="570.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@512x512bb.jpg" />
          </image>
       </ImageView>
-      <Button alignment="CENTER" layoutX="146.0" layoutY="150.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="100.0" text="New Game" textFill="#ed0909">
+      <Button fx:id="b1" alignment="CENTER" layoutX="146.0" layoutY="150.0" mnemonicParsing="false" onAction="#action1" prefHeight="10.0" prefWidth="100.0" text="New Game" textFill="#ed0909">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
@@ -24,7 +24,7 @@
             <Font name="System Italic" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="146.0" layoutY="220.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="100.0" text="Exit" textFill="#ed0909">
+      <Button fx:id="b2" alignment="CENTER" layoutX="146.0" layoutY="220.0" mnemonicParsing="false" onAction="#action2" prefHeight="10.0" prefWidth="100.0" text="Exit" textFill="#ed0909">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>
