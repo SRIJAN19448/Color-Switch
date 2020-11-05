@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="300.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@512x512bb.jpg" />
+         </image>
+      </ImageView>
+      <Button alignment="CENTER" layoutX="100.0" layoutY="195.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="100.0" text="Save Game" textFill="#ed0909">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" layoutX="100.0" layoutY="230.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="100.0" text="Restart" textFill="#ed0909">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" layoutX="100.0" layoutY="265.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="100.0" text="Back" textFill="#ed0909">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="90.0" layoutY="71.0" text="Game Paused" textFill="#ed0909">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
