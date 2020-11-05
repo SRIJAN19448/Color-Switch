@@ -11,12 +11,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample1.fxml"));
+        Parent root1 = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getResource("sample1.fxml"));
 
-        Scene scene=new Scene(root, 300, 500);
-        scene.setFill(Color.BLACK);
+        Scene scene1=new Scene(root1, 395, 400);
+        scene1.setFill(Color.BLACK);
+        Scene scene2=new Scene(root2, 300, 500);
+
+        scene2.setFill(Color.BLACK);
         primaryStage.setTitle("Color Switch");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(scene2);
         primaryStage.show();
     }
 
