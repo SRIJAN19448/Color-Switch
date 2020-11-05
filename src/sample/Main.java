@@ -115,6 +115,7 @@ public class Main extends Application {
 //        TriangleObs tri=new TriangleObs();
 //        tri.create(canvas);
 
+        
 
 
         ArrayList<ColorChanger> clrs=new ArrayList<>();
