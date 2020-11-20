@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Arc?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@bodybg.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller_of_Main_Screen">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@bodybg.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameManager">
    <children>
       <Group layoutX="-20.0" layoutY="30.0">
          <children>
@@ -56,7 +56,7 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Button layoutX="240.0" layoutY="238.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: #4CAF50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="New Game" textFill="#fc0101">
+      <Button fx:id="new_game" layoutX="240.0" layoutY="238.0" mnemonicParsing="false" onAction="#new_game" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: #4CAF50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="New Game" textFill="#fc0101">
          <font>
             <Font size="18.0" />
          </font>
