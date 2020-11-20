@@ -188,6 +188,5 @@ public class Controller_of_Main_Screen implements Initializable {
         Scene scene4=new Scene(root4, 300, 500);
         scene4.setFill(Color.BLACK);
         Main.getStage().setScene(scene4);
-
     }
 }
