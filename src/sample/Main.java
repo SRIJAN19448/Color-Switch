@@ -32,10 +32,10 @@ public class Main extends Application {
         scene3.setFill(Color.BLACK);
 
         Scene scene4=new Scene(root4, 300, 500);
-        scene3.setFill(Color.BLACK);
+        scene4.setFill(Color.BLACK);
 
         primaryStage.setTitle("Color Switch");
-        primaryStage.setScene(scene4);
+        primaryStage.setScene(scene1);
         primaryStage.show();
     }
 

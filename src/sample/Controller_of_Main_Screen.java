@@ -28,6 +28,9 @@ public class Controller_of_Main_Screen implements Initializable {
     Pane pane1;
     @FXML
     Button exit;
+    @FXML
+    Button load_game;
+
 
     @FXML
     Arc a1;
@@ -178,5 +181,13 @@ public class Controller_of_Main_Screen implements Initializable {
 
     public void exit(ActionEvent e){
         System.exit(0);
+    }
+
+    public void load_game(ActionEvent e) throws IOException {
+        Parent root4 = FXMLLoader.load(getClass().getResource("save_screen.fxml"));
+        Scene scene4=new Scene(root4, 300, 500);
+        scene4.setFill(Color.BLACK);
+        Main.getStage().setScene(scene4);
+
     }
 }
