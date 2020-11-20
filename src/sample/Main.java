@@ -32,6 +32,11 @@ import java.util.ArrayList;
 
 
 public class Main extends Application {
+    private static Stage guiStage;
+
+    public static Stage getStage() {
+        return guiStage;
+    }
     public void jump(Bounds bounds){
         Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(circle.layoutYProperty(),bounds.getMinY()+circle.getRadius())));
         //timeline.setCycleCount(1);
@@ -55,70 +60,57 @@ public class Main extends Application {
         gm.start_game(primaryStage);
 
 
-        canvas = new Pane();
-        Scene scene=new Scene(canvas, 300, 500);
-        scene.setFill(Color.BLACK);
+//        canvas = new Pane();
+//        Scene scene=new Scene(canvas, 300, 500);
+//        scene.setFill(Color.BLACK);
+//
+//        BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
+//        Background background=new Background(background_fill);
+//        canvas.setBackground(background);
+//        primaryStage.setTitle("Color Switch");
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
 
-        BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
-        Background background=new Background(background_fill);
-        canvas.setBackground(background);
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Color Switch");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        SquareObs square=new SquareObs(250);
-        square.create(canvas);
-        ColorChanger clr=new ColorChanger(100,canvas);
-        clr.create(canvas);
-        RingObs ring=new RingObs(-50);
-        ring.create(canvas);
-        ColorChanger clr2=new ColorChanger(-200,canvas);
-        clr2.create(canvas);
-        CrossObs cross=new CrossObs(-350);
-        cross.create(canvas);
-        ColorChanger clr3=new ColorChanger(-500,canvas);
-        clr3.create(canvas);
-        LineObs line=new LineObs(-650,1);
-        line.create(canvas);
-        ColorChanger clr4=new ColorChanger(-800,canvas);
-        clr4.create(canvas);
-
-//        LineObs line2=new LineObs(350,-1);
-//        line2.create(canvas);
-
-
-//        TriangleObs tri=new TriangleObs();
-//        tri.create(canvas);
-
-        
-
-
-        ArrayList<ColorChanger> clrs=new ArrayList<>();
-        clrs.add(clr);
-        clrs.add(clr2);
-        clrs.add(clr3);
-        clrs.add(clr4);
-        Ball ball=new Ball(150,490,10,canvas);
-        ball.create(canvas,clrs);
-
-        bounds=canvas.getBoundsInLocal();
-
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-//                ball.down.pause();
-                ball.make_jump();
-            }
-        });
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-//                ball.up.pause();
-//                ball.down.play();
-                ball.make_move();
-            }
-        });
+//        SquareObs square=new SquareObs(250);
+//        square.create(canvas);
+//        ColorChanger clr=new ColorChanger(100,canvas);
+//        clr.create(canvas);
+//        RingObs ring=new RingObs(-50);
+//        ring.create(canvas);
+//        ColorChanger clr2=new ColorChanger(-200,canvas);
+//        clr2.create(canvas);
+//        CrossObs cross=new CrossObs(-350);
+//        cross.create(canvas);
+//        ColorChanger clr3=new ColorChanger(-500,canvas);
+//        clr3.create(canvas);
+//        LineObs line=new LineObs(-650,1);
+//        line.create(canvas);
+//        ColorChanger clr4=new ColorChanger(-800,canvas);
+//        clr4.create(canvas);
+//
+//        ArrayList<ColorChanger> clrs=new ArrayList<>();
+//        clrs.add(clr);
+//        clrs.add(clr2);
+//        clrs.add(clr3);
+//        clrs.add(clr4);
+//        Ball ball=new Ball(150,490,10,canvas);
+//        ball.create(canvas,clrs);
+//
+//        bounds=canvas.getBoundsInLocal();
+//
+//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                ball.make_jump();
+//            }
+//        });
+//        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//
+//                ball.make_move();
+//            }
+//        });
 
     }
 
