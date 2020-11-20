@@ -55,7 +55,7 @@ public class Main extends Application {
     public static Bounds bounds;
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        guiStage=primaryStage;
         GameManager gm=new GameManager();
         gm.start_game(primaryStage);
 
