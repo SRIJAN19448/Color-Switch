@@ -5,52 +5,57 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" styleClass="bodybg" stylesheets="@bodybg.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller_of_save_game">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@bodybg.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller_of_save_game">
     <children>
-        <Button alignment="CENTER" layoutX="75.0" layoutY="130.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="150.0" text="Saved Game 2" textFill="#ed0909">
+        <Button alignment="CENTER" layoutX="187.0" layoutY="159.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="225.0" text="Saved Game 2" textFill="#ed0909">
             <font>
-                <Font name="System Italic" size="14.0" />
+                <Font name="System Italic" size="18.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="75.0" layoutY="180.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="150.0" text="Saved Game 3" textFill="#ed0909">
+        <Button alignment="CENTER" layoutX="187.0" layoutY="210.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="225.0" text="Saved Game 3" textFill="#ed0909">
             <font>
-                <Font name="System Italic" size="14.0" />
+                <Font name="System Italic" size="18.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="75.0" layoutY="230.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="150.0" text="Saved Game 4" textFill="#ed0909">
+        <Button alignment="CENTER" layoutX="187.0" layoutY="261.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="225.0" text="Saved Game 4" textFill="#ed0909">
             <font>
-                <Font name="System Italic" size="14.0" />
+                <Font name="System Italic" size="18.0" />
             </font>
         </Button>
-      <Button alignment="CENTER" layoutX="75.0" layoutY="80.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="150.0" text="Saved Game 1" textFill="#ed0909">
+      <Button alignment="CENTER" layoutX="187.0" layoutY="108.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="225.0" text="Saved Game 1" textFill="#ed0909">
          <font>
-            <Font name="System Italic" size="14.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="75.0" layoutY="280.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="150.0" text="Unsaved Game" textFill="#ed0909">
+      <Button alignment="CENTER" layoutX="187.0" layoutY="312.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="225.0" text="Unsaved Game" textFill="#ed0909">
          <font>
-            <Font name="System Italic" size="14.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="75.0" layoutY="330.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="150.0" text="Unsaved Game" textFill="#ed0909">
+      <Button alignment="CENTER" layoutX="187.0" layoutY="363.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="225.0" text="Unsaved Game" textFill="#ed0909">
          <font>
-            <Font name="System Italic" size="14.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="75.0" layoutY="430.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="150.0" text="Unsaved Game" textFill="#ed0909">
+      <Button alignment="CENTER" layoutX="187.0" layoutY="465.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="225.0" text="Unsaved Game" textFill="#ed0909">
          <font>
-            <Font name="System Italic" size="14.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="75.0" layoutY="380.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="150.0" text="Unsaved Game" textFill="#ed0909">
+      <Button alignment="CENTER" layoutX="187.0" layoutY="414.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="225.0" text="Unsaved Game" textFill="#ed0909">
          <font>
-            <Font name="System Italic" size="14.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Button>
-        <Label fx:id="label" layoutX="60.0" layoutY="10.0" text="Saved Games" textFill="#ed0909">
+        <Label fx:id="label" layoutX="176.0" layoutY="24.0" text="Saved Games" textFill="#ed0909">
             <font>
-                <Font name="System Bold Italic" size="28.0" />
+                <Font name="System Bold Italic" size="39.0" />
             </font>
         </Label>
+      <Button fx:id="back" alignment="CENTER" layoutX="245.0" layoutY="526.0" mnemonicParsing="false" onAction="#back" prefHeight="15.0" prefWidth="100.0" text="back" textFill="#ed0909">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Button>
     </children>
 </Pane>

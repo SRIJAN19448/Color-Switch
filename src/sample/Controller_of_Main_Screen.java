@@ -185,7 +185,7 @@ public class Controller_of_Main_Screen implements Initializable {
 
     public void load_game(ActionEvent e) throws IOException {
         Parent root4 = FXMLLoader.load(getClass().getResource("save_screen.fxml"));
-        Scene scene4=new Scene(root4, 300, 500);
+        Scene scene4=new Scene(root4, 600, 600);
         scene4.setFill(Color.BLACK);
         Main.getStage().setScene(scene4);
     }

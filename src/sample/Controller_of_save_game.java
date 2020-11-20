@@ -24,7 +24,8 @@ import java.util.ResourceBundle;
 public class Controller_of_save_game implements Initializable{
     @FXML
     Label label;
-
+    @FXML
+    Button back;
 
     public void change_label_colour(ActionEvent e){
         double r=Math.random();
@@ -40,5 +41,12 @@ public class Controller_of_save_game implements Initializable{
         Timeline timeline2=new Timeline((new KeyFrame(Duration.millis(1000), this::change_label_colour)));
         timeline2.setCycleCount(Timeline.INDEFINITE);
         timeline2.play();
+    }
+
+    public void back(ActionEvent e) throws Exception{
+        Parent root1 = FXMLLoader.load(getClass().getResource("Main_Screen.fxml"));
+        Scene scene1=new Scene(root1, 600, 600);
+        scene1.setFill(Color.BLACK);
+        Main.getStage().setScene(scene1);
     }
 }
