@@ -61,7 +61,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="240.0" layoutY="280.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: #4CAF50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Load Game" textFill="#fc0101">
+      <Button fx:id="load_game" layoutX="240.0" layoutY="280.0" mnemonicParsing="false" onAction="#load_game" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: #4CAF50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Load Game" textFill="#fc0101">
          <font>
             <Font size="18.0" />
          </font>
