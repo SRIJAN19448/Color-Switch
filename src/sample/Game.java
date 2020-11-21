@@ -26,55 +26,34 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Game implements Serializable {
-    Scene scene;
-    Pane canvas;
+    static Scene scene;
+    static Pane canvas;
     ArrayList<Obstacle> obstacles;
     Ball ball;
     ArrayList<ColorChanger> clrs;
     ArrayList<Star> stars;
     int score=0;
-    Button pause;
-    Label scr;
+
 
 
     public Game() throws IOException {
-        this.canvas=new Pane();
-        this.pause=new Button();
-        this.scene=new Scene(new Pane());
-        this.scr=new Label();
-        pause.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        this.canvas=Main.play;
 
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    pause_game();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        this.scene=Main.play_screen;
+
     }
     public void new_game() throws IOException {
 
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
         canvas.setBackground(background);
-        scene=new Scene(canvas, 300, 500);
-        scene.setFill(Color.BLACK);
         Main.getStage().setScene(scene);
-        pause.setText("Pause");
-        pause.setFont(new Font(13));
-        scr.setText(String.valueOf(score));
-        scr.setFont(new Font(25));
-        scr.setTextFill(Color.WHITE);
-        scr.setLayoutX(280);
-        canvas.getChildren().addAll(scr,pause);
+
         SquareObs square=new SquareObs(250);
         square.create(canvas);
-        
-
         ColorChanger clr=new ColorChanger(100,canvas);
         clr.create(canvas);
         RingObs ring=new RingObs(-50);
@@ -118,21 +97,21 @@ public class Game implements Serializable {
         });
 
 
+
     }
     public void play_game(){
 
     }
 
-    public void pause_game()throws IOException{
+    public void pause_game() throws IOException{
         Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
         Scene scene2=new Scene(root, 300, 500);
         scene2.setFill(Color.BLACK);
         Main.getStage().setScene(scene2);
+
     }
-    public void back(ActionEvent e){
-        System.out.println("SIRAJ");
-        Main.getStage().setScene(scene);
-        System.out.println("SRIJAN");
+    public void back(ActionEvent e) {
+
     }
     public void detetct_hit(){
 

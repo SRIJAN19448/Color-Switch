@@ -79,18 +79,18 @@ public class GameManager implements Initializable {
     @FXML
     Label l3;
 
-    Game game;
-    public void new_game(MouseEvent e) throws IOException{
+    static Game game;
+    public static void new_game() throws IOException {
         game=new Game();
         game.new_game();
 
     }
     public void start_game(Stage primaryStage) throws Exception {
-        Parent root1 = FXMLLoader.load(getClass().getResource("Main_Screen.fxml"));
-        Scene scene1 = new Scene(root1, 600, 600);
-        scene1.setFill(Color.BLACK);
-        primaryStage.setTitle("Color Switch");
-        primaryStage.setScene(scene1);
+//        Parent root1 = FXMLLoader.load(getClass().getResource("Main_Screen.fxml"));
+//        Scene scene1 = new Scene(root1, 600, 600);
+//        scene1.setFill(Color.BLACK);
+//        primaryStage.setTitle("Color Switch");
+        primaryStage.setScene(Main.main_screen);
         primaryStage.show();
     }
 
