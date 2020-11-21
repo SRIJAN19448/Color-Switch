@@ -46,6 +46,7 @@ public class Game implements Serializable {
         scene.setFill(Color.BLACK);
         Main.getStage().setScene(scene);
 
+
         SquareObs square=new SquareObs(250);
         square.create(canvas);
         ColorChanger clr=new ColorChanger(100,canvas);
