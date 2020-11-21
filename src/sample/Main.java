@@ -238,6 +238,20 @@ public class Main extends Application {
                 }
             }
         });
+        load_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
+        exit.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.exit(0);
+            }
+        });
     }
 
     @Override
