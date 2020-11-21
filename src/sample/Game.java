@@ -54,7 +54,6 @@ public class Game implements Serializable {
 //            ball.make_jump();
 //        });
 
-
         SquareObs square=new SquareObs(250);
         square.create(canvas);
         ColorChanger clr=new ColorChanger(100,canvas);
