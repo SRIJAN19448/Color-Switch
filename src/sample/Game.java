@@ -35,16 +35,24 @@ public class Game implements Serializable {
     int score=0;
     @FXML
     Button pause;
+    @FXML
+    Label scr;
+
 
     public void new_game() throws IOException {
+
         canvas= FXMLLoader.load(getClass().getResource("play_screen.fxml"));
 //        BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
 //        Background background=new Background(background_fill);
 //        canvas.setBackground(background);
 
+
         Scene scene=new Scene(canvas, 300, 500);
         scene.setFill(Color.BLACK);
         Main.getStage().setScene(scene);
+        pause.addEventFilter(KeyEvent.ANY,k->{
+            ball.make_jump();
+        });
 
 
         SquareObs square=new SquareObs(250);
@@ -96,7 +104,7 @@ public class Game implements Serializable {
 
     }
 
-    public void pause_game(MouseEvent e){
+    public void pause_game(ActionEvent e){
 
     }
 

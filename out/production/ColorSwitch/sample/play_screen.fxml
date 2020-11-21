@@ -7,12 +7,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" styleClass="bodybg" stylesheets="@bodybg2.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Game">
    <children>
-      <Button fx:id="pause" mnemonicParsing="false" onMouseClicked="#pause_game" text="Pause">
+      <Button fx:id="pause" mnemonicParsing="false" onAction="#pause_game" text="Pause">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Label layoutX="241.0" text="Label" textFill="WHITE">
+      <Label fx:id="scr" layoutX="241.0" text="Label" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
