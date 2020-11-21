@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -79,7 +80,7 @@ public class GameManager implements Initializable {
     Label l3;
 
     Game game;
-    public void new_game(ActionEvent e) throws IOException{
+    public void new_game(MouseEvent e) throws IOException{
         game=new Game();
         game.new_game();
 
@@ -198,13 +199,13 @@ public class GameManager implements Initializable {
             a17.setStartAngle(a17.getStartAngle()+1);
     }
 
-    public void exit(ActionEvent e){
+    public void exit(MouseEvent e){
         System.exit(0);
     }
 
 
 
-    public void load_game(ActionEvent e) throws IOException {
+    public void load_game(MouseEvent e) throws IOException {
         Parent root4 = FXMLLoader.load(getClass().getResource("save_screen.fxml"));
         Scene scene4=new Scene(root4, 600, 600);
         scene4.setFill(Color.BLACK);
