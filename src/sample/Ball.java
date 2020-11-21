@@ -93,6 +93,7 @@ public class Ball {
                 trans++;
             }
             ball.setTranslateY(-base);
+
 //            if (170 - newpos > diff) {
 //                diff = 170 - newpos;
 //                for (Node n : canvas.getChildren()) {

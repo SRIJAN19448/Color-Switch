@@ -12,6 +12,6 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="pause" layoutX="51.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#pause_game" text="Button" />
+      <Button fx:id="pause" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#pause_game" text="Button" />
    </children>
 </Pane>

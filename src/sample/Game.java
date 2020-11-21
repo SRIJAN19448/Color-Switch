@@ -99,7 +99,7 @@ public class Game implements Serializable {
 
     }
 
-    public void pause_game(MouseEvent e){
+    public void pause_game(ActionEvent e){
         System.out.println("mota");
 
     }
