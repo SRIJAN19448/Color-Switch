@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,19 +34,41 @@ public class Game implements Serializable {
     ArrayList<ColorChanger> clrs;
     ArrayList<Star> stars;
     int score=0;
-    @FXML
     Button pause;
+    Label scr;
 
+
+    Game() throws IOException {
+        this.canvas=new Pane();
+        this.pause=new Button();
+        this.scr=new Label();
+        pause.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    pause_game();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
     public void new_game() throws IOException {
-        canvas= FXMLLoader.load(getClass().getResource("play_screen.fxml"));
-//        BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
-//        Background background=new Background(background_fill);
-//        canvas.setBackground(background);
 
+        BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background=new Background(background_fill);
+        canvas.setBackground(background);
         Scene scene=new Scene(canvas, 300, 500);
         scene.setFill(Color.BLACK);
         Main.getStage().setScene(scene);
-
+        pause.setText("Pause");
+        pause.setFont(new Font(13));
+        scr.setText(String.valueOf(score));
+        scr.setFont(new Font(25));
+        scr.setTextFill(Color.WHITE);
+        scr.setLayoutX(280);
+        canvas.getChildren().addAll(scr,pause);
         SquareObs square=new SquareObs(250);
         square.create(canvas);
         
@@ -92,19 +115,22 @@ public class Game implements Serializable {
             }
         });
 
+
     }
     public void play_game(){
 
     }
 
-    public void pause_game(ActionEvent e){
-        pause.addEventFilter(KeyEvent.ANY,k->{
-            ball.make_jump();
-        });
-        System.out.println("mota");
+    public void pause_game()throws IOException{
+
+//        Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
+//        Scene scene2=new Scene(root, 300, 500);
+//        scene2.setFill(Color.BLACK);
+//        Main.getStage().setScene(scene2);
+    }
+    public void back(ActionEvent e){
 
     }
-
     public void detetct_hit(){
 
     }
