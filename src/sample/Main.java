@@ -34,10 +34,11 @@ import java.util.ArrayList;
 
 
 public class Main extends Application {
-    public static Scene pause_screen,play_screen,main_screen,hit_screen;
-    public static Pane pause,play,main,hit;
+    public static Scene pause_screen,play_screen,main_screen,load_screen,hit_screen;
+    public static Pane pause,play,main,load,hit;
     private static Stage guiStage;
     public static Label scr;
+    public static Button pausebtn;
     public static Stage getStage() {
         return guiStage;
     }
@@ -55,21 +56,25 @@ public class Main extends Application {
         Background background=new Background(background_fill);
         play.setBackground(background);
         play_screen=new Scene(play,300,500);
+        play_screen.setFill(Color.BLACK);
         scr=new Label("0");
         scr.setTextFill(Color.WHITE);
         scr.setFont(new Font(25));
-        scr.setLayoutX(279);
-        scr.setLayoutY(-4);
+        scr.setLayoutX(11);
+        scr.setLayoutY(3);
         Group g=new Group();
         g.setLayoutX(250);
         g.setLayoutY(100);
-        Button new_game=new Button("Pause");
-        new_game.setLayoutY(0);
-        new_game.setLayoutX(2);
-        new_game.setFont(new Font(14));
-        new_game.setTextFill(Color.RED);
-        play.getChildren().addAll(scr,new_game,g);
-        new_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        pausebtn=new Button("II");
+        pausebtn.setStyle("-fx-background-radius: 50;");
+        pausebtn.setLayoutX(259);
+        pausebtn.setLayoutY(3);
+        pausebtn.setFont(new Font("System Bold",17));
+        pausebtn.setTextFill(Color.RED);
+        pausebtn.setPrefWidth(38);
+        pausebtn.setPrefHeight(38);
+        play.getChildren().addAll(scr,pausebtn,g);
+        pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -139,7 +144,7 @@ public class Main extends Application {
         arcs2[3].setStrokeLineCap(StrokeLineCap.ROUND);
         g2.getChildren().addAll(arcs2);
         Button save_game=new Button("Save Game");
-        save_game.setStyle("-fx-background-radius: 50");
+        save_game.setStyle("-fx-background-radius: 50;");
         save_game.setLayoutX(100);
         save_game.setLayoutY(195);
         save_game.setFont(new Font(14));
@@ -172,9 +177,7 @@ public class Main extends Application {
         });
     }
 
-    public void make_hit(){
 
-    }
     public void make_main(){
         main=new Pane();
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
@@ -242,7 +245,7 @@ public class Main extends Application {
 
             @Override
             public void handle(MouseEvent mouseEvent) {
-
+                guiStage.setScene(load_screen);
             }
         });
         exit.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -254,12 +257,160 @@ public class Main extends Application {
         });
     }
 
+    public void make_load(){
+        load=new Pane();
+        BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background=new Background(background_fill);
+        load.setBackground(background);
+        load_screen=new Scene(load, 600, 600);
+        Label save=new Label("Saved Games");
+        save.setTextFill(Color.RED);
+        save.setFont(new Font("System Bold Italic",39));
+        save.setLayoutX(176);
+        save.setLayoutY(24);
+
+        Button saves[]=new Button[6];
+
+        saves[0]=new Button("Saved Game 1");
+        saves[0].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[0].setLayoutX(187);
+        saves[0].setLayoutY(108);
+        saves[0].setFont(new Font(25));
+        saves[0].setTextFill(Color.web("#fc0101"));
+        saves[0].setPrefWidth(225);
+        saves[0].setPrefHeight(15);
+
+        saves[1]=new Button("Saved Game 2");
+        saves[1].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[1].setLayoutX(187);
+        saves[1].setLayoutY(167);
+        saves[1].setFont(new Font(25));
+        saves[1].setTextFill(Color.web("#fc0101"));
+        saves[1].setPrefWidth(225);
+        saves[1].setPrefHeight(15);
+
+        saves[2]=new Button("Saved Game 3");
+        saves[2].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[2].setLayoutX(187);
+        saves[2].setLayoutY(226);
+        saves[2].setFont(new Font(25));
+        saves[2].setTextFill(Color.web("#fc0101"));
+        saves[2].setPrefWidth(225);
+        saves[2].setPrefHeight(15);
+
+        saves[3]=new Button("Saved Game 4");
+        saves[3].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[3].setLayoutX(187);
+        saves[3].setLayoutY(285);
+        saves[3].setFont(new Font(25));
+        saves[3].setTextFill(Color.web("#fc0101"));
+        saves[3].setPrefWidth(225);
+        saves[3].setPrefHeight(15);
+
+        saves[4]=new Button("Saved Game 5");
+        saves[4].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[4].setLayoutX(187);
+        saves[4].setLayoutY(344);
+        saves[4].setFont(new Font(25));
+        saves[4].setTextFill(Color.web("#fc0101"));
+        saves[4].setPrefWidth(225);
+        saves[4].setPrefHeight(15);
+
+        saves[5]=new Button("Saved Game 6");
+        saves[5].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[5].setLayoutX(187);
+        saves[5].setLayoutY(403);
+        saves[5].setFont(new Font(25));
+        saves[5].setTextFill(Color.web("#fc0101"));
+        saves[5].setPrefWidth(225);
+        saves[5].setPrefHeight(15);
+
+        Button back=new Button("Back");
+        back.setStyle("-fx-background-radius: 50;");
+        back.setLayoutX(245);
+        back.setLayoutY(486);
+        back.setFont(new Font(25));
+        back.setTextFill(Color.web("#9f1818"));
+        back.setPrefWidth(100);
+        back.setPrefHeight(15);
+
+        load.getChildren().addAll(save,back);
+        load.getChildren().addAll(saves);
+
+        back.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                guiStage.setScene(main_screen);
+            }
+        });
+
+    }
+    public void make_hit(){
+        hit=new Pane();
+        BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
+        Background background=new Background(background_fill);
+        hit.setBackground(background);
+        hit_screen=new Scene(hit, 300, 500);
+        Label h=new Label("Oops! Collision");
+        h.setTextFill(Color.RED);
+        h.setFont(new Font("System Bold Italic",28));
+        h.setLayoutX(55);
+        h.setLayoutY(71);
+
+        Button use=new Button("Use Stars");
+        use.setStyle("-fx-background-radius: 50;");
+        use.setLayoutX(100);
+        use.setLayoutY(195);
+        use.setFont(new Font(14));
+        use.setTextFill(Color.web("#9f1818"));
+        use.setPrefWidth(100);
+        use.setPrefHeight(10);
+
+        Button restart=new Button("Restart");
+        restart.setStyle("-fx-background-radius: 50;");
+        restart.setLayoutX(100);
+        restart.setLayoutY(230);
+        restart.setFont(new Font(14));
+        restart.setTextFill(Color.web("#9f1818"));
+        restart.setPrefWidth(100);
+        restart.setPrefHeight(10);
+
+        Button menu=new Button("Main Menu");
+        menu.setStyle("-fx-background-radius: 50;");
+        menu.setLayoutX(100);
+        menu.setLayoutY(265);
+        menu.setFont(new Font(14));
+        menu.setTextFill(Color.web("#9f1818"));
+        menu.setPrefWidth(100);
+        menu.setPrefHeight(10);
+
+        hit.getChildren().addAll(h,use,restart,menu);
+
+        menu.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                guiStage.setScene(main_screen);
+            }
+        });
+
+        restart.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         guiStage=primaryStage;
         make_pause();
         make_play();
         make_main();
+        make_load();
         make_hit();
         GameManager gm=new GameManager();
         gm.start_game(primaryStage);

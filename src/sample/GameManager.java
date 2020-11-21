@@ -90,7 +90,7 @@ public class GameManager implements Initializable {
 //        Scene scene1 = new Scene(root1, 600, 600);
 //        scene1.setFill(Color.BLACK);
 //        primaryStage.setTitle("Color Switch");
-        primaryStage.setScene(Main.main_screen);
+        primaryStage.setScene(Main.hit_screen);
         primaryStage.show();
     }
 

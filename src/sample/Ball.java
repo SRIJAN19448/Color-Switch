@@ -82,6 +82,8 @@ public class Ball {
             base += 3;
             System.out.println("base: "+base);
             canvas.setTranslateY(base);
+            Main.pausebtn.setTranslateY(-base);
+            Main.scr.setTranslateY(-base);
             if(canvas.getTranslateY()>=150*trans)
             {
                 Node n=canvas.getChildren().get(0);
