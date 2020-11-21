@@ -9,6 +9,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 
 public class ColorChanger implements Special{
+    Group g;
     Pane canvas;
     int pos;
     Arc arc[];
@@ -37,7 +38,7 @@ public class ColorChanger implements Special{
         arc[3].setType(ArcType.ROUND);
         arc[3].setFill(Color.DARKMAGENTA);
         arc[3].setStrokeLineCap(StrokeLineCap.ROUND);
-        Group g=new Group();
+        g=new Group();
         g.getChildren().addAll(arc);
         canvas.getChildren().addAll(g);
     }

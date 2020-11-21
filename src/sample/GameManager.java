@@ -79,53 +79,9 @@ public class GameManager implements Initializable {
     Label l3;
 
     Game game;
-    public void new_game(ActionEvent e){
-        Pane canvas=new Pane();
-        BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
-        Background background=new Background(background_fill);
-        canvas.setBackground(background);
-        Scene scene=new Scene(canvas, 300, 500);
-        scene.setFill(Color.BLACK);
-        Main.getStage().setScene(scene);
-        SquareObs square=new SquareObs(250);
-        square.create(canvas);
-        ColorChanger clr=new ColorChanger(100,canvas);
-        clr.create(canvas);
-        RingObs ring=new RingObs(-50);
-        ring.create(canvas);
-        ColorChanger clr2=new ColorChanger(-200,canvas);
-        clr2.create(canvas);
-        CrossObs cross=new CrossObs(-350);
-        cross.create(canvas);
-        ColorChanger clr3=new ColorChanger(-500,canvas);
-        clr3.create(canvas);
-        LineObs line=new LineObs(-650,1);
-        line.create(canvas);
-        ColorChanger clr4=new ColorChanger(-800,canvas);
-        clr4.create(canvas);
-
-        ArrayList<ColorChanger> clrs=new ArrayList<>();
-        clrs.add(clr);
-        clrs.add(clr2);
-        clrs.add(clr3);
-        clrs.add(clr4);
-        Ball ball=new Ball(150,490,10,canvas);
-        ball.create(canvas,clrs);
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                ball.make_jump();
-            }
-        });
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-
-                ball.make_move();
-            }
-        });
-    }
-    public void load_game(Game g){
+    public void new_game(ActionEvent e) throws IOException{
+        game=new Game();
+        game.new_game();
 
     }
     public void start_game(Stage primaryStage) throws Exception {

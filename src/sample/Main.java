@@ -37,16 +37,7 @@ public class Main extends Application {
     public static Stage getStage() {
         return guiStage;
     }
-    public void jump(Bounds bounds){
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(circle.layoutYProperty(),bounds.getMinY()+circle.getRadius())));
-        //timeline.setCycleCount(1);
-        timeline.play();
-    }
-    public void move_ball(Bounds bounds){
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(3),new KeyValue(circle.layoutYProperty(),bounds.getMaxY()-circle.getRadius())));
-        //timeline.setCycleCount(1);
-        timeline.play();
-    }
+
 
     public static Circle circle;
     public static Arc arc[];
@@ -111,7 +102,6 @@ public class Main extends Application {
 //                ball.make_move();
 //            }
 //        });
-
     }
 
 
