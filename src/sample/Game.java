@@ -56,7 +56,7 @@ public class Game implements Serializable {
 
         SquareObs square=new SquareObs(250);
         square.create(canvas);
-        
+
         ColorChanger clr=new ColorChanger(100,canvas);
         clr.create(canvas);
         RingObs ring=new RingObs(-50);
