@@ -38,10 +38,10 @@ public class Game implements Serializable {
     Label scr;
 
 
-    Game() throws IOException {
+    public Game() throws IOException {
         this.canvas=new Pane();
         this.pause=new Button();
-        
+
         this.scr=new Label();
         pause.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
@@ -123,11 +123,10 @@ public class Game implements Serializable {
     }
 
     public void pause_game()throws IOException{
-
-//        Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
-//        Scene scene2=new Scene(root, 300, 500);
-//        scene2.setFill(Color.BLACK);
-//        Main.getStage().setScene(scene2);
+        Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
+        Scene scene2=new Scene(root, 300, 500);
+        scene2.setFill(Color.BLACK);
+        Main.getStage().setScene(scene2);
     }
     public void back(ActionEvent e){
 
