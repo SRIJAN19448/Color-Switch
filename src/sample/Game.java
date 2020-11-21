@@ -97,6 +97,7 @@ public class Game implements Serializable {
     }
 
     public void pause_game(MouseEvent e){
+        System.out.println("mota");
 
     }
 
