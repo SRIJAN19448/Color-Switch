@@ -45,7 +45,9 @@ public class Game implements Serializable {
         Scene scene=new Scene(canvas, 300, 500);
         scene.setFill(Color.BLACK);
         Main.getStage().setScene(scene);
-
+//        pause.addEventFilter(KeyEvent.ANY,k->{
+//            ball.make_jump();
+//        });
         SquareObs square=new SquareObs(250);
         square.create(canvas);
         
@@ -98,9 +100,7 @@ public class Game implements Serializable {
     }
 
     public void pause_game(ActionEvent e){
-        pause.addEventFilter(KeyEvent.ANY,k->{
-            ball.make_jump();
-        });
+        if()
         System.out.println("mota");
 
     }
