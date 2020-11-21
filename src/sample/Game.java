@@ -41,6 +41,7 @@ public class Game implements Serializable {
     Game() throws IOException {
         this.canvas=new Pane();
         this.pause=new Button();
+        
         this.scr=new Label();
         pause.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
