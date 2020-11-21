@@ -28,6 +28,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Game implements Serializable {
+    Scene scene;
     Pane canvas;
     ArrayList<Obstacle> obstacles;
     Ball ball;
@@ -41,7 +42,7 @@ public class Game implements Serializable {
     public Game() throws IOException {
         this.canvas=new Pane();
         this.pause=new Button();
-
+        this.scene=new Scene(new Pane());
         this.scr=new Label();
         pause.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
@@ -60,7 +61,7 @@ public class Game implements Serializable {
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
         canvas.setBackground(background);
-        Scene scene=new Scene(canvas, 300, 500);
+        scene=new Scene(canvas, 300, 500);
         scene.setFill(Color.BLACK);
         Main.getStage().setScene(scene);
         pause.setText("Pause");
@@ -129,7 +130,9 @@ public class Game implements Serializable {
         Main.getStage().setScene(scene2);
     }
     public void back(ActionEvent e){
-
+        System.out.println("SIRAJ");
+        Main.getStage().setScene(scene);
+        System.out.println("SRIJAN");
     }
     public void detetct_hit(){
 
