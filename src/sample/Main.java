@@ -5,6 +5,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -23,6 +24,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
@@ -202,6 +204,290 @@ public class Main extends Application {
         rest.setTextFill(Color.RED);
         rest.setFont(new Font(48));
 
+        //first o
+        Arc arc1o[]=new Arc[4];
+        arc1o[0] = new Arc(170.0, 0, 20, 20, 0, 90);
+        arc1o[1] = new Arc(170.0, 0, 20, 20, 90, 90);
+        arc1o[2] = new Arc(170.0, 0, 20, 20, 180, 90);
+        arc1o[3] = new Arc(170.0, 0, 20, 20, 270, 90);
+
+        arc1o[0].setFill(Color.web("#391fff"));
+        arc1o[0].setStroke(Color.BLACK);
+        arc1o[0].setStrokeType(StrokeType.INSIDE);
+        arc1o[0].setType(ArcType.ROUND);
+
+        arc1o[1].setFill(Color.web("#f20dc4"));
+        arc1o[1].setStroke(Color.BLACK);
+        arc1o[1].setStrokeType(StrokeType.INSIDE);
+        arc1o[1].setType(ArcType.ROUND);
+
+        arc1o[2].setFill(Color.web("#a671a0"));
+        arc1o[2].setStroke(Color.BLACK);
+        arc1o[2].setStrokeType(StrokeType.INSIDE);
+        arc1o[2].setType(ArcType.ROUND);
+
+        arc1o[3].setFill(Color.web("#dddbf0"));
+        arc1o[3].setStroke(Color.BLACK);
+        arc1o[3].setStrokeType(StrokeType.INSIDE);
+        arc1o[3].setType(ArcType.ROUND);
+
+        Group g1=new Group();
+        g1.getChildren().addAll(arc1o);
+        g1.setLayoutX(-20);
+        g1.setLayoutY(30);
+        //first o completed
+
+        //second o
+        Arc arc2o[]=new Arc[4];
+        arc2o[0] = new Arc(170.0, 0, 20, 20, 0, 90);
+        arc2o[1] = new Arc(170.0, 0, 20, 20, 90, 90);
+        arc2o[2] = new Arc(170.0, 0, 20, 20, 180, 90);
+        arc2o[3] = new Arc(170.0, 0, 20, 20, 270, 90);
+
+        arc2o[0].setFill(Color.web("#391fff"));
+        arc2o[0].setStroke(Color.BLACK);
+        arc2o[0].setStrokeType(StrokeType.INSIDE);
+        arc2o[0].setType(ArcType.ROUND);
+
+        arc2o[1].setFill(Color.web("#f20dc4"));
+        arc2o[1].setStroke(Color.BLACK);
+        arc2o[1].setStrokeType(StrokeType.INSIDE);
+        arc2o[1].setType(ArcType.ROUND);
+
+        arc2o[2].setFill(Color.web("#a671a0"));
+        arc2o[2].setStroke(Color.BLACK);
+        arc2o[2].setStrokeType(StrokeType.INSIDE);
+        arc2o[2].setType(ArcType.ROUND);
+
+        arc2o[3].setFill(Color.web("#dddbf0"));
+        arc2o[3].setStroke(Color.BLACK);
+        arc2o[3].setStrokeType(StrokeType.INSIDE);
+        arc2o[3].setType(ArcType.ROUND);
+
+        Group g2=new Group();
+        g2.getChildren().addAll(arc2o);
+        g2.setLayoutX(45);
+        g2.setLayoutY(30);
+        //second o completed
+
+        //inner  circle
+        Arc arc_inner_circle[]=new Arc[4];
+        arc_inner_circle[0]=new Arc(0,0,150,150,0,90);
+        arc_inner_circle[1]=new Arc(0,0,150,150,90,90);
+        arc_inner_circle[2]=new Arc(0,0,150,150,180,90);
+        arc_inner_circle[3]=new Arc(0,0,150,150,270,90);
+
+        arc_inner_circle[0].setFill(Color.BLACK);
+        arc_inner_circle[0].setStroke(Color.web("#19e010"));
+        //arc_inner_circle[0].setStrokeType(StrokeType.INSIDE);
+        arc_inner_circle[0].setStrokeWidth(15);
+        arc_inner_circle[0].setStrokeLineCap(StrokeLineCap.ROUND);
+
+        arc_inner_circle[1].setFill(Color.BLACK);
+        arc_inner_circle[1].setStroke(Color.web("#e20e0e"));
+        //arc_inner_circle[1].setStrokeType(StrokeType.INSIDE);
+        arc_inner_circle[1].setStrokeWidth(15);
+        arc_inner_circle[1].setStrokeLineCap(StrokeLineCap.ROUND);
+
+        arc_inner_circle[2].setFill(Color.BLACK);
+        arc_inner_circle[2].setStroke(Color.web("#fffb00"));
+        //arc_inner_circle[2].setStrokeType(StrokeType.INSIDE);
+        arc_inner_circle[2].setStrokeWidth(15);
+        arc_inner_circle[2].setStrokeLineCap(StrokeLineCap.ROUND);
+
+        arc_inner_circle[3].setFill(Color.BLACK);
+        arc_inner_circle[3].setStroke(Color.web("#12bcde"));
+        //arc_inner_circle[3].setStrokeType(StrokeType.INSIDE);
+        arc_inner_circle[3].setStrokeWidth(15);
+        arc_inner_circle[3].setStrokeLineCap(StrokeLineCap.ROUND);
+
+        // inner circle complete adding the group
+
+        Group g3=new Group();
+        g3.getChildren().addAll(arc_inner_circle);
+        g3.setLayoutX(312);
+        g3.setLayoutY(312);
+
+        //outer circle started
+        Arc arc_outer_circle[]=new Arc[4];
+        arc_outer_circle[0]=new Arc(0,0,225,225,0,90);
+        arc_outer_circle[1]=new Arc(0,0,225,225,90,90);
+        arc_outer_circle[2]=new Arc(0,0,225,225,180,90);
+        arc_outer_circle[3]=new Arc(0,0,225,225,270,90);
+
+        arc_outer_circle[0].setFill(Color.BLACK);
+        arc_outer_circle[0].setStroke(Color.web("#19e010"));
+        //arc_outer_circle[0].setStrokeType(StrokeType.INSIDE);
+        arc_outer_circle[0].setStrokeWidth(15);
+        arc_outer_circle[0].setStrokeLineCap(StrokeLineCap.ROUND);
+
+        arc_outer_circle[1].setFill(Color.BLACK);
+        arc_outer_circle[1].setStroke(Color.web("#e20e0e"));
+        //arc_outer_circle[1].setStrokeType(StrokeType.INSIDE);
+        arc_outer_circle[1].setStrokeWidth(15);
+        arc_outer_circle[1].setStrokeLineCap(StrokeLineCap.ROUND);
+
+        arc_outer_circle[2].setFill(Color.BLACK);
+        arc_outer_circle[2].setStroke(Color.web("#fffb00"));
+        //arc_outer_circle[2].setStrokeType(StrokeType.INSIDE);
+        arc_outer_circle[2].setStrokeWidth(15);
+        arc_outer_circle[2].setStrokeLineCap(StrokeLineCap.ROUND);
+
+        arc_outer_circle[3].setFill(Color.BLACK);
+        arc_outer_circle[3].setStroke(Color.web("#12bcde"));
+        //arc_outer_circle[3].setStrokeType(StrokeType.INSIDE);
+        arc_outer_circle[3].setStrokeWidth(15);
+        arc_outer_circle[3].setStrokeLineCap(StrokeLineCap.ROUND);
+
+        // outer circle complete adding the group
+
+        Group g4=new Group();
+        g4.getChildren().addAll(arc_outer_circle);
+        g4.setLayoutX(312);
+        g4.setLayoutY(312);
+
+
+
+
+
+
+        //defining internal rotation function
+        //since java do not support a method inside a method therefore adding a local class
+         class local {
+            public void rotate1() {
+                if (arc1o[0].getStartAngle() >= 360)
+                    arc1o[0].setStartAngle(0);
+                else
+                    arc1o[0].setStartAngle(arc1o[0].getStartAngle() + 1);
+
+                if (arc2o[0].getStartAngle() >= 360)
+                    arc2o[0].setStartAngle(0);
+                else
+                    arc2o[0].setStartAngle(arc2o[0].getStartAngle() + 1);
+
+                if (arc_inner_circle[0].getStartAngle() <= 0)
+                    arc_inner_circle[0].setStartAngle(360);
+                else
+                    arc_inner_circle[0].setStartAngle(arc_inner_circle[0].getStartAngle() - 1);
+
+                if (arc_outer_circle[0].getStartAngle() >= 360)
+                    arc_outer_circle[0].setStartAngle(0);
+                else
+                    arc_outer_circle[0].setStartAngle(arc_outer_circle[0].getStartAngle() + 1);
+
+                //System.out.println("a");
+            }
+            public void rotate2() {
+                if (arc1o[1].getStartAngle() >= 360)
+                    arc1o[1].setStartAngle(0);
+                else
+                    arc1o[1].setStartAngle(arc1o[1].getStartAngle() + 1);
+
+                if (arc2o[1].getStartAngle() >= 360)
+                    arc2o[1].setStartAngle(0);
+                else
+                    arc2o[1].setStartAngle(arc2o[1].getStartAngle() + 1);
+
+                if (arc_inner_circle[1].getStartAngle() <= 0)
+                    arc_inner_circle[1].setStartAngle(360);
+                else
+                    arc_inner_circle[1].setStartAngle(arc_inner_circle[1].getStartAngle() - 1);
+
+                if (arc_outer_circle[1].getStartAngle() >= 360)
+                    arc_outer_circle[1].setStartAngle(0);
+                else
+                    arc_outer_circle[1].setStartAngle(arc_outer_circle[1].getStartAngle() + 1);
+
+                //System.out.println("b");
+            }
+
+            public void rotate3() {
+                if (arc1o[2].getStartAngle() >= 360)
+                    arc1o[2].setStartAngle(0);
+                else
+                    arc1o[2].setStartAngle(arc1o[2].getStartAngle() + 1);
+
+                if (arc2o[2].getStartAngle() >= 360)
+                    arc2o[2].setStartAngle(0);
+                else
+                    arc2o[2].setStartAngle(arc2o[2].getStartAngle() + 1);
+
+                if (arc_inner_circle[2].getStartAngle() <= 0)
+                    arc_inner_circle[2].setStartAngle(360);
+                else
+                    arc_inner_circle[2].setStartAngle(arc_inner_circle[2].getStartAngle() - 1);
+
+                if (arc_outer_circle[2].getStartAngle() >= 360)
+                    arc_outer_circle[2].setStartAngle(0);
+                else
+                    arc_outer_circle[2].setStartAngle(arc_outer_circle[2].getStartAngle() + 1);
+
+                //System.out.println("c");
+            }
+
+            public void rotate4() {
+                if (arc1o[3].getStartAngle() >= 360)
+                    arc1o[3].setStartAngle(0);
+                else
+                    arc1o[3].setStartAngle(arc1o[3].getStartAngle() + 1);
+
+                if (arc2o[3].getStartAngle() >= 360)
+                    arc2o[3].setStartAngle(0);
+                else
+                    arc2o[3].setStartAngle(arc2o[3].getStartAngle() + 1);
+
+                if (arc_inner_circle[3].getStartAngle() <= 0)
+                    arc_inner_circle[3].setStartAngle(360);
+                else
+                    arc_inner_circle[3].setStartAngle(arc_inner_circle[3].getStartAngle() - 1);
+
+                if (arc_outer_circle[3].getStartAngle() >= 360)
+                    arc_outer_circle[3].setStartAngle(0);
+                else
+                    arc_outer_circle[3].setStartAngle(arc_outer_circle[3].getStartAngle() + 1);
+
+                //System.out.println("d");
+            }
+
+        } // local class ends
+
+        //handler for rotate
+        class handler1 implements  EventHandler<ActionEvent>{
+            local obj=new local();
+             @Override
+            public void handle(ActionEvent event) {
+                obj.rotate1();
+                obj.rotate2();
+                obj.rotate3();
+                obj.rotate4();
+            }
+        }
+
+        //handle for changing the colour
+        class handler2 implements EventHandler<ActionEvent>{
+
+            @Override
+            public void handle(ActionEvent event) {
+                double r=Math.random();
+                double g=Math.random();
+                double b=Math.random();
+
+                c.setTextFill(Color.color(r,g,b));
+                l.setTextFill(Color.color(r,g,b));
+                rest.setTextFill(Color.color(r,g,b));
+            }
+        }
+
+
+         Timeline timeline1=new Timeline(new KeyFrame(Duration.millis(10),new handler1()));
+         timeline1.setCycleCount(Timeline.INDEFINITE);
+         timeline1.play();
+
+        Timeline timeline2=new Timeline(new KeyFrame(Duration.millis(1000),new handler2()));
+        timeline2.setCycleCount(Timeline.INDEFINITE);
+        timeline2.play();
+
+
         Button new_game=new Button("New Game");
         new_game.setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
         new_game.setLayoutX(240);
@@ -229,7 +515,7 @@ public class Main extends Application {
         exit.setPrefWidth(150);
         exit.setPrefHeight(40);
 
-        main.getChildren().addAll(c,l,rest,new_game,load_game,exit);
+        main.getChildren().addAll(c,l,rest,new_game,load_game,exit,g1,g2,g3,g4);
         new_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
