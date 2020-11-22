@@ -279,25 +279,25 @@ public class Main extends Application {
 
         arc_inner_circle[0].setFill(Color.BLACK);
         arc_inner_circle[0].setStroke(Color.web("#19e010"));
-        //arc_inner_circle[0].setStrokeType(StrokeType.INSIDE);
+        arc_inner_circle[0].setStrokeType(StrokeType.INSIDE);
         arc_inner_circle[0].setStrokeWidth(15);
         arc_inner_circle[0].setStrokeLineCap(StrokeLineCap.ROUND);
 
         arc_inner_circle[1].setFill(Color.BLACK);
         arc_inner_circle[1].setStroke(Color.web("#e20e0e"));
-        //arc_inner_circle[1].setStrokeType(StrokeType.INSIDE);
+        arc_inner_circle[1].setStrokeType(StrokeType.INSIDE);
         arc_inner_circle[1].setStrokeWidth(15);
         arc_inner_circle[1].setStrokeLineCap(StrokeLineCap.ROUND);
 
         arc_inner_circle[2].setFill(Color.BLACK);
         arc_inner_circle[2].setStroke(Color.web("#fffb00"));
-        //arc_inner_circle[2].setStrokeType(StrokeType.INSIDE);
+        arc_inner_circle[2].setStrokeType(StrokeType.INSIDE);
         arc_inner_circle[2].setStrokeWidth(15);
         arc_inner_circle[2].setStrokeLineCap(StrokeLineCap.ROUND);
 
         arc_inner_circle[3].setFill(Color.BLACK);
         arc_inner_circle[3].setStroke(Color.web("#12bcde"));
-        //arc_inner_circle[3].setStrokeType(StrokeType.INSIDE);
+        arc_inner_circle[3].setStrokeType(StrokeType.INSIDE);
         arc_inner_circle[3].setStrokeWidth(15);
         arc_inner_circle[3].setStrokeLineCap(StrokeLineCap.ROUND);
 
@@ -317,25 +317,25 @@ public class Main extends Application {
 
         arc_outer_circle[0].setFill(Color.BLACK);
         arc_outer_circle[0].setStroke(Color.web("#19e010"));
-        //arc_outer_circle[0].setStrokeType(StrokeType.INSIDE);
+        arc_outer_circle[0].setStrokeType(StrokeType.INSIDE);
         arc_outer_circle[0].setStrokeWidth(15);
         arc_outer_circle[0].setStrokeLineCap(StrokeLineCap.ROUND);
 
         arc_outer_circle[1].setFill(Color.BLACK);
         arc_outer_circle[1].setStroke(Color.web("#e20e0e"));
-        //arc_outer_circle[1].setStrokeType(StrokeType.INSIDE);
+        arc_outer_circle[1].setStrokeType(StrokeType.INSIDE);
         arc_outer_circle[1].setStrokeWidth(15);
         arc_outer_circle[1].setStrokeLineCap(StrokeLineCap.ROUND);
 
         arc_outer_circle[2].setFill(Color.BLACK);
         arc_outer_circle[2].setStroke(Color.web("#fffb00"));
-        //arc_outer_circle[2].setStrokeType(StrokeType.INSIDE);
+        arc_outer_circle[2].setStrokeType(StrokeType.INSIDE);
         arc_outer_circle[2].setStrokeWidth(15);
         arc_outer_circle[2].setStrokeLineCap(StrokeLineCap.ROUND);
 
         arc_outer_circle[3].setFill(Color.BLACK);
         arc_outer_circle[3].setStroke(Color.web("#12bcde"));
-        //arc_outer_circle[3].setStrokeType(StrokeType.INSIDE);
+        arc_outer_circle[3].setStrokeType(StrokeType.INSIDE);
         arc_outer_circle[3].setStrokeWidth(15);
         arc_outer_circle[3].setStrokeLineCap(StrokeLineCap.ROUND);
 
