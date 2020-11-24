@@ -39,8 +39,8 @@ public class Game implements Serializable {
     int score=0;
     int clr_pos;
     int obstacle_pos;
-    ArrayList<Object> items;
-
+    static ArrayList<Object> items;
+    int flag=1;
     public Game() throws IOException {
         this.obstacle_pos=250;
         this.clr_pos=100;
@@ -59,27 +59,35 @@ public class Game implements Serializable {
 
         SquareObs square=new SquareObs(this.obstacle_pos,this.ball);
         square.create(canvas);
+        canvas.getChildren().add(square.grp);
         this.obstacle_pos-=300;
         ColorChanger clr=new ColorChanger(this.clr_pos,canvas);
         clr.create(canvas);
+        canvas.getChildren().add(clr.g);
         this.clr_pos-=300;
         RingObs ring=new RingObs(this.obstacle_pos,this.ball);
         ring.create(canvas);
+        canvas.getChildren().add(ring.grp);
         this.obstacle_pos-=300;
         ColorChanger clr2=new ColorChanger(this.clr_pos,canvas);
         clr2.create(canvas);
+        canvas.getChildren().add(clr2.g);
         this.clr_pos-=300;
         CrossObs cross=new CrossObs(this.obstacle_pos,this.ball);
         cross.create(canvas);
+        canvas.getChildren().add(cross.grp);
         this.obstacle_pos-=300;
         ColorChanger clr3=new ColorChanger(this.clr_pos,canvas);
         clr3.create(canvas);
+        canvas.getChildren().add(clr3.g);
         this.clr_pos-=300;
         LineObs line=new LineObs(this.obstacle_pos,1,this.ball);
         line.create(canvas);
+        canvas.getChildren().add(line.grp);
         this.obstacle_pos-=300;
         ColorChanger clr4=new ColorChanger(this.clr_pos,canvas);
         clr4.create(canvas);
+        canvas.getChildren().add(clr4.g);
         this.clr_pos-=300;
         System.out.println("->");
 
@@ -187,10 +195,31 @@ public class Game implements Serializable {
                 }
             }
         });
-
+        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e->play_game()));
+        add.setCycleCount(Timeline.INDEFINITE);
+        add.play();
     }
     public void play_game(){
-
+        System.out.println(Game.items.size());
+            if(Game.items.size()!=8){
+                if(this.flag==1){
+                    SquareObs sq=new SquareObs(this.obstacle_pos,this.ball);
+                    sq.create(canvas);
+                    this.obstacle_pos-=300;
+                    System.out.println("index: "+canvas.getChildren().indexOf(sq.grp));
+                    canvas.getChildren().add(canvas.getChildren().size()-2,sq.grp);
+                    items.add(sq);
+                    this.flag=0;
+                }
+                else{
+                    ColorChanger clr=new ColorChanger(this.clr_pos,canvas);
+                    clr.create(canvas);
+                    this.clr_pos-=300;
+                    canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                    items.add(clr);
+                    this.flag=1;
+                }
+            }
     }
 
     public void pause_game() throws IOException{

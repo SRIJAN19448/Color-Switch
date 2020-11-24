@@ -13,12 +13,13 @@ import java.io.Serializable;
 public class ColorChanger implements Special, Serializable {
     transient Group g;
     transient Pane canvas;
-    int pos;
+    double pos;
     transient Arc arc[];
-    ColorChanger(int pos, Pane canvas){
+    ColorChanger(double pos, Pane canvas){
         this.pos=pos;
         this.canvas=canvas;
         arc=new Arc[4];
+        g=new Group();
     }
     public void create(Pane canvas){
         arc[0]=new Arc(150,pos,12,12,0,90);
@@ -40,9 +41,8 @@ public class ColorChanger implements Special, Serializable {
         arc[3].setType(ArcType.ROUND);
         arc[3].setFill(Color.DARKMAGENTA);
         arc[3].setStrokeLineCap(StrokeLineCap.ROUND);
-        g=new Group();
         g.getChildren().addAll(arc);
-        canvas.getChildren().addAll(g);
+//        canvas.getChildren().addAll(g);
     }
 
     @Override

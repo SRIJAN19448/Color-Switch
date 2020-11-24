@@ -47,7 +47,7 @@ public class TriangleObs extends Obstacle{
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
         grp.getChildren().addAll(line);
-        canvas.getChildren().addAll(grp);
+//        canvas.getChildren().addAll(grp);
     }
 
     public void rotateX(Line line, int number) {

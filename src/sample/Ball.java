@@ -86,8 +86,7 @@ public class Ball implements Serializable {
             canvas.setTranslateY(base);
             Main.pausebtn.setTranslateY(-base);
             Main.scr.setTranslateY(-base);
-            if(canvas.getTranslateY()>=150*trans)
-            {
+            if(canvas.getTranslateY()>=150*trans) {
 //                Node n=canvas.getChildren().get(0);
 //                canvas.getChildren().remove(n);
 //                n.setTranslateY(-canvas.getTranslateY()-250-650);
@@ -96,19 +95,13 @@ public class Ball implements Serializable {
 //                canvas.getChildren().add(this.ball);
                 trans++;
             }
-            System.out.println("->");
             ball.setTranslateY(-base);
-            for(Node n:canvas.getChildren()){
-
-                Bounds s=n.getBoundsInLocal();
-                System.out.println((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY()));
-            }
-            System.out.println("num1: "+num1);
             Node n=canvas.getChildren().get(num1);
             Bounds s=n.getBoundsInLocal();
             if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY())>=(double)600){
-                System.out.println("SRIJAN");
                 canvas.getChildren().remove(n);
+                Game.items.remove(0);
+                System.out.println(Game.items.size());
 
             }
 

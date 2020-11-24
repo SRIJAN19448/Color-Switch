@@ -65,7 +65,7 @@ public class LineObs extends Obstacle {
         timeline.play();
 
         grp.getChildren().addAll(line);
-        canvas.getChildren().addAll(grp);
+//        canvas.getChildren().addAll(grp);
     }
 
 

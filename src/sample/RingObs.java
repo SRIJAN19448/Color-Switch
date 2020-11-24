@@ -54,6 +54,6 @@ public class RingObs extends Obstacle{
         timeline.play();
 
         grp.getChildren().addAll(arc);
-        canvas.getChildren().addAll(grp);
+//        canvas.getChildren().addAll(grp);
     }
 }

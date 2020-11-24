@@ -10,11 +10,11 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class SquareObs extends Obstacle{
-    int pos;
+    double pos;
     transient Line line[];
     int degree[];
     int length;
-    SquareObs(int pos,Ball ball){
+    SquareObs(double pos,Ball ball){
         super(ball);
         this.pos=pos;
         line=new Line[4];
@@ -57,7 +57,7 @@ public class SquareObs extends Obstacle{
         timeline.play();
 
         this.grp.getChildren().addAll(line);
-        canvas.getChildren().addAll(grp);
+//        canvas.getChildren().addAll(grp);
 
     }
 
