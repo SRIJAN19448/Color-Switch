@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,15 +37,19 @@ public class Game implements Serializable {
     ArrayList<Star> stars;
     int pause_stat;
     int score=0;
-
-
+    int clr_pos;
+    int obstacle_pos;
+    ArrayList<Object> items;
 
     public Game() throws IOException {
+        this.obstacle_pos=250;
+        this.clr_pos=100;
         this.canvas=Main.play;
         this.pause_stat=0;
         this.scene=Main.play_screen;
 
     }
+
     public void new_game() throws IOException {
 
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
@@ -52,22 +57,41 @@ public class Game implements Serializable {
         canvas.setBackground(background);
         Main.getStage().setScene(scene);
 
-        SquareObs square=new SquareObs(250,this.ball);
+        SquareObs square=new SquareObs(this.obstacle_pos,this.ball);
         square.create(canvas);
-        ColorChanger clr=new ColorChanger(100,canvas);
+        this.obstacle_pos-=300;
+        ColorChanger clr=new ColorChanger(this.clr_pos,canvas);
         clr.create(canvas);
-        RingObs ring=new RingObs(-50,this.ball);
+        this.clr_pos-=300;
+        RingObs ring=new RingObs(this.obstacle_pos,this.ball);
         ring.create(canvas);
-        ColorChanger clr2=new ColorChanger(-200,canvas);
+        this.obstacle_pos-=300;
+        ColorChanger clr2=new ColorChanger(this.clr_pos,canvas);
         clr2.create(canvas);
-        CrossObs cross=new CrossObs(-350,this.ball);
+        this.clr_pos-=300;
+        CrossObs cross=new CrossObs(this.obstacle_pos,this.ball);
         cross.create(canvas);
-        ColorChanger clr3=new ColorChanger(-500,canvas);
+        this.obstacle_pos-=300;
+        ColorChanger clr3=new ColorChanger(this.clr_pos,canvas);
         clr3.create(canvas);
-        LineObs line=new LineObs(-650,1,this.ball);
+        this.clr_pos-=300;
+        LineObs line=new LineObs(this.obstacle_pos,1,this.ball);
         line.create(canvas);
-        ColorChanger clr4=new ColorChanger(-800,canvas);
+        this.obstacle_pos-=300;
+        ColorChanger clr4=new ColorChanger(this.clr_pos,canvas);
         clr4.create(canvas);
+        this.clr_pos-=300;
+        System.out.println("->");
+
+        items=new ArrayList<>();
+        items.add(square);
+        items.add(clr);
+        items.add(ring);
+        items.add(clr2);
+        items.add(cross);
+        items.add(clr3);
+        items.add(line);
+        items.add(clr4);
 
         obstacles=new ArrayList<>();
         obstacles.add(square);
@@ -82,6 +106,11 @@ public class Game implements Serializable {
         clrs.add(clr4);
         ball=new Ball(150,490,10,canvas);
         ball.create(canvas,clrs);
+        for(Node n:canvas.getChildren()){
+
+            Bounds s=n.getBoundsInLocal();
+            System.out.println((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY()));
+        }
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {

@@ -66,8 +66,6 @@ public class Main extends Application {
         scr.setLayoutX(11);
         scr.setLayoutY(3);
         Group g=new Group();
-        g.setLayoutX(250);
-        g.setLayoutY(100);
         pausebtn=new Button("II");
         pausebtn.setStyle("-fx-background-radius: 50;-fx-background-color: #333333");
         pausebtn.setLayoutX(259);
@@ -76,7 +74,7 @@ public class Main extends Application {
         pausebtn.setTextFill(Color.WHITE);
         pausebtn.setPrefWidth(38);
         pausebtn.setPrefHeight(38);
-        play.getChildren().addAll(scr,pausebtn,g);
+        play.getChildren().addAll(scr,pausebtn);
         pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override

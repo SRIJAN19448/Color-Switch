@@ -2,6 +2,7 @@ package sample;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -24,9 +25,10 @@ public class Ball implements Serializable {
     transient Timeline up;
     transient Timeline down;
     transient Circle ball;
-
+    int num1;
     Ball(int centerx, int centery, int radius,Pane canvas){
         this.canvas=canvas;
+        num1=2;
         ball=new Circle(centerx,centery,radius);
         prevpos=ball.getCenterY();
         newpos=ball.getCenterY();
@@ -60,7 +62,6 @@ public class Ball implements Serializable {
             if(clrs.get(0).special(ball.getCenterY(),ball)==1) {
                 ColorChanger c=clrs.get(0);
                 clrs.remove(0);
-                clrs.add(c);
             }
 //        System.out.println   ("curr: "+ball.getCenterY());
 //        System.out.println("prev: " + Double.toString(prevpos));
@@ -81,21 +82,35 @@ public class Ball implements Serializable {
 //            }
             newpos = ball.getCenterY();
             base += 3;
-            System.out.println("base: "+base);
+//            System.out.println("base: "+base);
             canvas.setTranslateY(base);
             Main.pausebtn.setTranslateY(-base);
             Main.scr.setTranslateY(-base);
             if(canvas.getTranslateY()>=150*trans)
             {
-                Node n=canvas.getChildren().get(0);
-                canvas.getChildren().remove(n);
-                n.setTranslateY(-canvas.getTranslateY()-250-650);
-                canvas.getChildren().add(n);
-                canvas.getChildren().remove(this.ball);
-                canvas.getChildren().add(this.ball);
+//                Node n=canvas.getChildren().get(0);
+//                canvas.getChildren().remove(n);
+//                n.setTranslateY(-canvas.getTranslateY()-250-650);
+//                canvas.getChildren().add(n);
+//                canvas.getChildren().remove(this.ball);
+//                canvas.getChildren().add(this.ball);
                 trans++;
             }
+            System.out.println("->");
             ball.setTranslateY(-base);
+            for(Node n:canvas.getChildren()){
+
+                Bounds s=n.getBoundsInLocal();
+                System.out.println((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY()));
+            }
+            System.out.println("num1: "+num1);
+            Node n=canvas.getChildren().get(num1);
+            Bounds s=n.getBoundsInLocal();
+            if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY())>=(double)600){
+                System.out.println("SRIJAN");
+                canvas.getChildren().remove(n);
+
+            }
 
 //            if (170 - newpos > diff) {
 //                diff = 170 - newpos;
