@@ -33,6 +33,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main extends Application {
@@ -40,11 +41,11 @@ public class Main extends Application {
     public static Pane pause,play,main,load,hit;
     private static Stage guiStage;
     public static Label scr;
-    public static Button pausebtn;
+    public static Button pausebtn,back,save_game;
     public static Stage getStage() {
         return guiStage;
     }
-
+    int var=3;
 
     public static Circle circle;
 //    public static Arc arc[];
@@ -61,18 +62,18 @@ public class Main extends Application {
         play_screen.setFill(Color.BLACK);
         scr=new Label("0");
         scr.setTextFill(Color.WHITE);
-        scr.setFont(new Font(25));
+        scr.setFont(new Font("System Bold",25));
         scr.setLayoutX(11);
         scr.setLayoutY(3);
         Group g=new Group();
         g.setLayoutX(250);
         g.setLayoutY(100);
         pausebtn=new Button("II");
-        pausebtn.setStyle("-fx-background-radius: 50;");
+        pausebtn.setStyle("-fx-background-radius: 50;-fx-background-color: #333333");
         pausebtn.setLayoutX(259);
         pausebtn.setLayoutY(3);
         pausebtn.setFont(new Font("System Bold",17));
-        pausebtn.setTextFill(Color.RED);
+        pausebtn.setTextFill(Color.WHITE);
         pausebtn.setPrefWidth(38);
         pausebtn.setPrefHeight(38);
         play.getChildren().addAll(scr,pausebtn,g);
@@ -80,6 +81,7 @@ public class Main extends Application {
 
             @Override
             public void handle(MouseEvent mouseEvent) {
+
                 guiStage.setScene(pause_screen);
             }
         });
@@ -145,7 +147,7 @@ public class Main extends Application {
         arcs2[3].setStroke(Color.web("#12bcde"));
         arcs2[3].setStrokeLineCap(StrokeLineCap.ROUND);
         g2.getChildren().addAll(arcs2);
-        Button save_game=new Button("Save Game");
+        save_game=new Button("Save Game");
         save_game.setStyle("-fx-background-radius: 50;");
         save_game.setLayoutX(100);
         save_game.setLayoutY(195);
@@ -161,7 +163,7 @@ public class Main extends Application {
         restart.setTextFill(Color.web("#9f1818"));
         restart.setPrefWidth(100);
         restart.setPrefHeight(30);
-        Button back=new Button("Back");
+        back=new Button("Back");
         back.setStyle("-fx-background-radius: 50;");
         back.setLayoutX(100);
         back.setLayoutY(275);
@@ -171,10 +173,34 @@ public class Main extends Application {
         back.setPrefHeight(30);
         pause.getChildren().addAll(label,g1,g2,save_game,restart,back);
         back.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
+            int var=3;
+            Label timer;
             @Override
             public void handle(MouseEvent mouseEvent) {
                 guiStage.setScene(play_screen);
+                timer=new Label("3");
+                timer.setTextFill(Color.WHITE);
+                timer.setFont(new Font("System Bold Italic",50));
+                timer.setLayoutX(133);
+                timer.setLayoutY(220);
+                play.getChildren().add(timer);
+
+                Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
+                t.setCycleCount(3);
+                t.play();
+
+            }
+
+            public void times() {
+                if(var!=1){
+                    var--;
+                    timer.setText(String.valueOf(var));
+
+                }
+                else{
+                    var=3;
+                    play.getChildren().removeAll(timer);
+                }
             }
         });
     }
@@ -190,19 +216,19 @@ public class Main extends Application {
         c.setLayoutX(98);
         c.setLayoutY(-6);
         c.setTextFill(Color.RED);
-        c.setFont(new Font(48));
+        c.setFont(new Font("System Bold",48));
 
         Label l=new Label("L");
         l.setLayoutX(174);
         l.setLayoutY(-6);
         l.setTextFill(Color.RED);
-        l.setFont(new Font(48));
+        l.setFont(new Font("System Bold",48));
 
         Label rest=new Label("UR SWITCH");
         rest.setLayoutX(238);
         rest.setLayoutY(-6);
         rest.setTextFill(Color.RED);
-        rest.setFont(new Font(48));
+        rest.setFont(new Font("System Bold",48));
 
         //first o
         Arc arc1o[]=new Arc[4];

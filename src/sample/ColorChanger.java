@@ -8,11 +8,13 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 
-public class ColorChanger implements Special{
-    Group g;
-    Pane canvas;
+import java.io.Serializable;
+
+public class ColorChanger implements Special, Serializable {
+    transient Group g;
+    transient Pane canvas;
     int pos;
-    Arc arc[];
+    transient Arc arc[];
     ColorChanger(int pos, Pane canvas){
         this.pos=pos;
         this.canvas=canvas;

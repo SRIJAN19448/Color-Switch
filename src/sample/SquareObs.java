@@ -11,11 +11,11 @@ import javafx.util.Duration;
 
 public class SquareObs extends Obstacle{
     int pos;
-    Timeline timeline;
-    Line line[];
+    transient Line line[];
     int degree[];
     int length;
-    SquareObs(int pos){
+    SquareObs(int pos,Ball ball){
+        super(ball);
         this.pos=pos;
         line=new Line[4];
         degree=new int[4];
@@ -55,9 +55,9 @@ public class SquareObs extends Obstacle{
         timeline=new Timeline(new KeyFrame(Duration.millis(20), e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20), e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20), e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20), e->rotateX(line[3],3)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        Group g=new Group();
-        g.getChildren().addAll(line);
-        canvas.getChildren().addAll(g);
+
+        this.grp.getChildren().addAll(line);
+        canvas.getChildren().addAll(grp);
 
     }
 

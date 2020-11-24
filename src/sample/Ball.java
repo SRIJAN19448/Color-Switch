@@ -9,20 +9,21 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Ball {
+public class Ball implements Serializable {
     int color=0;
     int trans=1;
     double prevpos;
     double newpos;
     double diff=0;
     double base=0;
-    Pane canvas;
-    Timeline up;
-    Timeline down;
-    Circle ball;
+    transient Pane canvas;
+    transient Timeline up;
+    transient Timeline down;
+    transient Circle ball;
 
     Ball(int centerx, int centery, int radius,Pane canvas){
         this.canvas=canvas;

@@ -9,10 +9,11 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class TriangleObs extends Obstacle{
-    Line line[];
+    transient Line line[];
     int degree[];
     int length;
-    TriangleObs(){
+    TriangleObs(Ball ball){
+        super(ball);
         line=new Line[3];
         degree=new int[3];
     }
@@ -45,7 +46,8 @@ public class TriangleObs extends Obstacle{
         Timeline timeline=new Timeline(new KeyFrame(Duration.millis(20), e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20), e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20), e->rotateX(line[2],2)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        canvas.getChildren().addAll(line);
+        grp.getChildren().addAll(line);
+        canvas.getChildren().addAll(grp);
     }
 
     public void rotateX(Line line, int number) {

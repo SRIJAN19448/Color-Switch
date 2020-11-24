@@ -11,10 +11,11 @@ import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 public class LineObs extends Obstacle {
-    Line line[];
+    transient Line line[];
     int orientation;
     int pos;
-    LineObs(int pos,int orientation){
+    LineObs(int pos,int orientation,Ball ball){
+        super(ball);
         this.pos=pos;
         this.orientation=orientation;
     }
@@ -55,16 +56,16 @@ public class LineObs extends Obstacle {
         line[7]=new Line(330,pos,440,pos);
         line[7].setStrokeWidth(15);
         line[7].setStroke(Color.CYAN);
-        Timeline timeline;
+
         if(orientation==1)
             timeline=new Timeline(new KeyFrame(Duration.millis(10),e -> move(line[7])),new KeyFrame(Duration.millis(10),e1 -> move(line[6])),new KeyFrame(Duration.millis(10),e2 -> move(line[5])),new KeyFrame(Duration.millis(10),e3 -> move(line[4])),new KeyFrame(Duration.millis(10),e4 -> move(line[3])),new KeyFrame(Duration.millis(10),e5 -> move(line[2])),new KeyFrame(Duration.millis(10),e6 -> move(line[1])),new KeyFrame(Duration.millis(10),e7 -> move(line[0])));
         else
             timeline=new Timeline(new KeyFrame(Duration.millis(10),e -> move2(line[0])),new KeyFrame(Duration.millis(10),e1 -> move2(line[1])),new KeyFrame(Duration.millis(10),e2 -> move2(line[2])),new KeyFrame(Duration.millis(10),e3 -> move2(line[3])),new KeyFrame(Duration.millis(10),e4 -> move2(line[4])),new KeyFrame(Duration.millis(10),e5 -> move2(line[5])),new KeyFrame(Duration.millis(10),e6 -> move2(line[6])),new KeyFrame(Duration.millis(10),e7 -> move2(line[7])));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        Group g=new Group();
-        g.getChildren().addAll(line);
-        canvas.getChildren().addAll(g);
+
+        grp.getChildren().addAll(line);
+        canvas.getChildren().addAll(grp);
     }
 
 

@@ -14,9 +14,10 @@ public class CrossObs extends Obstacle {
     int length;
     int pos;
     int degree[];
-    Line line[];
-    Circle pivot;
-    CrossObs(int pos){
+    transient Line line[];
+    transient Circle pivot;
+    CrossObs(int pos,Ball ball){
+        super(ball);
         this.pos=pos;
         degree=new int[4];
         line=new Line[4];
@@ -58,13 +59,13 @@ public class CrossObs extends Obstacle {
         line[3].setStroke(Color.CYAN);
         line[3].setStrokeLineCap(StrokeLineCap.ROUND);
 
-        Timeline timeline=new Timeline(new KeyFrame(Duration.millis(20),e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20),e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20),e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20),e->rotateX(line[3],3)));
+        timeline=new Timeline(new KeyFrame(Duration.millis(20),e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20),e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20),e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20),e->rotateX(line[3],3)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        Group g =new Group();
-        g.getChildren().addAll(line);
-        g.getChildren().add(pivot);
-        canvas.getChildren().addAll(g);
+
+        grp.getChildren().addAll(line);
+        grp.getChildren().add(pivot);
+        canvas.getChildren().addAll(grp);
 //        canvas.getChildren().addAll(pivot);
 
     }

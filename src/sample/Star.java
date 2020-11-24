@@ -3,7 +3,9 @@ package sample;
 import javafx.scene.Group;
 import javafx.scene.shape.Circle;
 
-public class Star implements Special{
+import java.io.Serializable;
+
+public class Star implements Special, Serializable {
 Group grp;
 
     @Override
