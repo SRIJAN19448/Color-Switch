@@ -28,7 +28,8 @@ public class Ball implements Serializable {
     transient Timeline down;
     transient Circle ball;
     int num1;
-    Ball(double centerx, double centery, int radius,Pane canvas){
+    Ball(double centerx, double centery, int radius,Pane canvas,double base){
+        this.base=base;
         this.centerX=centerx;
         this.centerY=centery;
         this.radius=radius;

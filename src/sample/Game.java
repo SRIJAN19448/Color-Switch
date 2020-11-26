@@ -47,7 +47,7 @@ public class Game implements Serializable {
         this.obstacle_pos=250;
         this.clr_pos=100;
         this.canvas=Main.play;
-        this.ball=new Ball(150,490,10,this.canvas);
+        this.ball=new Ball(150,490,10,this.canvas,0);
         this.pause_stat=0;
         this.scene=Main.play_screen;
         this.obstacles=new ArrayList<>();
@@ -56,12 +56,12 @@ public class Game implements Serializable {
         this.items=new ArrayList<>();
 
     }
-    public Game(ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans){
+    public Game(ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,double base,int ob_ps,int cl_ps){
         this.translate=trans;
-        this.obstacle_pos=250;
-        this.clr_pos=100;
+        this.obstacle_pos=ob_ps;
+        this.clr_pos=cl_ps;
         this.canvas=Main.play;
-        this.ball=new Ball(150,centY,10,this.canvas);
+        this.ball=new Ball(150,centY,10,this.canvas,base);
         this.pause_stat=0;
         this.scene=Main.play_screen;
         this.clrs=clrs;
@@ -303,9 +303,74 @@ public class Game implements Serializable {
                     ball.make_move();
             }
         });
+        Main.pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                for (Obstacle i:obstacles){
+                    i.animation_pause();
+                }
+                pause_stat=1;
+                ball.up.pause();
+                ball.down.pause();
+//                obstacles.get(1).animation_pause();
+                Main.getStage().setScene(Main.pause_screen);
+            }
+        });
+        Main.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            int var=3;
+            Label timer;
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Main.getStage().setScene(Main.play_screen);
+                timer=new Label("3");
+                timer.setTextFill(Color.WHITE);
+                timer.setFont(new Font("System Bold Italic",50));
+                timer.setLayoutX(133);
+                timer.setLayoutY(220-canvas.getTranslateY());
+                Main.play.getChildren().add(timer);
+
+                Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
+                t.setCycleCount(3);
+                t.play();
+
+            }
+
+            public void times() {
+                if(var!=1){
+                    var--;
+                    timer.setText(String.valueOf(var));
+
+                }
+                else{
+                    var=3;
+                    Main.play.getChildren().removeAll(timer);
+                    for(Obstacle i:obstacles){
+                        i.animation_play();
+                    }
+                    ball.down.play();
+                    pause_stat=0;
+//                    obstacles.get(0).animation_play();
+                }
+            }
+        });
+        Main.save_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    save_game();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e->play_game()));
+        add.setCycleCount(Timeline.INDEFINITE);
+        add.play();
         this.clrs=cls;
         this.obstacles=obs;
-        this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play);
+        this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base);
         this.ball.create(Game.canvas,this.clrs);
         this.ball.ball.setTranslateY(-this.translate);
         System.out.println(this.ball.centerY);
@@ -313,6 +378,7 @@ public class Game implements Serializable {
         Main.play.getChildren().get(0).setTranslateY(-this.translate);
         Main.play.getChildren().get(1).setTranslateY(-this.translate);
         Main.getStage().setScene(Main.play_screen);
+        this.ball.down.play();
     }
     public void pause_game() throws IOException{
         Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
