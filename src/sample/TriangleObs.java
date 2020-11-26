@@ -22,7 +22,7 @@ public class TriangleObs extends Obstacle{
 
     }
 
-    public void create(Pane canvas){
+    public void create(){
         degree[0]=0;
         degree[1]=120;
         degree[2]=240;

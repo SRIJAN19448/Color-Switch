@@ -24,8 +24,8 @@ public class SquareObs extends Obstacle{
     public void passThrough() {
 
     }
-
-    public void create(Pane canvas){
+    @Override
+    public void create(){
         degree[0]=0;
         degree[1]=90;
         degree[2]=180;

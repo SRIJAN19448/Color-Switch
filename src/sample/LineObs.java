@@ -23,7 +23,7 @@ public class LineObs extends Obstacle {
     public void passThrough() {
 
     }
-    public void create(Pane canvas){
+    public void create(){
         line=new Line[8];
         line[0]=new Line(-440,pos,-330,pos);
         line[0].setStrokeWidth(15);

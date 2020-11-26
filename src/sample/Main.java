@@ -41,7 +41,7 @@ public class Main extends Application {
     public static Pane pause,play,main,load,hit;
     private static Stage guiStage;
     public static Label scr;
-    public static Button pausebtn,back,save_game;
+    public static Button new_game,load_game,exit,pausebtn,back,save_game,saves[];
     public static Stage getStage() {
         return guiStage;
     }
@@ -512,7 +512,7 @@ public class Main extends Application {
         timeline2.play();
 
 
-        Button new_game=new Button("New Game");
+        new_game=new Button("New Game");
         new_game.setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
         new_game.setLayoutX(240);
         new_game.setLayoutY(238);
@@ -521,7 +521,7 @@ public class Main extends Application {
         new_game.setPrefWidth(150);
         new_game.setPrefHeight(40);
 
-        Button load_game=new Button("Load Game");
+        load_game=new Button("Load Game");
         load_game.setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
         load_game.setLayoutX(240);
         load_game.setLayoutY(288);
@@ -530,7 +530,7 @@ public class Main extends Application {
         load_game.setPrefWidth(150);
         load_game.setPrefHeight(40);
 
-        Button exit=new Button("Exit");
+        exit=new Button("Exit");
         exit.setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
         exit.setLayoutX(240);
         exit.setLayoutY(338);
@@ -540,31 +540,9 @@ public class Main extends Application {
         exit.setPrefHeight(40);
 
         main.getChildren().addAll(c,l,rest,new_game,load_game,exit,g1,g2,g3,g4);
-        new_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    GameManager.new_game();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        load_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                guiStage.setScene(load_screen);
-            }
-        });
-        exit.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.exit(0);
-            }
-        });
     }
 
     public void make_load(){
@@ -579,7 +557,7 @@ public class Main extends Application {
         save.setLayoutX(176);
         save.setLayoutY(24);
 
-        Button saves[]=new Button[6];
+        saves=new Button[6];
 
         saves[0]=new Button("Saved Game 1");
         saves[0].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");

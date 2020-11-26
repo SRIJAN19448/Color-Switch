@@ -21,12 +21,17 @@ public class Ball implements Serializable {
     double newpos;
     double diff=0;
     double base=0;
+    double centerX,centerY;
+    int radius;
     transient Pane canvas;
     transient Timeline up;
     transient Timeline down;
     transient Circle ball;
     int num1;
-    Ball(int centerx, int centery, int radius,Pane canvas){
+    Ball(double centerx, double centery, int radius,Pane canvas){
+        this.centerX=centerx;
+        this.centerY=centery;
+        this.radius=radius;
         this.canvas=canvas;
         num1=2;
         ball=new Circle(centerx,centery,radius);
@@ -52,6 +57,9 @@ public class Ball implements Serializable {
         down.play();
     }
     public void jump(ArrayList<ColorChanger> clrs){
+        if(canvas==null){
+            System.out.println("NULL");
+        }
 //        down.pause();
 //        up.play();
         if(ball.getCenterY()<=10)
@@ -96,14 +104,14 @@ public class Ball implements Serializable {
                 trans++;
             }
             ball.setTranslateY(-base);
-            Node n=canvas.getChildren().get(num1);
-            Bounds s=n.getBoundsInLocal();
-            if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY())>=(double)600){
-                canvas.getChildren().remove(n);
-                Game.items.remove(0);
-                System.out.println(Game.items.size());
-
-            }
+//            Node n=canvas.getChildren().get(num1);
+//            Bounds s=n.getBoundsInLocal();
+//            if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY())>=(double)600){
+//                canvas.getChildren().remove(n);
+//                Game.items.remove(0);
+//                System.out.println(Game.items.size());
+//
+//            }
 
 //            if (170 - newpos > diff) {
 //                diff = 170 - newpos;

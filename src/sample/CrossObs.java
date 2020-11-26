@@ -27,7 +27,7 @@ public class CrossObs extends Obstacle {
 
     }
 
-    public void create(Pane canvas){
+    public void create(){
         length=80;
         degree[0]=0;
         degree[1]=90;

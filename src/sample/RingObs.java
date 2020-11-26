@@ -22,7 +22,7 @@ public class RingObs extends Obstacle{
     public void passThrough() {
 
     }
-    public void create(Pane canvas){
+    public void create(){
         arc=new Arc[4];
 
         arc[0]=new Arc(150,pos,70,70,0,78);

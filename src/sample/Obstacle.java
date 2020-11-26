@@ -20,4 +20,7 @@ public abstract class Obstacle implements Serializable {
         this.grp=new Group();
         this.ball=ball;
     }
+
+    public abstract void create();
 }
+

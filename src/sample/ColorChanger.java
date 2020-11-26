@@ -21,7 +21,7 @@ public class ColorChanger implements Special, Serializable {
         arc=new Arc[4];
         g=new Group();
     }
-    public void create(Pane canvas){
+    public void create(){
         arc[0]=new Arc(150,pos,12,12,0,90);
         arc[0].setType(ArcType.ROUND);
         arc[0].setFill(Color.DARKVIOLET);
@@ -47,7 +47,8 @@ public class ColorChanger implements Special, Serializable {
 
     @Override
     public int special(double posY, Circle ball) {
-
+        if(this.canvas==null)
+            System.out.println("NULL");
         if(posY>=this.arc[0].getCenterY()+canvas.getTranslateY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+canvas.getTranslateY()+this.arc[0].getRadiusY()/4) {
             System.out.println("BYUV");
             if (ball.getFill().equals(Color.YELLOW))
