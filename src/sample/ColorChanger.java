@@ -21,7 +21,7 @@ public class ColorChanger implements Special, Serializable {
     transient Arc arc[];
     Ball ball;
     Game game;
-    Timeline t;
+    transient Timeline t;
     ArrayList<ColorChanger> clrs;
     ArrayList<Object> itms;
     ColorChanger(double pos,Ball ball,Game game,ArrayList<ColorChanger> clrs,ArrayList<Object> itms){
@@ -77,8 +77,8 @@ public class ColorChanger implements Special, Serializable {
                 game.ball.ball.setFill(Color.CYAN);
             } else if (game.ball.ball.getFill().equals(Color.CYAN))
                 game.ball.ball.setFill(Color.YELLOW);
-            canvas.getChildren().remove(clrs.get(0).g);
-            ColorChanger cl=this.clrs.get(0);
+            canvas.getChildren().remove(this.g);
+            ColorChanger cl=this;
             this.clrs.remove(cl);
             this.itms.remove(cl);
             t.stop();

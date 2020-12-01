@@ -23,7 +23,7 @@ public class Star implements Special, Serializable {
     double pos;
     ArrayList<Star> strs;
     ArrayList<Object> itms;
-    Timeline t;
+    transient Timeline t;
     Star(double pos, Pane canvas,Ball ball,Game g,ArrayList<Star> strs,ArrayList<Object> itms){
         this.pos=pos;
         this.canvas=canvas;
@@ -46,6 +46,7 @@ public class Star implements Special, Serializable {
         imv.setX(125);
         imv.setY(pos);
         grp.getChildren().add(imv);
+        System.out.println(ball.ball==null);
         t=new Timeline(new KeyFrame(Duration.millis(10),e->special(ball.ball.getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
@@ -56,8 +57,8 @@ public class Star implements Special, Serializable {
 //        System.out.println(this.canvas==null);
         if(posY>=this.imv.getY()+canvas.getTranslateY()+10 && posY<=this.imv.getY()+canvas.getTranslateY()+40){
             Main.scr.setText(String.valueOf(++g.score));
-            canvas.getChildren().remove(strs.get(0).grp);
-            Star x=this.strs.get(0);
+            canvas.getChildren().remove(this.grp);
+            Star x=this;
             this.strs.remove(x);
             this.itms.remove(x);
             t.stop();

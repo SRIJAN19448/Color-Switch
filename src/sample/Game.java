@@ -37,7 +37,7 @@ public class Game implements Serializable {
     ArrayList<ColorChanger> clrs;
     ArrayList<Star> stars;
     int pause_stat;
-    Integer score=0;
+    Integer score;
     int clr_pos;
     int obstacle_pos;
     int str_pos;
@@ -45,6 +45,7 @@ public class Game implements Serializable {
 //    int flag=1;
     public Game() throws IOException {
 //        this.translate=0;
+        this.score=0;
         this.obstacle_pos=250;
         this.clr_pos=100;
         this.str_pos=225;
@@ -58,7 +59,8 @@ public class Game implements Serializable {
         this.items=new ArrayList<>();
 
     }
-    public Game(ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,double base,int ob_ps,int cl_ps,int st_ps){
+    public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,double base,int ob_ps,int cl_ps,int st_ps){
+        this.score=score;
         this.translate=trans;
         this.obstacle_pos=ob_ps;
         this.clr_pos=cl_ps;
@@ -160,7 +162,7 @@ public class Game implements Serializable {
         stars.add(st1);
         stars.add(st2);
         stars.add(st3);
-        ball.create(canvas,clrs,stars);
+        ball.create(canvas);
         for(Node n:canvas.getChildren()){
 
             Bounds s=n.getBoundsInLocal();
@@ -345,53 +347,43 @@ public class Game implements Serializable {
                 items.add(clr);
                 clrs.add(clr);
             }
-//            else if(rem instanceof ColorChanger){
-//                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
-//                clr.create();
-//                this.clr_pos-=300;
-//                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
-//                items.add(clr);
-//                clrs.add(clr);
-//            }
-//            else if(rem instanceof Star){
-//                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
-//                st.create();
-//                this.str_pos-=300;
-//                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
-//                items.add(st);
-//                stars.add(st);
-//            }
-//        }
     }
 
     public void load_game() throws FileNotFoundException {
         ArrayList<Obstacle> obs=new ArrayList<>();
         ArrayList<Star> strs=new ArrayList<>();
         ArrayList<ColorChanger> cls=new ArrayList<>();
+        ArrayList<Object> itms=new ArrayList<>();
+        this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base);
 
+        this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
                 i=new SquareObs(((SquareObs) i).pos,((SquareObs)i).ball);
                 ((SquareObs)i).create();
                 obs.add(((SquareObs)i));
+                itms.add(i);
                 Game.canvas.getChildren().add(((SquareObs)i).grp);
             }
             else if(i instanceof RingObs){
                 i=new RingObs((((RingObs) i).pos), ((RingObs) i).ball);
                 ((RingObs) i).create();
                 obs.add(((RingObs) i));
+                itms.add(i);
                 Game.canvas.getChildren().add(((RingObs) i).grp);
             }
             else if(i instanceof CrossObs){
                 i=new CrossObs((((CrossObs) i).pos), ((CrossObs) i).ball);
                 ((CrossObs) i).create();
                 obs.add(((CrossObs) i));
+                itms.add(i);
                 Game.canvas.getChildren().add(((CrossObs) i).grp);
             }
             else if(i instanceof LineObs){
                 i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, ((LineObs) i).ball);
                 ((LineObs) i).create();
                 obs.add(((LineObs) i));
+                itms.add(i);
                 Game.canvas.getChildren().add(((LineObs) i).grp);
             }
             else if(i instanceof ColorChanger){
@@ -399,12 +391,14 @@ public class Game implements Serializable {
                 i=new ColorChanger(((ColorChanger) i).pos, this.ball,this,this.clrs,this.items);
                 ((ColorChanger) i).create();
                 cls.add(((ColorChanger) i));
+                itms.add(i);
                 Game.canvas.getChildren().add(((ColorChanger) i).g);
             }
             else if(i instanceof Star){
-                i=new Star(((Star) i).pos,this.canvas,((Star) i).ball,this,this.stars,this.items);
+                i=new Star(((Star) i).pos,canvas,this.ball,this,this.stars,this.items);
                 ((Star) i).create();
                 strs.add(((Star) i));
+                itms.add(i);
                 Game.canvas.getChildren().add(((Star) i).grp);
             }
 
@@ -497,15 +491,24 @@ public class Game implements Serializable {
         this.clrs=cls;
         this.obstacles=obs;
         this.stars=strs;
-        this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base);
-        this.ball.create(Game.canvas,this.clrs,this.stars);
-        this.ball.ball.setTranslateY(-this.translate);
-        System.out.println(this.ball.centerY);
+        this.items=itms;
         Game.canvas.setTranslateY(this.translate);
+        this.ball.create(Game.canvas);
+        System.out.println(this.ball.centerY);
         Main.play.getChildren().get(0).setTranslateY(-this.translate);
         Main.play.getChildren().get(1).setTranslateY(-this.translate);
+        Main.scr.setText(String.valueOf(this.score));
         Main.getStage().setScene(Main.play_screen);
         this.ball.down.play();
+        Timeline add2=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+            try {
+                play_game();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        }));
+        add2.setCycleCount(Timeline.INDEFINITE);
+        add2.play();
     }
     public void pause_game() throws IOException{
         Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
@@ -523,6 +526,7 @@ public class Game implements Serializable {
 
     public void save_game() throws IOException {
         ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("saves.txt"));
+        System.out.println(canvas.getTranslateY());
         this.translate=canvas.getTranslateY();
         System.out.println(this.ball.ball.getCenterY());
         this.ball.centerY=this.ball.ball.getCenterY();
