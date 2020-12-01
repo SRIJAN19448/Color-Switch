@@ -37,15 +37,17 @@ public class Game implements Serializable {
     ArrayList<ColorChanger> clrs;
     ArrayList<Star> stars;
     int pause_stat;
-    int score=0;
+    Integer score=0;
     int clr_pos;
     int obstacle_pos;
+    int str_pos;
     ArrayList<Object> items;
-    int flag=1;
+//    int flag=1;
     public Game() throws IOException {
 //        this.translate=0;
         this.obstacle_pos=250;
         this.clr_pos=100;
+        this.str_pos=225;
         this.canvas=Main.play;
         this.ball=new Ball(150,490,10,this.canvas,0);
         this.pause_stat=0;
@@ -56,10 +58,11 @@ public class Game implements Serializable {
         this.items=new ArrayList<>();
 
     }
-    public Game(ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,double base,int ob_ps,int cl_ps){
+    public Game(ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,double base,int ob_ps,int cl_ps,int st_ps){
         this.translate=trans;
         this.obstacle_pos=ob_ps;
         this.clr_pos=cl_ps;
+        this.str_pos=st_ps;
         this.canvas=Main.play;
         this.ball=new Ball(150,centY,10,this.canvas,base);
         this.pause_stat=0;
@@ -81,7 +84,11 @@ public class Game implements Serializable {
         square.create();
         canvas.getChildren().add(square.grp);
         this.obstacle_pos-=300;
-        ColorChanger clr=new ColorChanger(this.clr_pos,canvas);
+        Star st=new Star(225,canvas,ball,this,this.stars,this.items);
+        st.create();
+        canvas.getChildren().add(st.grp);
+        this.str_pos-=300;
+        ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
         clr.create();
         canvas.getChildren().add(clr.g);
         this.clr_pos-=300;
@@ -89,7 +96,11 @@ public class Game implements Serializable {
         ring.create();
         canvas.getChildren().add(ring.grp);
         this.obstacle_pos-=300;
-        ColorChanger clr2=new ColorChanger(this.clr_pos,canvas);
+        Star st1=new Star(-75,canvas,ball,this,this.stars,this.items);
+        st1.create();
+        canvas.getChildren().add(st1.grp);
+        this.str_pos-=300;
+        ColorChanger clr2=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
         clr2.create();
         canvas.getChildren().add(clr2.g);
         this.clr_pos-=300;
@@ -97,7 +108,11 @@ public class Game implements Serializable {
         cross.create();
         canvas.getChildren().add(cross.grp);
         this.obstacle_pos-=300;
-        ColorChanger clr3=new ColorChanger(this.clr_pos,canvas);
+        Star st2=new Star(-375,canvas,ball,this,this.stars,this.items);
+        st2.create();
+        canvas.getChildren().add(st2.grp);
+        this.str_pos-=300;
+        ColorChanger clr3=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
         clr3.create();
         canvas.getChildren().add(clr3.g);
         this.clr_pos-=300;
@@ -105,7 +120,11 @@ public class Game implements Serializable {
         line.create();
         canvas.getChildren().add(line.grp);
         this.obstacle_pos-=300;
-        ColorChanger clr4=new ColorChanger(this.clr_pos,canvas);
+        Star st3=new Star(-675,canvas,ball,this,this.stars,this.items);
+        st3.create();
+        canvas.getChildren().add(st3.grp);
+        this.str_pos-=300;
+        ColorChanger clr4=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
         clr4.create();
         canvas.getChildren().add(clr4.g);
         this.clr_pos-=300;
@@ -120,6 +139,10 @@ public class Game implements Serializable {
         items.add(clr3);
         items.add(line);
         items.add(clr4);
+        items.add(st);
+        items.add(st1);
+        items.add(st2);
+        items.add(st3);
 
 
         obstacles.add(square);
@@ -132,7 +155,12 @@ public class Game implements Serializable {
         clrs.add(clr2);
         clrs.add(clr3);
         clrs.add(clr4);
-        ball.create(canvas,clrs);
+
+        stars.add(st);
+        stars.add(st1);
+        stars.add(st2);
+        stars.add(st3);
+        ball.create(canvas,clrs,stars);
         for(Node n:canvas.getChildren()){
 
             Bounds s=n.getBoundsInLocal();
@@ -214,43 +242,129 @@ public class Game implements Serializable {
                 }
             }
         });
-        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e->play_game()));
+        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+            try {
+                play_game();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        }));
         add.setCycleCount(Timeline.INDEFINITE);
         add.play();
     }
-    public void play_game(){
+    public void play_game() throws FileNotFoundException {
         Node n=canvas.getChildren().get(2);
         Bounds s=n.getBoundsInLocal();
+        Object rem=new Object();
         if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY())>=(double)600){
             canvas.getChildren().remove(n);
+            rem=this.items.get(0);
             this.items.remove(0);
-            System.out.println(this.items.size());
+            System.out.println("size : "+this.items.size());
 
         }
-            if(this.items.size()!=8){
-                if(this.flag==1){
-                    SquareObs sq=new SquareObs(this.obstacle_pos,this.ball);
-                    sq.create();
-                    this.obstacle_pos-=300;
-                    System.out.println("index: "+canvas.getChildren().indexOf(sq.grp));
-                    canvas.getChildren().add(canvas.getChildren().size()-2,sq.grp);
-                    items.add(sq);
-                    obstacles.add(sq);
-                    this.flag=0;
-                }
-                else{
-                    ColorChanger clr=new ColorChanger(this.clr_pos,canvas);
-                    clr.create();
-                    this.clr_pos-=300;
-                    canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
-                    items.add(clr);
-                    clrs.add(clr);
-                    this.flag=1;
-                }
+//        if(this.items.size()!=8){
+            if(rem instanceof SquareObs){
+                SquareObs sq=new SquareObs(this.obstacle_pos,this.ball);
+                sq.create();
+                this.obstacle_pos-=300;
+//                System.out.println("index: "+canvas.getChildren().indexOf(sq.grp));
+                canvas.getChildren().add(canvas.getChildren().size()-2,sq.grp);
+                items.add(sq);
+                obstacles.add(sq);
+                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+                st.create();
+                this.str_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+                items.add(st);
+                stars.add(st);
+                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+                clr.create();
+                this.clr_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                items.add(clr);
+                clrs.add(clr);
             }
+            else if(rem instanceof RingObs){
+                RingObs ri=new RingObs(this.obstacle_pos,this.ball);
+                ri.create();
+                this.obstacle_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,ri.grp);
+                items.add(ri);
+                obstacles.add(ri);
+                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+                st.create();
+                this.str_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+                items.add(st);
+                stars.add(st);
+                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+                clr.create();
+                this.clr_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                items.add(clr);
+                clrs.add(clr);
+            }
+            else if(rem instanceof CrossObs){
+                CrossObs cr=new CrossObs(this.obstacle_pos,this.ball);
+                cr.create();
+                this.obstacle_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,cr.grp);
+                items.add(cr);
+                obstacles.add(cr);
+                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+                st.create();
+                this.str_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+                items.add(st);
+                stars.add(st);
+                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+                clr.create();
+                this.clr_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                items.add(clr);
+                clrs.add(clr);
+            }
+            else if(rem instanceof LineObs){
+                LineObs li=new LineObs(this.obstacle_pos,1,this.ball);
+                li.create();
+                this.obstacle_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,li.grp);
+                items.add(li);
+                obstacles.add(li);
+                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+                st.create();
+                this.str_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+                items.add(st);
+                stars.add(st);
+                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+                clr.create();
+                this.clr_pos-=300;
+                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                items.add(clr);
+                clrs.add(clr);
+            }
+//            else if(rem instanceof ColorChanger){
+//                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+//                clr.create();
+//                this.clr_pos-=300;
+//                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+//                items.add(clr);
+//                clrs.add(clr);
+//            }
+//            else if(rem instanceof Star){
+//                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+//                st.create();
+//                this.str_pos-=300;
+//                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+//                items.add(st);
+//                stars.add(st);
+//            }
+//        }
     }
 
-    public void load_game(){
+    public void load_game() throws FileNotFoundException {
         ArrayList<Obstacle> obs=new ArrayList<>();
         ArrayList<Star> strs=new ArrayList<>();
         ArrayList<ColorChanger> cls=new ArrayList<>();
@@ -282,10 +396,16 @@ public class Game implements Serializable {
             }
             else if(i instanceof ColorChanger){
 
-                i=new ColorChanger(((ColorChanger) i).pos, this.canvas);
+                i=new ColorChanger(((ColorChanger) i).pos, this.ball,this,this.clrs,this.items);
                 ((ColorChanger) i).create();
                 cls.add(((ColorChanger) i));
                 Game.canvas.getChildren().add(((ColorChanger) i).g);
+            }
+            else if(i instanceof Star){
+                i=new Star(((Star) i).pos,this.canvas,((Star) i).ball,this,this.stars,this.items);
+                ((Star) i).create();
+                strs.add(((Star) i));
+                Game.canvas.getChildren().add(((Star) i).grp);
             }
 
         }
@@ -365,13 +485,20 @@ public class Game implements Serializable {
                 }
             }
         });
-        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e->play_game()));
+        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+            try {
+                play_game();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        }));
         add.setCycleCount(Timeline.INDEFINITE);
         add.play();
         this.clrs=cls;
         this.obstacles=obs;
+        this.stars=strs;
         this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base);
-        this.ball.create(Game.canvas,this.clrs);
+        this.ball.create(Game.canvas,this.clrs,this.stars);
         this.ball.ball.setTranslateY(-this.translate);
         System.out.println(this.ball.centerY);
         Game.canvas.setTranslateY(this.translate);

@@ -41,9 +41,9 @@ public class Ball implements Serializable {
 
 
     }
-    public void create(Pane canvas, ArrayList<ColorChanger> clrs){
+    public void create(Pane canvas, ArrayList<ColorChanger> clrs,ArrayList<Star> strs){
         ball.setFill(Color.DARKMAGENTA);
-        up=new Timeline(new KeyFrame(Duration.millis(10),e->jump(clrs)));
+        up=new Timeline(new KeyFrame(Duration.millis(10),e->jump(clrs,strs)));
         down=new Timeline(new KeyFrame(Duration.millis(10),e->move_ball()));
         up.setCycleCount(Timeline.INDEFINITE);
         down.setCycleCount(Timeline.INDEFINITE);
@@ -57,7 +57,7 @@ public class Ball implements Serializable {
         up.pause();
         down.play();
     }
-    public void jump(ArrayList<ColorChanger> clrs){
+    public void jump(ArrayList<ColorChanger> clrs,ArrayList<Star> strs){
         if(canvas==null){
             System.out.println("NULL");
         }
@@ -67,11 +67,17 @@ public class Ball implements Serializable {
             up.pause();
         else
             ball.setCenterY(ball.getCenterY()-3);
-        if(clrs.size()!=0)
-            if(clrs.get(0).special(ball.getCenterY(),ball)==1) {
-                ColorChanger c=clrs.get(0);
-                clrs.remove(0);
-            }
+//        if(clrs.size()!=0)
+//            if(clrs.get(0).special(ball.getCenterY())==1) {
+////                ColorChanger c=clrs.get(0);
+//                canvas.getChildren().remove(clrs.get(0).g);
+//                clrs.remove(0);
+//            }
+//        if(strs.size()!=0)
+//            if(strs.get(0).special(ball.getCenterY())==1){
+//                canvas.getChildren().remove(strs.get(0).grp);
+//                strs.remove(0);
+//            }
 //        System.out.println   ("curr: "+ball.getCenterY());
 //        System.out.println("prev: " + Double.toString(prevpos));
 //        System.out.println("new: " + Double.toString(newpos));

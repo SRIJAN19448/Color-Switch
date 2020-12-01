@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -7,19 +9,31 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.util.Duration;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ColorChanger implements Special, Serializable {
     transient Group g;
     transient Pane canvas;
     double pos;
     transient Arc arc[];
-    ColorChanger(double pos, Pane canvas){
+    Ball ball;
+    Game game;
+    Timeline t;
+    ArrayList<ColorChanger> clrs;
+    ArrayList<Object> itms;
+    ColorChanger(double pos,Ball ball,Game game,ArrayList<ColorChanger> clrs,ArrayList<Object> itms){
         this.pos=pos;
-        this.canvas=canvas;
+        this.canvas=game.canvas;
         arc=new Arc[4];
         g=new Group();
+        this.game=game;
+        this.clrs=clrs;
+        this.t=new Timeline();
+        this.ball=ball;
+        this.itms=itms;
     }
     public void create(){
         arc[0]=new Arc(150,pos,12,12,0,90);
@@ -42,25 +56,32 @@ public class ColorChanger implements Special, Serializable {
         arc[3].setFill(Color.DARKMAGENTA);
         arc[3].setStrokeLineCap(StrokeLineCap.ROUND);
         g.getChildren().addAll(arc);
+        t=new Timeline(new KeyFrame(Duration.millis(10), e->special(ball.ball.getCenterY())));
+        t.setCycleCount(Timeline.INDEFINITE);
+        t.play();
 //        canvas.getChildren().addAll(g);
     }
 
     @Override
-    public int special(double posY, Circle ball) {
+    public int special(double posY) {
         if(this.canvas==null)
             System.out.println("NULL");
         if(posY>=this.arc[0].getCenterY()+canvas.getTranslateY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+canvas.getTranslateY()+this.arc[0].getRadiusY()/4) {
             System.out.println("BYUV");
-            if (ball.getFill().equals(Color.YELLOW))
-                ball.setFill(Color.DARKVIOLET);
-            else if (ball.getFill().equals(Color.DARKVIOLET))
-                ball.setFill(Color.DARKMAGENTA);
-            else if (ball.getFill().equals(Color.DARKMAGENTA)) {
+            if (game.ball.ball.getFill().equals(Color.YELLOW))
+                game.ball.ball.setFill(Color.DARKVIOLET);
+            else if (game.ball.ball.getFill().equals(Color.DARKVIOLET))
+                game.ball.ball.setFill(Color.DARKMAGENTA);
+            else if (game.ball.ball.getFill().equals(Color.DARKMAGENTA)) {
                 System.out.println("UDIKVJ HJDK");
-                ball.setFill(Color.CYAN);
-            } else if (ball.getFill().equals(Color.CYAN))
-                ball.setFill(Color.YELLOW);
-            return 1;
+                game.ball.ball.setFill(Color.CYAN);
+            } else if (game.ball.ball.getFill().equals(Color.CYAN))
+                game.ball.ball.setFill(Color.YELLOW);
+            canvas.getChildren().remove(clrs.get(0).g);
+            ColorChanger cl=this.clrs.get(0);
+            this.clrs.remove(cl);
+            this.itms.remove(cl);
+            t.stop();
         }
         return -1;
     }

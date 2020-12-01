@@ -86,7 +86,7 @@ public class GameManager {
         double t=game.translate;
         System.out.println(game.ball.centerY);
         double cent=game.ball.centerY;
-        game=new Game(game.clrs,game.stars,game.obstacles,game.items,cent,game.translate,game.ball.base,game.obstacle_pos,game.clr_pos);
+        game=new Game(game.clrs,game.stars,game.obstacles,game.items,cent,game.translate,game.ball.base,game.obstacle_pos,game.clr_pos,game.str_pos);
         game.translate=t;
         game.load_game();
 //        ArrayList<Obstacle> obs=new ArrayList<>();
