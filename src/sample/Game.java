@@ -84,51 +84,51 @@ public class Game implements Serializable {
 
         SquareObs square=new SquareObs(this.obstacle_pos,this.ball);
         square.create();
-        canvas.getChildren().add(square.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
         this.obstacle_pos-=300;
         Star st=new Star(225,canvas,ball,this,this.stars,this.items);
         st.create();
-        canvas.getChildren().add(st.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
         this.str_pos-=300;
         ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
         clr.create();
-        canvas.getChildren().add(clr.g);
+        canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
         this.clr_pos-=300;
         RingObs ring=new RingObs(this.obstacle_pos,this.ball);
         ring.create();
-        canvas.getChildren().add(ring.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,ring.grp);
         this.obstacle_pos-=300;
         Star st1=new Star(-75,canvas,ball,this,this.stars,this.items);
         st1.create();
-        canvas.getChildren().add(st1.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,st1.grp);
         this.str_pos-=300;
         ColorChanger clr2=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
         clr2.create();
-        canvas.getChildren().add(clr2.g);
+        canvas.getChildren().add(canvas.getChildren().size()-2,clr2.g);
         this.clr_pos-=300;
         CrossObs cross=new CrossObs(this.obstacle_pos,this.ball);
         cross.create();
-        canvas.getChildren().add(cross.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,cross.grp);
         this.obstacle_pos-=300;
         Star st2=new Star(-375,canvas,ball,this,this.stars,this.items);
         st2.create();
-        canvas.getChildren().add(st2.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,st2.grp);
         this.str_pos-=300;
         ColorChanger clr3=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
         clr3.create();
-        canvas.getChildren().add(clr3.g);
+        canvas.getChildren().add(canvas.getChildren().size()-2,clr3.g);
         this.clr_pos-=300;
         LineObs line=new LineObs(this.obstacle_pos,1,this.ball);
         line.create();
-        canvas.getChildren().add(line.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,line.grp);
         this.obstacle_pos-=300;
         Star st3=new Star(-675,canvas,ball,this,this.stars,this.items);
         st3.create();
-        canvas.getChildren().add(st3.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,st3.grp);
         this.str_pos-=300;
         ColorChanger clr4=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
         clr4.create();
-        canvas.getChildren().add(clr4.g);
+        canvas.getChildren().add(canvas.getChildren().size()-2,clr4.g);
         this.clr_pos-=300;
         System.out.println("->");
 
@@ -255,14 +255,15 @@ public class Game implements Serializable {
         add.play();
     }
     public void play_game() throws FileNotFoundException {
-        Node n=canvas.getChildren().get(2);
+        System.out.println("size : "+this.items.size());
+        Node n=canvas.getChildren().get(0);
         Bounds s=n.getBoundsInLocal();
         Object rem=new Object();
         if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY())>=(double)600){
             canvas.getChildren().remove(n);
             rem=this.items.get(0);
             this.items.remove(0);
-            System.out.println("size : "+this.items.size());
+
 
         }
 //        if(this.items.size()!=8){
@@ -271,19 +272,19 @@ public class Game implements Serializable {
                 sq.create();
                 this.obstacle_pos-=300;
 //                System.out.println("index: "+canvas.getChildren().indexOf(sq.grp));
-                canvas.getChildren().add(canvas.getChildren().size()-2,sq.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,sq.grp);
                 items.add(sq);
                 obstacles.add(sq);
                 Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
                 st.create();
                 this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,st.grp);
                 items.add(st);
                 stars.add(st);
                 ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
                 clr.create();
                 this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,clr.g);
                 items.add(clr);
                 clrs.add(clr);
             }
@@ -291,19 +292,19 @@ public class Game implements Serializable {
                 RingObs ri=new RingObs(this.obstacle_pos,this.ball);
                 ri.create();
                 this.obstacle_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,ri.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,ri.grp);
                 items.add(ri);
                 obstacles.add(ri);
                 Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
                 st.create();
                 this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,st.grp);
                 items.add(st);
                 stars.add(st);
                 ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
                 clr.create();
                 this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,clr.g);
                 items.add(clr);
                 clrs.add(clr);
             }
@@ -311,19 +312,19 @@ public class Game implements Serializable {
                 CrossObs cr=new CrossObs(this.obstacle_pos,this.ball);
                 cr.create();
                 this.obstacle_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,cr.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,cr.grp);
                 items.add(cr);
                 obstacles.add(cr);
                 Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
                 st.create();
                 this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,st.grp);
                 items.add(st);
                 stars.add(st);
                 ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
                 clr.create();
                 this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,clr.g);
                 items.add(clr);
                 clrs.add(clr);
             }
@@ -331,19 +332,19 @@ public class Game implements Serializable {
                 LineObs li=new LineObs(this.obstacle_pos,1,this.ball);
                 li.create();
                 this.obstacle_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,li.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,li.grp);
                 items.add(li);
                 obstacles.add(li);
                 Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
                 st.create();
                 this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,st.grp);
                 items.add(st);
                 stars.add(st);
                 ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
                 clr.create();
                 this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,clr.g);
                 items.add(clr);
                 clrs.add(clr);
             }
@@ -355,7 +356,7 @@ public class Game implements Serializable {
         ArrayList<ColorChanger> cls=new ArrayList<>();
         ArrayList<Object> itms=new ArrayList<>();
         this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base);
-
+        this.ball.create(Game.canvas);
         this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
@@ -363,28 +364,28 @@ public class Game implements Serializable {
                 ((SquareObs)i).create();
                 obs.add(((SquareObs)i));
                 itms.add(i);
-                Game.canvas.getChildren().add(((SquareObs)i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
             }
             else if(i instanceof RingObs){
                 i=new RingObs((((RingObs) i).pos), ((RingObs) i).ball);
                 ((RingObs) i).create();
                 obs.add(((RingObs) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(((RingObs) i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
             }
             else if(i instanceof CrossObs){
                 i=new CrossObs((((CrossObs) i).pos), ((CrossObs) i).ball);
                 ((CrossObs) i).create();
                 obs.add(((CrossObs) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(((CrossObs) i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
             }
             else if(i instanceof LineObs){
                 i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, ((LineObs) i).ball);
                 ((LineObs) i).create();
                 obs.add(((LineObs) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(((LineObs) i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((LineObs) i).grp);
             }
             else if(i instanceof ColorChanger){
 
@@ -392,14 +393,14 @@ public class Game implements Serializable {
                 ((ColorChanger) i).create();
                 cls.add(((ColorChanger) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(((ColorChanger) i).g);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((ColorChanger) i).g);
             }
             else if(i instanceof Star){
                 i=new Star(((Star) i).pos,canvas,this.ball,this,this.stars,this.items);
                 ((Star) i).create();
                 strs.add(((Star) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(((Star) i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((Star) i).grp);
             }
 
         }
@@ -492,8 +493,16 @@ public class Game implements Serializable {
         this.obstacles=obs;
         this.stars=strs;
         this.items=itms;
+        for(ColorChanger i:clrs){
+            i.itms=itms;
+            i.clrs=cls;
+        }
+        for(Star i:stars){
+            i.itms=itms;
+            i.strs=strs;
+        }
         Game.canvas.setTranslateY(this.translate);
-        this.ball.create(Game.canvas);
+
         System.out.println(this.ball.centerY);
         Main.play.getChildren().get(0).setTranslateY(-this.translate);
         Main.play.getChildren().get(1).setTranslateY(-this.translate);
