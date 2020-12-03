@@ -19,6 +19,7 @@ public class LineObs extends Obstacle {
         super(ball,g);
         this.pos=pos;
         this.orientation=orientation;
+        line=new Line[8];
     }
     @Override
     public void passThrough() {

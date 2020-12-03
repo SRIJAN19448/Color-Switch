@@ -18,6 +18,7 @@ public class RingObs extends Obstacle{
     RingObs(int pos,Ball ball,Game g){
         super(ball,g);
         this.pos=pos;
+        arc=new Arc[4];
     }
     @Override
     public void passThrough() {

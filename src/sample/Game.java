@@ -360,28 +360,28 @@ public class Game implements Serializable {
         this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
-                i=new SquareObs(((SquareObs) i).pos,((SquareObs)i).ball,this);
+                i=new SquareObs(((SquareObs) i).pos,this.ball,this);
                 ((SquareObs)i).create();
                 obs.add(((SquareObs)i));
                 itms.add(i);
                 Game.canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
             }
             else if(i instanceof RingObs){
-                i=new RingObs((((RingObs) i).pos), ((RingObs) i).ball,this);
+                i=new RingObs((((RingObs) i).pos), this.ball,this);
                 ((RingObs) i).create();
                 obs.add(((RingObs) i));
                 itms.add(i);
                 Game.canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
             }
             else if(i instanceof CrossObs){
-                i=new CrossObs((((CrossObs) i).pos), ((CrossObs) i).ball,this);
+                i=new CrossObs((((CrossObs) i).pos), this.ball,this);
                 ((CrossObs) i).create();
                 obs.add(((CrossObs) i));
                 itms.add(i);
                 Game.canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
             }
             else if(i instanceof LineObs){
-                i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, ((LineObs) i).ball,this);
+                i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, this.ball,this);
                 ((LineObs) i).create();
                 obs.add(((LineObs) i));
                 itms.add(i);
