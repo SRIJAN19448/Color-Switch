@@ -53,7 +53,7 @@ public class Main extends Application {
 //    public static Pane canvas;
 //    public static Bounds bounds;
 
-    public void make_play(){
+    public static void make_play(){
         play=new Pane();
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
@@ -84,7 +84,7 @@ public class Main extends Application {
             }
         });
     }
-    public void make_pause(){
+    public static void make_pause(){
         pause=new Pane();
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
@@ -204,7 +204,7 @@ public class Main extends Application {
     }
 
 
-    public void make_main(){
+    public static void make_main(){
         main=new Pane();
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
@@ -545,7 +545,7 @@ public class Main extends Application {
 
     }
 
-    public void make_load(){
+    public static void make_load(){
         load=new Pane();
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
@@ -634,7 +634,7 @@ public class Main extends Application {
         });
 
     }
-    public void make_hit(){
+    public static void make_hit(){
         hit=new Pane();
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);

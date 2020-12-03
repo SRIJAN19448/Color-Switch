@@ -82,7 +82,7 @@ public class Game implements Serializable {
         canvas.setBackground(background);
         Main.getStage().setScene(scene);
 
-        SquareObs square=new SquareObs(this.obstacle_pos,this.ball);
+        SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
         square.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
         this.obstacle_pos-=300;
@@ -94,7 +94,7 @@ public class Game implements Serializable {
         clr.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
         this.clr_pos-=300;
-        RingObs ring=new RingObs(this.obstacle_pos,this.ball);
+        RingObs ring=new RingObs(this.obstacle_pos,this.ball,this);
         ring.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,ring.grp);
         this.obstacle_pos-=300;
@@ -106,7 +106,7 @@ public class Game implements Serializable {
         clr2.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,clr2.g);
         this.clr_pos-=300;
-        CrossObs cross=new CrossObs(this.obstacle_pos,this.ball);
+        CrossObs cross=new CrossObs(this.obstacle_pos,this.ball,this);
         cross.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,cross.grp);
         this.obstacle_pos-=300;
@@ -118,7 +118,7 @@ public class Game implements Serializable {
         clr3.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,clr3.g);
         this.clr_pos-=300;
-        LineObs line=new LineObs(this.obstacle_pos,1,this.ball);
+        LineObs line=new LineObs(this.obstacle_pos,1,this.ball,this);
         line.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,line.grp);
         this.obstacle_pos-=300;
@@ -268,7 +268,7 @@ public class Game implements Serializable {
         }
 //        if(this.items.size()!=8){
             if(rem instanceof SquareObs){
-                SquareObs sq=new SquareObs(this.obstacle_pos,this.ball);
+                SquareObs sq=new SquareObs(this.obstacle_pos,this.ball,this);
                 sq.create();
                 this.obstacle_pos-=300;
 //                System.out.println("index: "+canvas.getChildren().indexOf(sq.grp));
@@ -289,7 +289,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof RingObs){
-                RingObs ri=new RingObs(this.obstacle_pos,this.ball);
+                RingObs ri=new RingObs(this.obstacle_pos,this.ball,this);
                 ri.create();
                 this.obstacle_pos-=300;
                 canvas.getChildren().add(canvas.getChildren().size()-3,ri.grp);
@@ -309,7 +309,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof CrossObs){
-                CrossObs cr=new CrossObs(this.obstacle_pos,this.ball);
+                CrossObs cr=new CrossObs(this.obstacle_pos,this.ball,this);
                 cr.create();
                 this.obstacle_pos-=300;
                 canvas.getChildren().add(canvas.getChildren().size()-3,cr.grp);
@@ -329,7 +329,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof LineObs){
-                LineObs li=new LineObs(this.obstacle_pos,1,this.ball);
+                LineObs li=new LineObs(this.obstacle_pos,1,this.ball,this);
                 li.create();
                 this.obstacle_pos-=300;
                 canvas.getChildren().add(canvas.getChildren().size()-3,li.grp);
@@ -360,28 +360,28 @@ public class Game implements Serializable {
         this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
-                i=new SquareObs(((SquareObs) i).pos,((SquareObs)i).ball);
+                i=new SquareObs(((SquareObs) i).pos,((SquareObs)i).ball,this);
                 ((SquareObs)i).create();
                 obs.add(((SquareObs)i));
                 itms.add(i);
                 Game.canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
             }
             else if(i instanceof RingObs){
-                i=new RingObs((((RingObs) i).pos), ((RingObs) i).ball);
+                i=new RingObs((((RingObs) i).pos), ((RingObs) i).ball,this);
                 ((RingObs) i).create();
                 obs.add(((RingObs) i));
                 itms.add(i);
                 Game.canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
             }
             else if(i instanceof CrossObs){
-                i=new CrossObs((((CrossObs) i).pos), ((CrossObs) i).ball);
+                i=new CrossObs((((CrossObs) i).pos), ((CrossObs) i).ball,this);
                 ((CrossObs) i).create();
                 obs.add(((CrossObs) i));
                 itms.add(i);
                 Game.canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
             }
             else if(i instanceof LineObs){
-                i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, ((LineObs) i).ball);
+                i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, ((LineObs) i).ball,this);
                 ((LineObs) i).create();
                 obs.add(((LineObs) i));
                 itms.add(i);
@@ -529,8 +529,11 @@ public class Game implements Serializable {
     public void back(ActionEvent e) {
 
     }
-    public void detetct_hit(){
-
+    public void hit_detected(){
+        for (Obstacle i:obstacles){
+            i.animation_pause();
+        }
+        Main.getStage().setScene(Main.hit_screen);
     }
 
     public void save_game() throws IOException {

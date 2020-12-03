@@ -12,8 +12,8 @@ public class TriangleObs extends Obstacle{
     transient Line line[];
     int degree[];
     int length;
-    TriangleObs(Ball ball){
-        super(ball);
+    TriangleObs(Ball ball,Game g){
+        super(ball,g);
         line=new Line[3];
         degree=new int[3];
     }
@@ -48,6 +48,11 @@ public class TriangleObs extends Obstacle{
         timeline.play();
         grp.getChildren().addAll(line);
 //        canvas.getChildren().addAll(grp);
+    }
+
+    @Override
+    public void detect_hit() {
+
     }
 
     public void rotateX(Line line, int number) {

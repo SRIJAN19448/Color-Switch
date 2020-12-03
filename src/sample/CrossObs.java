@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
@@ -16,8 +17,8 @@ public class CrossObs extends Obstacle {
     int degree[];
     transient Line line[];
     transient Circle pivot;
-    CrossObs(int pos,Ball ball){
-        super(ball);
+    CrossObs(int pos,Ball ball,Game g){
+        super(ball,g);
         this.pos=pos;
         degree=new int[4];
         line=new Line[4];
@@ -62,13 +63,33 @@ public class CrossObs extends Obstacle {
         timeline=new Timeline(new KeyFrame(Duration.millis(20),e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20),e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20),e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20),e->rotateX(line[3],3)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
+        hit=new Timeline(new KeyFrame(Duration.millis(10),e->detect_hit()));
+        hit.setCycleCount(Timeline.INDEFINITE);
+        hit.play();
         grp.getChildren().addAll(line);
         grp.getChildren().add(pivot);
 //        canvas.getChildren().addAll(grp);
 //        canvas.getChildren().addAll(pivot);
 
     }
+
+    @Override
+    public void detect_hit() {
+        for(int i=0;i<4;i++) {
+            Shape shape = Shape.intersect(ball.ball, line[i]);
+            if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.ball.getFill()){
+                System.out.println("Collision detected");
+                timeline.pause();
+                hit.pause();
+                ball.up.pause();
+                ball.down.pause();
+                g.hit_detected();
+                g.pause_stat=1;
+                break;
+            }
+        }
+    }
+
     public void rotateX(Line line, int number){
 
         if(number==0) {

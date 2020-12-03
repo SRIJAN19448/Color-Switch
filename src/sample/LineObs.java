@@ -8,14 +8,15 @@ import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 public class LineObs extends Obstacle {
     transient Line line[];
     int orientation;
     int pos;
-    LineObs(int pos,int orientation,Ball ball){
-        super(ball);
+    LineObs(int pos,int orientation,Ball ball,Game g){
+        super(ball,g);
         this.pos=pos;
         this.orientation=orientation;
     }
@@ -63,9 +64,28 @@ public class LineObs extends Obstacle {
             timeline=new Timeline(new KeyFrame(Duration.millis(10),e -> move2(line[0])),new KeyFrame(Duration.millis(10),e1 -> move2(line[1])),new KeyFrame(Duration.millis(10),e2 -> move2(line[2])),new KeyFrame(Duration.millis(10),e3 -> move2(line[3])),new KeyFrame(Duration.millis(10),e4 -> move2(line[4])),new KeyFrame(Duration.millis(10),e5 -> move2(line[5])),new KeyFrame(Duration.millis(10),e6 -> move2(line[6])),new KeyFrame(Duration.millis(10),e7 -> move2(line[7])));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
+        hit=new Timeline(new KeyFrame(Duration.millis(10),e->detect_hit()));
+        hit.setCycleCount(Timeline.INDEFINITE);
+        hit.play();
         grp.getChildren().addAll(line);
 //        canvas.getChildren().addAll(grp);
+    }
+
+    @Override
+    public void detect_hit() {
+        for(int i=0;i<8;i++) {
+            Shape shape = Shape.intersect(ball.ball, line[i]);
+            if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.ball.getFill()){
+                System.out.println("Collision detected");
+                timeline.pause();
+                hit.pause();
+                ball.up.pause();
+                ball.down.pause();
+                g.hit_detected();
+                g.pause_stat=1;
+                break;
+            }
+        }
     }
 
 

@@ -47,6 +47,7 @@ public class GameManager {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 try {
+                    Main.make_play();
                     new_game();
                 } catch (IOException e) {
                     e.printStackTrace();
