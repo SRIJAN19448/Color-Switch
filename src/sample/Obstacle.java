@@ -8,6 +8,7 @@ import java.io.Serializable;
 public abstract class Obstacle implements Serializable {
     protected Ball ball;
     protected Game g;
+    protected double pos;
     protected transient Group grp;
     protected transient Timeline timeline;
     protected transient Timeline hit;
@@ -18,12 +19,17 @@ public abstract class Obstacle implements Serializable {
     public void animation_play(){
         timeline.play();
     }
-    Obstacle(Ball ball,Game g){
+    Obstacle(Ball ball,Game g,double pos){
         this.grp=new Group();
         this.ball=ball;
         this.g=g;
+        this.pos=pos;
         this.timeline=new Timeline();
         this.hit=new Timeline();
+    }
+
+    public double getPos() {
+        return pos;
     }
 
     public abstract void create();

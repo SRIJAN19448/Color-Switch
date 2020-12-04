@@ -15,25 +15,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Star implements Special, Serializable {
-    transient Group grp;
-    transient Pane canvas;
-    transient ImageView imv;
-    Game g;
-    Ball ball;
-    double pos;
-    ArrayList<Star> strs;
-    ArrayList<Object> itms;
-    transient Timeline t;
-    Star(double pos, Pane canvas,Ball ball,Game g,ArrayList<Star> strs,ArrayList<Object> itms){
+    private transient Group grp;
+//    transient Pane canvas;
+    private transient ImageView imv;
+    private Game game;
+//    Ball ball;
+    private double pos;
+//    ArrayList<Star> strs;
+//    ArrayList<Object> itms;
+    private transient Timeline t;
+    Star(double pos, Pane canvas,Ball ball,Game game,ArrayList<Star> strs,ArrayList<Object> itms){
         this.pos=pos;
-        this.canvas=canvas;
+//        this.canvas=canvas;
         grp=new Group();
         imv=new ImageView();
-        this.ball=ball;
-        this.g=g;
-        this.strs=strs;
+//        this.ball=ball;
+        this.game=game;
+//        this.strs=strs;
         this.t=new Timeline();
-        this.itms=itms;
+//        this.itms=itms;
+    }
+
+    public Group getGrp() {
+        return grp;
+    }
+
+    public double getPos() {
+        return pos;
     }
 
     public void create() throws FileNotFoundException {
@@ -46,8 +54,8 @@ public class Star implements Special, Serializable {
         imv.setX(125);
         imv.setY(pos);
         grp.getChildren().add(imv);
-        System.out.println(ball.ball==null);
-        t=new Timeline(new KeyFrame(Duration.millis(10),e->special(ball.ball.getCenterY())));
+        System.out.println(game.getBall().ball==null);
+        t=new Timeline(new KeyFrame(Duration.millis(10),e->special(game.getBall().ball.getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
     }
@@ -55,13 +63,13 @@ public class Star implements Special, Serializable {
     @Override
     public int special(double posY) {
 //        System.out.println(this.canvas==null);
-        if(posY>=this.imv.getY()+canvas.getTranslateY()+10 && posY<=this.imv.getY()+canvas.getTranslateY()+40){
-            g.setScore(g.getScore()+1);
-            Main.scr.setText(String.valueOf(g.getScore()));
-            canvas.getChildren().remove(this.grp);
+        if(posY>=this.imv.getY()+10 && posY<=this.imv.getY()+40){
+            game.setScore(game.getScore()+1);
+            Main.scr.setText(String.valueOf(game.getScore()));
+            game.getCanvas().getChildren().remove(this.grp);
             Star x=this;
-            this.strs.remove(x);
-            this.itms.remove(x);
+            this.game.getStars().remove(x);
+            this.game.getItems().remove(x);
             t.stop();
         }
 

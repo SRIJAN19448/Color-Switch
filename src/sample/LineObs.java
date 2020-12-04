@@ -13,15 +13,24 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class LineObs extends Obstacle {
-    transient Line line[];
-    int orientation;
-    int pos;
-    LineObs(int pos,int orientation,Ball ball,Game g){
-        super(ball,g);
-        this.pos=pos;
+    private transient Line line[];
+    private int orientation;
+//    int pos;
+    LineObs(double pos,int orientation,Ball ball,Game g){
+        super(ball,g,pos);
+//        this.pos=pos;
         this.orientation=orientation;
         line=new Line[8];
     }
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+    }
+
     @Override
     public void passThrough() {
 

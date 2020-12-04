@@ -33,7 +33,7 @@ public class GameManager {
 
 
 
-    static Game game;
+    private static Game game;
     GameManager() throws IOException {
         game=new Game();
     }

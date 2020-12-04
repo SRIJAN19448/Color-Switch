@@ -11,16 +11,16 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class SquareObs extends Obstacle{
-    static int counter=1;
-    int id;
-    double pos;
-    transient Line line[];
-    int degree[];
-    int length;
+    private static int counter=1;
+    private int id;
+//    double pos;
+    private transient Line line[];
+    private int degree[];
+    private int length;
     SquareObs(double pos,Ball ball,Game g){
-        super(ball,g);
+        super(ball,g,pos);
         this.id=counter++;
-        this.pos=pos;
+//        this.pos=pos;
         line=new Line[4];
         degree=new int[4];
     }

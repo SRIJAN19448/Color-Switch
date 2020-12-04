@@ -140,11 +140,11 @@ public class Game implements Serializable {
         this.obstacle_pos-=300;
         Star st=new Star(225,canvas,ball,this,this.stars,this.items);
         st.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,st.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,st.getGrp());
         this.str_pos-=300;
-        ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+        ColorChanger clr=new ColorChanger(this.clr_pos,this);
         clr.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,clr.g);
+        canvas.getChildren().add(canvas.getChildren().size()-2,clr.getGrp());
         this.clr_pos-=300;
         RingObs ring=new RingObs(this.obstacle_pos,this.ball,this);
         ring.create();
@@ -152,11 +152,11 @@ public class Game implements Serializable {
         this.obstacle_pos-=300;
         Star st1=new Star(-75,canvas,ball,this,this.stars,this.items);
         st1.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,st1.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,st1.getGrp());
         this.str_pos-=300;
-        ColorChanger clr2=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+        ColorChanger clr2=new ColorChanger(this.clr_pos,this);
         clr2.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,clr2.g);
+        canvas.getChildren().add(canvas.getChildren().size()-2,clr2.getGrp());
         this.clr_pos-=300;
         CrossObs cross=new CrossObs(this.obstacle_pos,this.ball,this);
         cross.create();
@@ -164,11 +164,11 @@ public class Game implements Serializable {
         this.obstacle_pos-=300;
         Star st2=new Star(-375,canvas,ball,this,this.stars,this.items);
         st2.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,st2.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,st2.getGrp());
         this.str_pos-=300;
-        ColorChanger clr3=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+        ColorChanger clr3=new ColorChanger(this.clr_pos,this);
         clr3.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,clr3.g);
+        canvas.getChildren().add(canvas.getChildren().size()-2,clr3.getGrp());
         this.clr_pos-=300;
         LineObs line=new LineObs(this.obstacle_pos,1,this.ball,this);
         line.create();
@@ -176,11 +176,11 @@ public class Game implements Serializable {
         this.obstacle_pos-=300;
         Star st3=new Star(-675,canvas,ball,this,this.stars,this.items);
         st3.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,st3.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,st3.getGrp());
         this.str_pos-=300;
-        ColorChanger clr4=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+        ColorChanger clr4=new ColorChanger(this.clr_pos,this);
         clr4.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,clr4.g);
+        canvas.getChildren().add(canvas.getChildren().size()-2,clr4.getGrp());
         this.clr_pos-=300;
         System.out.println("->");
 
@@ -332,13 +332,13 @@ public class Game implements Serializable {
                 Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
                 st.create();
                 this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,st.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,st.getGrp());
                 items.add(st);
                 stars.add(st);
-                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+                ColorChanger clr=new ColorChanger(this.clr_pos,this);
                 clr.create();
                 this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,clr.g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,clr.getGrp());
                 items.add(clr);
                 clrs.add(clr);
             }
@@ -353,13 +353,13 @@ public class Game implements Serializable {
                 Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
                 st.create();
                 this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,st.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,st.getGrp());
                 items.add(st);
                 stars.add(st);
-                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+                ColorChanger clr=new ColorChanger(this.clr_pos,this);
                 clr.create();
                 this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,clr.g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,clr.getGrp());
                 items.add(clr);
                 clrs.add(clr);
             }
@@ -374,13 +374,13 @@ public class Game implements Serializable {
                 Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
                 st.create();
                 this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,st.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,st.getGrp());
                 items.add(st);
                 stars.add(st);
-                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+                ColorChanger clr=new ColorChanger(this.clr_pos,this);
                 clr.create();
                 this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,clr.g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,clr.getGrp());
                 items.add(clr);
                 clrs.add(clr);
             }
@@ -395,13 +395,13 @@ public class Game implements Serializable {
                 Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
                 st.create();
                 this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,st.grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,st.getGrp());
                 items.add(st);
                 stars.add(st);
-                ColorChanger clr=new ColorChanger(this.clr_pos,this.ball,this,this.clrs,this.items);
+                ColorChanger clr=new ColorChanger(this.clr_pos,this);
                 clr.create();
                 this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,clr.g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,clr.getGrp());
                 items.add(clr);
                 clrs.add(clr);
             }
@@ -418,28 +418,28 @@ public class Game implements Serializable {
 //        this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
-                i=new SquareObs(((SquareObs) i).pos,this.ball,this);
+                i=new SquareObs(((SquareObs) i).getPos(),this.ball,this);
                 ((SquareObs)i).create();
                 obs.add(((SquareObs)i));
                 itms.add(i);
                 canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
             }
             else if(i instanceof RingObs){
-                i=new RingObs((((RingObs) i).pos), this.ball,this);
+                i=new RingObs((((RingObs) i).getPos()), this.ball,this);
                 ((RingObs) i).create();
                 obs.add(((RingObs) i));
                 itms.add(i);
                 canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
             }
             else if(i instanceof CrossObs){
-                i=new CrossObs((((CrossObs) i).pos), this.ball,this);
+                i=new CrossObs((((CrossObs) i).getPos()), this.ball,this);
                 ((CrossObs) i).create();
                 obs.add(((CrossObs) i));
                 itms.add(i);
                 canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
             }
             else if(i instanceof LineObs){
-                i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, this.ball,this);
+                i=new LineObs((((LineObs) i).getPos()),((LineObs) i).getOrientation(), this.ball,this);
                 ((LineObs) i).create();
                 obs.add(((LineObs) i));
                 itms.add(i);
@@ -447,18 +447,18 @@ public class Game implements Serializable {
             }
             else if(i instanceof ColorChanger){
 
-                i=new ColorChanger(((ColorChanger) i).pos, this.ball,this,this.clrs,this.items);
+                i=new ColorChanger(((ColorChanger) i).getPos(),this);
                 ((ColorChanger) i).create();
                 cls.add(((ColorChanger) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((ColorChanger) i).g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((ColorChanger) i).getGrp());
             }
             else if(i instanceof Star){
-                i=new Star(((Star) i).pos,canvas,this.ball,this,this.stars,this.items);
+                i=new Star(((Star) i).getPos(),canvas,this.ball,this,this.stars,this.items);
                 ((Star) i).create();
                 strs.add(((Star) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((Star) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((Star) i).getGrp());
             }
 
         }
@@ -551,14 +551,14 @@ public class Game implements Serializable {
         this.obstacles=obs;
         this.stars=strs;
         this.items=itms;
-        for(ColorChanger i:clrs){
-            i.itms=itms;
-            i.clrs=cls;
-        }
-        for(Star i:stars){
-            i.itms=itms;
-            i.strs=strs;
-        }
+//        for(ColorChanger i:clrs){
+//            i.itms=itms;
+//            i.clrs=cls;
+//        }
+//        for(Star i:stars){
+//            i.itms=itms;
+//            i.strs=strs;
+//        }
         System.out.println(this.ball.centerY);
         Main.scr.setText(String.valueOf(this.score));
         Main.getStage().setScene(Main.play_screen);

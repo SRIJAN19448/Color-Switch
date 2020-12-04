@@ -15,26 +15,35 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ColorChanger implements Special, Serializable {
-    transient Group g;
-    transient Pane canvas;
-    double pos;
-    transient Arc arc[];
-    Ball ball;
-    Game game;
-    transient Timeline t;
-    ArrayList<ColorChanger> clrs;
-    ArrayList<Object> itms;
-    ColorChanger(double pos,Ball ball,Game game,ArrayList<ColorChanger> clrs,ArrayList<Object> itms){
+    private transient Group grp;
+//    private transient Pane canvas;
+    private double pos;
+    private transient Arc arc[];
+//    Ball ball;
+    private Game game;
+    private transient Timeline t;
+//    ArrayList<ColorChanger> clrs;
+//    ArrayList<Object> itms;
+    ColorChanger(double pos,Game game){
         this.pos=pos;
-        this.canvas=game.getCanvas();
+//        this.canvas=game.getCanvas();
         arc=new Arc[4];
-        g=new Group();
+        grp=new Group();
         this.game=game;
-        this.clrs=clrs;
+//        this.clrs=clrs;
         this.t=new Timeline();
-        this.ball=ball;
-        this.itms=itms;
+//        this.ball=ball;
+//        this.itms=itms;
     }
+
+    public Group getGrp() {
+        return grp;
+    }
+
+    public double getPos() {
+        return pos;
+    }
+
     public void create(){
         arc[0]=new Arc(150,pos,12,12,0,90);
         arc[0].setType(ArcType.ROUND);
@@ -55,8 +64,8 @@ public class ColorChanger implements Special, Serializable {
         arc[3].setType(ArcType.ROUND);
         arc[3].setFill(Color.DARKMAGENTA);
         arc[3].setStrokeLineCap(StrokeLineCap.ROUND);
-        g.getChildren().addAll(arc);
-        t=new Timeline(new KeyFrame(Duration.millis(10), e->special(ball.ball.getCenterY())));
+        grp.getChildren().addAll(arc);
+        t=new Timeline(new KeyFrame(Duration.millis(10), e->special(game.getBall().ball.getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
 //        canvas.getChildren().addAll(g);
@@ -64,9 +73,9 @@ public class ColorChanger implements Special, Serializable {
 
     @Override
     public int special(double posY) {
-        if(this.canvas==null)
-            System.out.println("NULL");
-        if(posY>=this.arc[0].getCenterY()+canvas.getTranslateY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+canvas.getTranslateY()+this.arc[0].getRadiusY()/4) {
+//        if(this.canvas==null)
+//            System.out.println("NULL");
+        if(posY>=this.arc[0].getCenterY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+this.arc[0].getRadiusY()/4) {
             System.out.println("BYUV");
             if (game.getBall().ball.getFill().equals(Color.YELLOW))
                 game.getBall().ball.setFill(Color.DARKVIOLET);
@@ -77,10 +86,10 @@ public class ColorChanger implements Special, Serializable {
                 game.getBall().ball.setFill(Color.CYAN);
             } else if (game.getBall().ball.getFill().equals(Color.CYAN))
                 game.getBall().ball.setFill(Color.YELLOW);
-            canvas.getChildren().remove(this.g);
+            game.getCanvas().getChildren().remove(this.grp);
             ColorChanger cl=this;
-            this.clrs.remove(cl);
-            this.itms.remove(cl);
+            this.game.getClrs().remove(cl);
+            this.game.getItems().remove(cl);
             t.stop();
         }
         return -1;

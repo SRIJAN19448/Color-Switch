@@ -12,8 +12,8 @@ public class TriangleObs extends Obstacle{
     transient Line line[];
     int degree[];
     int length;
-    TriangleObs(Ball ball,Game g){
-        super(ball,g);
+    TriangleObs(double pos,Ball ball,Game g){
+        super(ball,g,pos);
         line=new Line[3];
         degree=new int[3];
     }

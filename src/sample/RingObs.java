@@ -13,11 +13,11 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class RingObs extends Obstacle{
-    int pos;
-    transient Arc arc[];
-    RingObs(int pos,Ball ball,Game g){
-        super(ball,g);
-        this.pos=pos;
+//    int pos;
+    private transient Arc arc[];
+    RingObs(double pos,Ball ball,Game g){
+        super(ball,g,pos);
+//        this.pos=pos;
         arc=new Arc[4];
     }
     @Override

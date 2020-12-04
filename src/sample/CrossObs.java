@@ -12,14 +12,14 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class CrossObs extends Obstacle {
-    int length;
-    int pos;
-    int degree[];
-    transient Line line[];
-    transient Circle pivot;
-    CrossObs(int pos,Ball ball,Game g){
-        super(ball,g);
-        this.pos=pos;
+    private int length;
+//    int pos;
+    private int degree[];
+    private transient Line line[];
+    private transient Circle pivot;
+    CrossObs(double pos,Ball ball,Game g){
+        super(ball,g,pos);
+//        this.pos=pos;
         degree=new int[4];
         line=new Line[4];
     }
