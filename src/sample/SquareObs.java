@@ -85,7 +85,7 @@ public class SquareObs extends Obstacle{
                 ball.up.pause();
                 ball.down.pause();
                 g.hit_detected();
-                g.pause_stat=1;
+                g.setPause_stat(1);
                 break;
             }
         }

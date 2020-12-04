@@ -86,7 +86,7 @@ public class Ball implements Serializable {
         if(y<250){
             if(250-y>canvas.getLayoutY()){
                 canvas.setLayoutY(250-y);
-                g.translate=250-y;
+                g.setTranslate(250-y);
                 Main.pausebtn.setLayoutY(y-250);
                 Main.scr.setLayoutY(y-250);
             }

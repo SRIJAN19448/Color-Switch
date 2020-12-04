@@ -26,7 +26,7 @@ public class ColorChanger implements Special, Serializable {
     ArrayList<Object> itms;
     ColorChanger(double pos,Ball ball,Game game,ArrayList<ColorChanger> clrs,ArrayList<Object> itms){
         this.pos=pos;
-        this.canvas=game.canvas;
+        this.canvas=game.getCanvas();
         arc=new Arc[4];
         g=new Group();
         this.game=game;
@@ -68,15 +68,15 @@ public class ColorChanger implements Special, Serializable {
             System.out.println("NULL");
         if(posY>=this.arc[0].getCenterY()+canvas.getTranslateY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+canvas.getTranslateY()+this.arc[0].getRadiusY()/4) {
             System.out.println("BYUV");
-            if (game.ball.ball.getFill().equals(Color.YELLOW))
-                game.ball.ball.setFill(Color.DARKVIOLET);
-            else if (game.ball.ball.getFill().equals(Color.DARKVIOLET))
-                game.ball.ball.setFill(Color.DARKMAGENTA);
-            else if (game.ball.ball.getFill().equals(Color.DARKMAGENTA)) {
+            if (game.getBall().ball.getFill().equals(Color.YELLOW))
+                game.getBall().ball.setFill(Color.DARKVIOLET);
+            else if (game.getBall().ball.getFill().equals(Color.DARKVIOLET))
+                game.getBall().ball.setFill(Color.DARKMAGENTA);
+            else if (game.getBall().ball.getFill().equals(Color.DARKMAGENTA)) {
                 System.out.println("UDIKVJ HJDK");
-                game.ball.ball.setFill(Color.CYAN);
-            } else if (game.ball.ball.getFill().equals(Color.CYAN))
-                game.ball.ball.setFill(Color.YELLOW);
+                game.getBall().ball.setFill(Color.CYAN);
+            } else if (game.getBall().ball.getFill().equals(Color.CYAN))
+                game.getBall().ball.setFill(Color.YELLOW);
             canvas.getChildren().remove(this.g);
             ColorChanger cl=this;
             this.clrs.remove(cl);

@@ -56,7 +56,8 @@ public class Star implements Special, Serializable {
     public int special(double posY) {
 //        System.out.println(this.canvas==null);
         if(posY>=this.imv.getY()+canvas.getTranslateY()+10 && posY<=this.imv.getY()+canvas.getTranslateY()+40){
-            Main.scr.setText(String.valueOf(++g.score));
+            g.setScore(g.getScore()+1);
+            Main.scr.setText(String.valueOf(g.getScore()));
             canvas.getChildren().remove(this.grp);
             Star x=this;
             this.strs.remove(x);

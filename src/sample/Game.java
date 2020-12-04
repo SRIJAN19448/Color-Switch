@@ -29,19 +29,19 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Game implements Serializable {
-    transient static Scene scene;
-    transient static Pane canvas;
-    double translate;
-    ArrayList<Obstacle> obstacles;
-    Ball ball;
-    ArrayList<ColorChanger> clrs;
-    ArrayList<Star> stars;
-    int pause_stat;
-    Integer score;
-    int clr_pos;
-    int obstacle_pos;
-    int str_pos;
-    ArrayList<Object> items;
+    private transient static Scene scene;
+    private transient Pane canvas;
+    private double translate;
+    private ArrayList<Obstacle> obstacles;
+    private Ball ball;
+    private ArrayList<ColorChanger> clrs;
+    private ArrayList<Star> stars;
+    private int pause_stat;
+    private Integer score;
+    private int clr_pos;
+    private int obstacle_pos;
+    private int str_pos;
+    private ArrayList<Object> items;
 //    int flag=1;
     public Game() throws IOException {
 //        this.translate=0;
@@ -73,6 +73,58 @@ public class Game implements Serializable {
         this.stars=stars;
         this.obstacles=obstacles;
         this.items=item;
+    }
+
+    public Pane getCanvas() {
+        return canvas;
+    }
+
+    public double getTranslate() {
+        return translate;
+    }
+
+    public void setTranslate(double translate) {
+        this.translate = translate;
+    }
+
+    public ArrayList<Obstacle> getObstacles() {
+        return obstacles;
+    }
+
+    public Ball getBall() {
+        return ball;
+    }
+
+    public ArrayList<ColorChanger> getClrs() {
+        return clrs;
+    }
+
+    public ArrayList<Star> getStars() {
+        return stars;
+    }
+
+    public int getPause_stat() {
+        return pause_stat;
+    }
+
+    public void setPause_stat(int pause_stat) {
+        this.pause_stat = pause_stat;
+    }
+
+    public int getClr_pos() {
+        return clr_pos;
+    }
+
+    public int getObstacle_pos() {
+        return obstacle_pos;
+    }
+
+    public int getStr_pos() {
+        return str_pos;
+    }
+
+    public ArrayList<Object> getItems() {
+        return items;
     }
 
     public void new_game() throws IOException {
@@ -356,13 +408,13 @@ public class Game implements Serializable {
     }
 
     public void load_game() throws FileNotFoundException {
-        Game.canvas.setLayoutY(this.translate);
+        canvas.setLayoutY(this.translate);
         ArrayList<Obstacle> obs=new ArrayList<>();
         ArrayList<Star> strs=new ArrayList<>();
         ArrayList<ColorChanger> cls=new ArrayList<>();
         ArrayList<Object> itms=new ArrayList<>();
         this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base,this);
-        this.ball.create(Game.canvas);
+        this.ball.create(canvas);
 //        this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
@@ -370,28 +422,28 @@ public class Game implements Serializable {
                 ((SquareObs)i).create();
                 obs.add(((SquareObs)i));
                 itms.add(i);
-                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
             }
             else if(i instanceof RingObs){
                 i=new RingObs((((RingObs) i).pos), this.ball,this);
                 ((RingObs) i).create();
                 obs.add(((RingObs) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
             }
             else if(i instanceof CrossObs){
                 i=new CrossObs((((CrossObs) i).pos), this.ball,this);
                 ((CrossObs) i).create();
                 obs.add(((CrossObs) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
             }
             else if(i instanceof LineObs){
                 i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, this.ball,this);
                 ((LineObs) i).create();
                 obs.add(((LineObs) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((LineObs) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((LineObs) i).grp);
             }
             else if(i instanceof ColorChanger){
 
@@ -399,14 +451,14 @@ public class Game implements Serializable {
                 ((ColorChanger) i).create();
                 cls.add(((ColorChanger) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((ColorChanger) i).g);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((ColorChanger) i).g);
             }
             else if(i instanceof Star){
                 i=new Star(((Star) i).pos,canvas,this.ball,this,this.stars,this.items);
                 ((Star) i).create();
                 strs.add(((Star) i));
                 itms.add(i);
-                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((Star) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((Star) i).grp);
             }
 
         }
