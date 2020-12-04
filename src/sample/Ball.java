@@ -15,34 +15,56 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Ball implements Serializable {
-    int color=0;
-    int trans=1;
-    double prevpos;
-    double newpos;
-    double diff=0;
-    double base=0;
-    double centerX,centerY;
-    int radius;
-    transient Pane canvas;
-    transient Timeline up;
-    transient Timeline down;
-    transient Circle ball;
-    Game g;
-    int num1;
-    Ball(double centerx, double centery, int radius,Pane canvas,double base, Game g){
-        this.base=base;
+    private int color=0;
+    private int trans=1;
+    private double centerX,centerY;
+    private int radius;
+    private transient Pane canvas;
+    private transient Timeline up;
+    private transient Timeline down;
+    private transient Circle ball;
+    private Game g;
+
+
+
+    Ball(double centerx, double centery, int radius, Pane canvas, Game g){
         this.centerX=centerx;
         this.centerY=centery;
         this.radius=radius;
         this.canvas=canvas;
         this.g=g;
-        num1=2;
         ball=new Circle(centerx,centery,radius);
-        prevpos=ball.getCenterY();
-        newpos=ball.getCenterY();
 
 
     }
+
+    public double getCenterX() {
+        return centerX;
+    }
+
+    public double getCenterY() {
+        return centerY;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+    public void fall_pause(){
+        down.pause();
+    }
+
+    public void setCenterY(double centerY) {
+        this.centerY = centerY;
+    }
+
+    public Circle getBall() {
+        return ball;
+    }
+
+    public void jump_pause(){
+        up.pause();
+    }
+
     public void create(Pane canvas){
         ball.setFill(Color.DARKMAGENTA);
         up=new Timeline(new KeyFrame(Duration.millis(10),e->jump()));
@@ -86,7 +108,7 @@ public class Ball implements Serializable {
         if(y<250){
             if(250-y>canvas.getLayoutY()){
                 canvas.setLayoutY(250-y);
-                g.translate=250-y;
+                g.setTranslate(250-y);
                 Main.pausebtn.setLayoutY(y-250);
                 Main.scr.setLayoutY(y-250);
             }

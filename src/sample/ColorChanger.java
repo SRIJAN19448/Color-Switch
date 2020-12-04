@@ -16,24 +16,23 @@ import java.util.ArrayList;
 
 public class ColorChanger implements Special, Serializable {
     transient Group g;
-    transient Pane canvas;
     double pos;
     transient Arc arc[];
-    Ball ball;
+//    Ball ball;
     Game game;
     transient Timeline t;
-    ArrayList<ColorChanger> clrs;
-    ArrayList<Object> itms;
+//    ArrayList<ColorChanger> clrs;
+//    ArrayList<Object> itms;
     ColorChanger(double pos,Ball ball,Game game,ArrayList<ColorChanger> clrs,ArrayList<Object> itms){
         this.pos=pos;
-        this.canvas=game.canvas;
+
         arc=new Arc[4];
         g=new Group();
         this.game=game;
-        this.clrs=clrs;
+//        this.clrs=clrs;
         this.t=new Timeline();
-        this.ball=ball;
-        this.itms=itms;
+//        this.ball=ball;
+//        this.itms=itms;
     }
     public void create(){
         arc[0]=new Arc(150,pos,12,12,0,90);
@@ -56,7 +55,7 @@ public class ColorChanger implements Special, Serializable {
         arc[3].setFill(Color.DARKMAGENTA);
         arc[3].setStrokeLineCap(StrokeLineCap.ROUND);
         g.getChildren().addAll(arc);
-        t=new Timeline(new KeyFrame(Duration.millis(10), e->special(ball.ball.getCenterY())));
+        t=new Timeline(new KeyFrame(Duration.millis(10), e->special(game.getBall().getBall().getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
 //        canvas.getChildren().addAll(g);
@@ -64,23 +63,23 @@ public class ColorChanger implements Special, Serializable {
 
     @Override
     public int special(double posY) {
-        if(this.canvas==null)
+        if(this.game.getCanvas()==null)
             System.out.println("NULL");
-        if(posY>=this.arc[0].getCenterY()+canvas.getTranslateY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+canvas.getTranslateY()+this.arc[0].getRadiusY()/4) {
+        if(posY>=this.arc[0].getCenterY()+game.getCanvas().getTranslateY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+game.getCanvas().getTranslateY()+this.arc[0].getRadiusY()/4) {
             System.out.println("BYUV");
-            if (game.ball.ball.getFill().equals(Color.YELLOW))
-                game.ball.ball.setFill(Color.DARKVIOLET);
-            else if (game.ball.ball.getFill().equals(Color.DARKVIOLET))
-                game.ball.ball.setFill(Color.DARKMAGENTA);
-            else if (game.ball.ball.getFill().equals(Color.DARKMAGENTA)) {
+            if (game.getBall().getBall().getFill().equals(Color.YELLOW))
+                game.getBall().getBall().setFill(Color.DARKVIOLET);
+            else if (game.getBall().getBall().getFill().equals(Color.DARKVIOLET))
+                game.getBall().getBall().setFill(Color.DARKMAGENTA);
+            else if (game.getBall().getBall().getFill().equals(Color.DARKMAGENTA)) {
                 System.out.println("UDIKVJ HJDK");
-                game.ball.ball.setFill(Color.CYAN);
-            } else if (game.ball.ball.getFill().equals(Color.CYAN))
-                game.ball.ball.setFill(Color.YELLOW);
-            canvas.getChildren().remove(this.g);
+                game.getBall().getBall().setFill(Color.CYAN);
+            } else if (game.getBall().getBall().getFill().equals(Color.CYAN))
+                game.getBall().getBall().setFill(Color.YELLOW);
+            game.getCanvas().getChildren().remove(this.g);
             ColorChanger cl=this;
-            this.clrs.remove(cl);
-            this.itms.remove(cl);
+            this.game.getClrs().remove(cl);
+            this.game.getItems().remove(cl);
             t.stop();
         }
         return -1;

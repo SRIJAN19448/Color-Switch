@@ -12,14 +12,12 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class CrossObs extends Obstacle {
-    int length;
-    int pos;
-    int degree[];
-    transient Line line[];
-    transient Circle pivot;
-    CrossObs(int pos,Ball ball,Game g){
-        super(ball,g);
-        this.pos=pos;
+    private int length;
+    private int degree[];
+    private transient Line line[];
+    private transient Circle pivot;
+    CrossObs(double pos,Ball ball,Game g){
+        super(ball,g,pos);
         degree=new int[4];
         line=new Line[4];
     }
@@ -82,19 +80,19 @@ public class CrossObs extends Obstacle {
     @Override
     public void detect_hit() throws InterruptedException {
         for(int i=0;i<4;i++) {
-            Shape shape = Shape.intersect(ball.ball, line[i]);
-            if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.ball.getFill()){
+            Shape shape = Shape.intersect(ball.getBall(), line[i]);
+            if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.getBall().getFill()){
                 System.out.println("width: "+shape.getBoundsInLocal().getWidth());
-                System.out.println("COLORball: "+ball.ball.getFill());
+                System.out.println("COLORball: "+ball.getBall().getFill());
                 System.out.println("COLOR: "+line[i].getStroke());
                 System.out.println("Collision detected");
                 System.out.println("CROSSOBS");
                 timeline.pause();
                 hit.pause();
-                ball.up.pause();
-                ball.down.pause();
+                ball.jump_pause();
+                ball.fall_pause();
                 g.hit_detected();
-                g.pause_stat=1;
+                g.setPause_stat(1);
                 break;
             }
         }

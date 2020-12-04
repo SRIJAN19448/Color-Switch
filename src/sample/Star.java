@@ -18,22 +18,22 @@ public class Star implements Special, Serializable {
     transient Group grp;
     transient Pane canvas;
     transient ImageView imv;
-    Game g;
-    Ball ball;
+    Game game;
+//    Ball ball;
     double pos;
-    ArrayList<Star> strs;
-    ArrayList<Object> itms;
+//    ArrayList<Star> strs;
+//    ArrayList<Object> itms;
     transient Timeline t;
-    Star(double pos, Pane canvas,Ball ball,Game g,ArrayList<Star> strs,ArrayList<Object> itms){
+    Star(double pos, Pane canvas,Ball ball,Game game,ArrayList<Star> strs,ArrayList<Object> itms){
         this.pos=pos;
         this.canvas=canvas;
         grp=new Group();
         imv=new ImageView();
-        this.ball=ball;
-        this.g=g;
-        this.strs=strs;
+//        this.ball=ball;
+        this.game=game;
+//        this.strs=strs;
         this.t=new Timeline();
-        this.itms=itms;
+//        this.itms=itms;
     }
 
     public void create() throws FileNotFoundException {
@@ -46,8 +46,8 @@ public class Star implements Special, Serializable {
         imv.setX(125);
         imv.setY(pos);
         grp.getChildren().add(imv);
-        System.out.println(ball.ball==null);
-        t=new Timeline(new KeyFrame(Duration.millis(10),e->special(ball.ball.getCenterY())));
+        System.out.println(game.getBall().getBall()==null);
+        t=new Timeline(new KeyFrame(Duration.millis(10),e->special(game.getBall().getBall().getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
     }
@@ -56,11 +56,12 @@ public class Star implements Special, Serializable {
     public int special(double posY) {
 //        System.out.println(this.canvas==null);
         if(posY>=this.imv.getY()+canvas.getTranslateY()+10 && posY<=this.imv.getY()+canvas.getTranslateY()+40){
-            Main.scr.setText(String.valueOf(++g.score));
+            game.setScore(game.getScore()+1);
+            Main.scr.setText(String.valueOf(game.getScore()));
             canvas.getChildren().remove(this.grp);
             Star x=this;
-            this.strs.remove(x);
-            this.itms.remove(x);
+            this.game.getStars().remove(x);
+            this.game.getItems().remove(x);
             t.stop();
         }
 

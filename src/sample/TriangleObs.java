@@ -9,11 +9,11 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class TriangleObs extends Obstacle{
-    transient Line line[];
-    int degree[];
-    int length;
-    TriangleObs(Ball ball,Game g){
-        super(ball,g);
+    private transient Line line[];
+    private int degree[];
+    private int length;
+    TriangleObs(Ball ball,Game g,double pos){
+        super(ball,g,pos);
         line=new Line[3];
         degree=new int[3];
     }
