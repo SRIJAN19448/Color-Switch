@@ -33,13 +33,10 @@ public class GameManager {
 
 
 
-    Game game;
-    GameManager() throws IOException {
-        this.game=new Game();
-    }
-    public void new_game() throws IOException {
-
-        this.game.new_game();
+    static Game game;
+    public static void new_game() throws IOException {
+        game=new Game();
+        game.new_game();
 
     }
     public void start_game(Stage primaryStage){
@@ -84,14 +81,14 @@ public class GameManager {
 
 
 
-    public void load_game() throws IOException, ClassNotFoundException {
+    public static void load_game() throws IOException, ClassNotFoundException {
         ObjectInputStream in=new ObjectInputStream(new FileInputStream("saves.txt"));
         game=(Game)in.readObject();
-        double t=game.getTranslate();
-        System.out.println(game.getBall().getCenterY());
-        double cent=game.getBall().getCenterY();
-        game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
-        game.setTranslate(t);
+        double t=game.translate;
+        System.out.println(game.ball.centerY);
+        double cent=game.ball.centerY;
+        game=new Game(game.score,game.clrs,game.stars,game.obstacles,game.items,cent,game.translate,game.ball.base,game.obstacle_pos,game.clr_pos,game.str_pos);
+        game.translate=t;
         game.load_game();
 //        ArrayList<Obstacle> obs=new ArrayList<>();
 //        ArrayList<Star> strs=new ArrayList<>();

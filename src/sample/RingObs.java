@@ -13,10 +13,11 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class RingObs extends Obstacle{
-
-    private transient Arc arc[];
-    RingObs(double pos,Ball ball,Game g){
-        super(ball,g,pos);
+    int pos;
+    transient Arc arc[];
+    RingObs(int pos,Ball ball,Game g){
+        super(ball,g);
+        this.pos=pos;
         arc=new Arc[4];
     }
     @Override
@@ -69,18 +70,18 @@ public class RingObs extends Obstacle{
     @Override
     public void detect_hit() throws InterruptedException {
         for(int i=0;i<4;i++) {
-            Shape shape = Shape.intersect(ball.getBall(), arc[i]);
-            if(shape.getBoundsInLocal().getWidth()!=-1 && arc[i].getStroke()!=ball.getBall().getFill()){
+            Shape shape = Shape.intersect(ball.ball, arc[i]);
+            if(shape.getBoundsInLocal().getWidth()!=-1 && arc[i].getStroke()!=ball.ball.getFill()){
                 System.out.println("width: "+shape.getBoundsInLocal().getWidth());
-                System.out.println("COLORball: "+ball.getBall().getFill());
+                System.out.println("COLORball: "+ball.ball.getFill());
                 System.out.println("COLOR: "+arc[i].getStroke());
                 System.out.println("Collision detected");
                 timeline.pause();
                 hit.pause();
-                ball.jump_pause();
-                ball.fall_pause();
+                ball.up.pause();
+                ball.down.pause();
                 g.hit_detected();
-                g.setPause_stat(1);
+                g.pause_stat=1;
                 break;
             }
         }

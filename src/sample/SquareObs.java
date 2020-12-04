@@ -12,13 +12,15 @@ import javafx.util.Duration;
 
 public class SquareObs extends Obstacle{
     static int counter=1;
-    private int id;
-    private transient Line line[];
-    private int degree[];
-    private int length;
+    int id;
+    double pos;
+    transient Line line[];
+    int degree[];
+    int length;
     SquareObs(double pos,Ball ball,Game g){
-        super(ball,g,pos);
+        super(ball,g);
         this.id=counter++;
+        this.pos=pos;
         line=new Line[4];
         degree=new int[4];
     }
@@ -74,16 +76,16 @@ public class SquareObs extends Obstacle{
     @Override
     public void detect_hit() throws InterruptedException {
         for(int i=0;i<4;i++) {
-            Shape shape = Shape.intersect(ball.getBall(), line[i]);
-            if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.getBall().getFill()){
+            Shape shape = Shape.intersect(ball.ball, line[i]);
+            if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.ball.getFill()){
                 System.out.println("Collision detected");
                 System.out.println("SQUAREOBS "+this.id);
                 this.timeline.pause();
                 this.hit.pause();
-                ball.jump_pause();
-                ball.fall_pause();
+                ball.up.pause();
+                ball.down.pause();
                 g.hit_detected();
-                g.setPause_stat(1);
+                g.pause_stat=1;
                 break;
             }
         }

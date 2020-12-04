@@ -29,19 +29,19 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Game implements Serializable {
-    private transient static Scene scene;
-    static private transient Pane canvas;
-    private double translate;
-    private ArrayList<Obstacle> obstacles;
-    private Ball ball;
-    private ArrayList<ColorChanger> clrs;
-    private ArrayList<Star> stars;
-    private int pause_stat;
-    private int score;
-    private int clr_pos;
-    private int obstacle_pos;
-    private int str_pos;
-    private ArrayList<Object> items;
+    transient static Scene scene;
+    transient static Pane canvas;
+    double translate;
+    ArrayList<Obstacle> obstacles;
+    Ball ball;
+    ArrayList<ColorChanger> clrs;
+    ArrayList<Star> stars;
+    int pause_stat;
+    Integer score;
+    int clr_pos;
+    int obstacle_pos;
+    int str_pos;
+    ArrayList<Object> items;
 //    int flag=1;
     public Game() throws IOException {
 //        this.translate=0;
@@ -50,7 +50,7 @@ public class Game implements Serializable {
         this.clr_pos=100;
         this.str_pos=225;
         this.canvas=Main.play;
-        this.ball=new Ball(150,490,10,this.canvas,this);
+        this.ball=new Ball(150,490,10,this.canvas,0,this);
         this.pause_stat=0;
         this.scene=Main.play_screen;
         this.obstacles=new ArrayList<>();
@@ -59,14 +59,14 @@ public class Game implements Serializable {
         this.items=new ArrayList<>();
 
     }
-    public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,int ob_ps,int cl_ps,int st_ps){
+    public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,double base,int ob_ps,int cl_ps,int st_ps){
         this.score=score;
         this.translate=trans;
         this.obstacle_pos=ob_ps;
         this.clr_pos=cl_ps;
         this.str_pos=st_ps;
         this.canvas=Main.play;
-        this.ball=new Ball(150,centY,10,this.canvas,this);
+        this.ball=new Ball(150,centY,10,this.canvas,base,this);
         this.pause_stat=0;
         this.scene=Main.play_screen;
         this.clrs=clrs;
@@ -74,60 +74,6 @@ public class Game implements Serializable {
         this.obstacles=obstacles;
         this.items=item;
     }
-
-    public Pane getCanvas() {
-        return canvas;
-    }
-
-    public double getTranslate() {
-        return translate;
-    }
-
-    public void setTranslate(double translate) {
-        this.translate = translate;
-    }
-
-    public ArrayList<Obstacle> getObstacles() {
-        return obstacles;
-    }
-
-    public ArrayList<ColorChanger> getClrs() {
-        return clrs;
-    }
-
-    public Ball getBall() {
-        return ball;
-    }
-
-    public ArrayList<Star> getStars() {
-        return stars;
-    }
-
-    public int getPause_stat() {
-        return pause_stat;
-    }
-
-    public int getClr_pos() {
-        return clr_pos;
-    }
-
-    public int getObstacle_pos() {
-        return obstacle_pos;
-    }
-
-    public int getStr_pos() {
-        return str_pos;
-    }
-
-    public ArrayList<Object> getItems() {
-        return items;
-    }
-
-    public void setPause_stat(int pause_stat) {
-        this.pause_stat = pause_stat;
-    }
-
-
 
     public void new_game() throws IOException {
 
@@ -244,8 +190,8 @@ public class Game implements Serializable {
                     i.animation_pause();
                 }
                 pause_stat=1;
-                ball.jump_pause();
-                ball.fall_pause();
+                ball.up.pause();
+                ball.down.pause();
 //                obstacles.get(1).animation_pause();
                 Main.getStage().setScene(Main.pause_screen);
             }
@@ -281,7 +227,7 @@ public class Game implements Serializable {
                     for(Obstacle i:obstacles){
                         i.animation_play();
                     }
-                    ball.fall_pause();
+                    ball.down.play();
                     pause_stat=0;
 //                    obstacles.get(0).animation_play();
                 }
@@ -318,12 +264,11 @@ public class Game implements Serializable {
             rem=this.items.get(0);
             this.items.remove(rem);
             this.obstacles.remove((Obstacle)rem);
-            ((Obstacle)rem).detection_stop();
 
         }
 //        if(this.items.size()!=8){
             if(rem instanceof SquareObs){
-//                ((SquareObs)rem).detection_stop();
+                ((SquareObs)rem).hit.stop();
                 SquareObs sq=new SquareObs(this.obstacle_pos,this.ball,this);
                 sq.create();
                 this.obstacle_pos-=300;
@@ -345,7 +290,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof RingObs){
-//                ((RingObs)rem).hit.stop();
+                ((RingObs)rem).hit.stop();
                 RingObs ri=new RingObs(this.obstacle_pos,this.ball,this);
                 ri.create();
                 this.obstacle_pos-=300;
@@ -366,7 +311,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof CrossObs){
-//                ((CrossObs)rem).hit.stop();
+                ((CrossObs)rem).hit.stop();
                 CrossObs cr=new CrossObs(this.obstacle_pos,this.ball,this);
                 cr.create();
                 this.obstacle_pos-=300;
@@ -387,7 +332,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof LineObs){
-//                ((LineObs)rem).hit.stop();
+                ((LineObs)rem).hit.stop();
                 LineObs li=new LineObs(this.obstacle_pos,1,this.ball,this);
                 li.create();
                 this.obstacle_pos-=300;
@@ -410,13 +355,13 @@ public class Game implements Serializable {
     }
 
     public void load_game() throws FileNotFoundException {
-        canvas.setLayoutY(this.translate);
+        Game.canvas.setLayoutY(this.translate);
         ArrayList<Obstacle> obs=new ArrayList<>();
         ArrayList<Star> strs=new ArrayList<>();
         ArrayList<ColorChanger> cls=new ArrayList<>();
         ArrayList<Object> itms=new ArrayList<>();
-        this.ball=new Ball(this.ball.getCenterX(),this.ball.getCenterY(),this.ball.getRadius(),Main.play,this);
-        this.ball.create(canvas);
+        this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base,this);
+        this.ball.create(Game.canvas);
 //        this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
@@ -424,28 +369,28 @@ public class Game implements Serializable {
                 ((SquareObs)i).create();
                 obs.add(((SquareObs)i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
             }
             else if(i instanceof RingObs){
                 i=new RingObs((((RingObs) i).pos), this.ball,this);
                 ((RingObs) i).create();
                 obs.add(((RingObs) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
             }
             else if(i instanceof CrossObs){
                 i=new CrossObs((((CrossObs) i).pos), this.ball,this);
                 ((CrossObs) i).create();
                 obs.add(((CrossObs) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
             }
             else if(i instanceof LineObs){
-                i=new LineObs((((LineObs) i).pos),((LineObs) i).getOrientation(), this.ball,this);
+                i=new LineObs((((LineObs) i).pos),((LineObs) i).orientation, this.ball,this);
                 ((LineObs) i).create();
                 obs.add(((LineObs) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((LineObs) i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((LineObs) i).grp);
             }
             else if(i instanceof ColorChanger){
 
@@ -453,14 +398,14 @@ public class Game implements Serializable {
                 ((ColorChanger) i).create();
                 cls.add(((ColorChanger) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((ColorChanger) i).g);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((ColorChanger) i).g);
             }
             else if(i instanceof Star){
                 i=new Star(((Star) i).pos,canvas,this.ball,this,this.stars,this.items);
                 ((Star) i).create();
                 strs.add(((Star) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((Star) i).grp);
+                Game.canvas.getChildren().add(canvas.getChildren().size()-3,((Star) i).grp);
             }
 
         }
@@ -486,8 +431,8 @@ public class Game implements Serializable {
                     i.animation_pause();
                 }
                 pause_stat=1;
-                ball.jump_pause();
-                ball.fall_pause();
+                ball.up.pause();
+                ball.down.pause();
 //                obstacles.get(1).animation_pause();
                 Main.getStage().setScene(Main.pause_screen);
             }
@@ -523,7 +468,7 @@ public class Game implements Serializable {
                     for(Obstacle i:obstacles){
                         i.animation_play();
                     }
-                    ball.fall_pause();
+                    ball.down.play();
                     pause_stat=0;
 //                    obstacles.get(0).animation_play();
                 }
@@ -553,18 +498,18 @@ public class Game implements Serializable {
         this.obstacles=obs;
         this.stars=strs;
         this.items=itms;
-//        for(ColorChanger i:clrs){
-//            i.itms=itms;
-//            i.clrs=cls;
-//        }
-//        for(Star i:stars){
-//            i.itms=itms;
-//            i.strs=strs;
-//        }
-        System.out.println(this.ball.getCenterY());
+        for(ColorChanger i:clrs){
+            i.itms=itms;
+            i.clrs=cls;
+        }
+        for(Star i:stars){
+            i.itms=itms;
+            i.strs=strs;
+        }
+        System.out.println(this.ball.centerY);
         Main.scr.setText(String.valueOf(this.score));
         Main.getStage().setScene(Main.play_screen);
-        this.ball.fall_pause();
+        this.ball.down.play();
         Timeline add2=new Timeline(new KeyFrame(Duration.millis(10),e-> {
             try {
                 play_game();
@@ -605,8 +550,8 @@ public class Game implements Serializable {
         ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("saves.txt"));
         System.out.println(canvas.getLayoutY());
 //        this.translate=canvas.getLayoutY();
-        System.out.println(this.ball.getBall().getCenterY());
-        this.ball.setCenterY(this.ball.getBall().getCenterY());
+        System.out.println(this.ball.ball.getCenterY());
+        this.ball.centerY=this.ball.ball.getCenterY();
         out.writeObject(this);
     }
     public void restart_game(ActionEvent e){
@@ -620,12 +565,12 @@ public class Game implements Serializable {
     }
 
     public void jump(Bounds bounds){
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMinY()+ball.getBall().getRadius())));
+        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(ball.ball.layoutYProperty(),bounds.getMinY()+ball.ball.getRadius())));
         //timeline.setCycleCount(1);
         timeline.play();
     }
     public void move_ball(Bounds bounds){
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(3),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMaxY()-ball.getBall().getRadius())));
+        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(3),new KeyValue(ball.ball.layoutYProperty(),bounds.getMaxY()-ball.ball.getRadius())));
         //timeline.setCycleCount(1);
         timeline.play();
     }
