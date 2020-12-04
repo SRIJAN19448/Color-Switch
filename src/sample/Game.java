@@ -233,6 +233,7 @@ public class Game implements Serializable {
                 }
             }
         });
+        
         Main.save_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
