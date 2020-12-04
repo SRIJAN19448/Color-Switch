@@ -262,7 +262,7 @@ public class Game implements Serializable {
         if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getLayoutY())>=(double)600){
             canvas.getChildren().remove(n);
             rem=this.items.get(0);
-            this.items.remove(0);
+            this.items.remove(rem);
             this.obstacles.remove((Obstacle)rem);
 
         }
