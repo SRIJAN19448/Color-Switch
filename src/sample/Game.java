@@ -50,7 +50,7 @@ public class Game implements Serializable {
         this.clr_pos=100;
         this.str_pos=225;
         this.canvas=Main.play;
-        this.ball=new Ball(150,490,10,this.canvas,0);
+        this.ball=new Ball(150,490,10,this.canvas,0,this);
         this.pause_stat=0;
         this.scene=Main.play_screen;
         this.obstacles=new ArrayList<>();
@@ -66,7 +66,7 @@ public class Game implements Serializable {
         this.clr_pos=cl_ps;
         this.str_pos=st_ps;
         this.canvas=Main.play;
-        this.ball=new Ball(150,centY,10,this.canvas,base);
+        this.ball=new Ball(150,centY,10,this.canvas,base,this);
         this.pause_stat=0;
         this.scene=Main.play_screen;
         this.clrs=clrs;
@@ -255,19 +255,20 @@ public class Game implements Serializable {
         add.play();
     }
     public void play_game() throws FileNotFoundException {
-        System.out.println("size : "+this.items.size());
+//        System.out.println("size : "+this.items.size());
         Node n=canvas.getChildren().get(0);
         Bounds s=n.getBoundsInLocal();
         Object rem=new Object();
-        if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY())>=(double)600){
+        if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getLayoutY())>=(double)600){
             canvas.getChildren().remove(n);
             rem=this.items.get(0);
             this.items.remove(0);
-
+            this.obstacles.remove((Obstacle)rem);
 
         }
 //        if(this.items.size()!=8){
             if(rem instanceof SquareObs){
+                ((SquareObs)rem).hit.stop();
                 SquareObs sq=new SquareObs(this.obstacle_pos,this.ball,this);
                 sq.create();
                 this.obstacle_pos-=300;
@@ -289,6 +290,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof RingObs){
+                ((RingObs)rem).hit.stop();
                 RingObs ri=new RingObs(this.obstacle_pos,this.ball,this);
                 ri.create();
                 this.obstacle_pos-=300;
@@ -309,6 +311,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof CrossObs){
+                ((CrossObs)rem).hit.stop();
                 CrossObs cr=new CrossObs(this.obstacle_pos,this.ball,this);
                 cr.create();
                 this.obstacle_pos-=300;
@@ -329,6 +332,7 @@ public class Game implements Serializable {
                 clrs.add(clr);
             }
             else if(rem instanceof LineObs){
+                ((LineObs)rem).hit.stop();
                 LineObs li=new LineObs(this.obstacle_pos,1,this.ball,this);
                 li.create();
                 this.obstacle_pos-=300;
@@ -351,13 +355,14 @@ public class Game implements Serializable {
     }
 
     public void load_game() throws FileNotFoundException {
+        Game.canvas.setLayoutY(this.translate);
         ArrayList<Obstacle> obs=new ArrayList<>();
         ArrayList<Star> strs=new ArrayList<>();
         ArrayList<ColorChanger> cls=new ArrayList<>();
         ArrayList<Object> itms=new ArrayList<>();
-        this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base);
+        this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base,this);
         this.ball.create(Game.canvas);
-        this.ball.ball.setTranslateY(-this.translate);
+//        this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
                 i=new SquareObs(((SquareObs) i).pos,this.ball,this);
@@ -442,7 +447,7 @@ public class Game implements Serializable {
                 timer.setTextFill(Color.WHITE);
                 timer.setFont(new Font("System Bold Italic",50));
                 timer.setLayoutX(133);
-                timer.setLayoutY(220-canvas.getTranslateY());
+                timer.setLayoutY(220-translate);
                 Main.play.getChildren().add(timer);
 
                 Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
@@ -501,11 +506,7 @@ public class Game implements Serializable {
             i.itms=itms;
             i.strs=strs;
         }
-        Game.canvas.setTranslateY(this.translate);
-
         System.out.println(this.ball.centerY);
-        Main.play.getChildren().get(0).setTranslateY(-this.translate);
-        Main.play.getChildren().get(1).setTranslateY(-this.translate);
         Main.scr.setText(String.valueOf(this.score));
         Main.getStage().setScene(Main.play_screen);
         this.ball.down.play();
@@ -529,17 +530,26 @@ public class Game implements Serializable {
     public void back(ActionEvent e) {
 
     }
-    public void hit_detected(){
+    public void hit_detected() throws InterruptedException {
         for (Obstacle i:obstacles){
             i.animation_pause();
         }
+
+        Label over=new Label("Game over");
+        over.setTextFill(Color.WHITE);
+        over.setFont(new Font("System Bold Italic",50));
+        over.setLayoutX(133);
+        over.setLayoutY(300);
+        Main.play.getChildren().add(over);
+        TimeUnit.SECONDS.sleep(2);
+        Main.play.getChildren().remove(over);
         Main.getStage().setScene(Main.hit_screen);
     }
 
     public void save_game() throws IOException {
         ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("saves.txt"));
-        System.out.println(canvas.getTranslateY());
-        this.translate=canvas.getTranslateY();
+        System.out.println(canvas.getLayoutY());
+//        this.translate=canvas.getLayoutY();
         System.out.println(this.ball.ball.getCenterY());
         this.ball.centerY=this.ball.ball.getCenterY();
         out.writeObject(this);

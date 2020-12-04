@@ -6,11 +6,11 @@ import javafx.scene.Group;
 import java.io.Serializable;
 
 public abstract class Obstacle implements Serializable {
-    Ball ball;
-    Game g;
-    transient Group grp;
-    transient Timeline timeline;
-    transient Timeline hit;
+    protected Ball ball;
+    protected Game g;
+    protected transient Group grp;
+    protected transient Timeline timeline;
+    protected transient Timeline hit;
     public abstract void passThrough();
     public void animation_pause(){
         timeline.pause();
@@ -27,6 +27,6 @@ public abstract class Obstacle implements Serializable {
     }
 
     public abstract void create();
-    public abstract void detect_hit();
+    public abstract void detect_hit() throws InterruptedException;
 }
 

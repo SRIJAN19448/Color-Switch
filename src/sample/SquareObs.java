@@ -11,12 +11,15 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
 
 public class SquareObs extends Obstacle{
+    static int counter=1;
+    int id;
     double pos;
     transient Line line[];
     int degree[];
     int length;
     SquareObs(double pos,Ball ball,Game g){
         super(ball,g);
+        this.id=counter++;
         this.pos=pos;
         line=new Line[4];
         degree=new int[4];
@@ -56,7 +59,13 @@ public class SquareObs extends Obstacle{
         timeline=new Timeline(new KeyFrame(Duration.millis(20), e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20), e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20), e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20), e->rotateX(line[3],3)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        hit=new Timeline(new KeyFrame(Duration.millis(10),e->detect_hit()));
+        hit=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+            try {
+                detect_hit();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+        }));
         hit.setCycleCount(Timeline.INDEFINITE);
         hit.play();
         this.grp.getChildren().addAll(line);
@@ -65,13 +74,14 @@ public class SquareObs extends Obstacle{
     }
 
     @Override
-    public void detect_hit() {
+    public void detect_hit() throws InterruptedException {
         for(int i=0;i<4;i++) {
             Shape shape = Shape.intersect(ball.ball, line[i]);
             if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.ball.getFill()){
                 System.out.println("Collision detected");
-                timeline.pause();
-                hit.pause();
+                System.out.println("SQUAREOBS "+this.id);
+                this.timeline.pause();
+                this.hit.pause();
                 ball.up.pause();
                 ball.down.pause();
                 g.hit_detected();

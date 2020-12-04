@@ -27,13 +27,15 @@ public class Ball implements Serializable {
     transient Timeline up;
     transient Timeline down;
     transient Circle ball;
+    Game g;
     int num1;
-    Ball(double centerx, double centery, int radius,Pane canvas,double base){
+    Ball(double centerx, double centery, int radius,Pane canvas,double base, Game g){
         this.base=base;
         this.centerX=centerx;
         this.centerY=centery;
         this.radius=radius;
         this.canvas=canvas;
+        this.g=g;
         num1=2;
         ball=new Circle(centerx,centery,radius);
         prevpos=ball.getCenterY();
@@ -58,77 +60,40 @@ public class Ball implements Serializable {
         down.play();
     }
     public void jump(){
-        if(canvas==null){
-            System.out.println("NULL");
-        }
-//        down.pause();
-//        up.play();
-        if(ball.getCenterY()<=10)
-            up.pause();
-        else
-            ball.setCenterY(ball.getCenterY()-3);
-
-//        System.out.println   ("curr: "+ball.getCenterY());
-//        System.out.println("prev: " + Double.toString(prevpos));
-//        System.out.println("new: " + Double.toString(newpos));
-        if(ball.getCenterY()<=170 && newpos<=prevpos) {
-//            if(ball.getCenterY()==170) {
-//                Random r = new Random();
-//                int r_no = r.nextInt(4) + 1;
-//                System.out.println("color: "+r_no);
-//                if (r_no == 0)
-//                    ball.setFill(Color.YELLOW);
-//                else if (r_no == 1)
-//                    ball.setFill(Color.DARKVIOLET);
-//                else if (r_no == 2)
-//                    ball.setFill(Color.DARKMAGENTA);
-//                else if(r_no==3)
-//                    ball.setFill(Color.CYAN);
+//        if(canvas==null){
+//            System.out.println("NULL");
+//        }
+//        if(ball.getCenterY()<=10)
+//            up.pause();
+//        else
+//            ball.setCenterY(ball.getCenterY()-3);
+//        if(ball.getCenterY()<=170 && newpos<=prevpos) {
+//            newpos = ball.getCenterY();
+//            base += 3;
+//            canvas.setTranslateY(base);
+//            Main.pausebtn.setTranslateY(-base);
+//            Main.scr.setTranslateY(-base);
+//            if(canvas.getTranslateY()>=150*trans) {
+//                trans++;
 //            }
-            newpos = ball.getCenterY();
-            base += 3;
-//            System.out.println("base: "+base);
-            canvas.setTranslateY(base);
-            Main.pausebtn.setTranslateY(-base);
-            Main.scr.setTranslateY(-base);
-            if(canvas.getTranslateY()>=150*trans) {
-//                Node n=canvas.getChildren().get(0);
-//                canvas.getChildren().remove(n);
-//                n.setTranslateY(-canvas.getTranslateY()-250-650);
-//                canvas.getChildren().add(n);
-//                canvas.getChildren().remove(this.ball);
-//                canvas.getChildren().add(this.ball);
-                trans++;
+//            ball.setTranslateY(-base);
+//                prevpos = newpos;
+//        }
+
+        double y=ball.getCenterY();
+        y-=3;
+        ball.setCenterY(y);
+        if(y<250){
+            if(250-y>canvas.getLayoutY()){
+                canvas.setLayoutY(250-y);
+                g.translate=250-y;
+                Main.pausebtn.setLayoutY(y-250);
+                Main.scr.setLayoutY(y-250);
             }
-            ball.setTranslateY(-base);
-//            Node n=canvas.getChildren().get(num1);
-//            Bounds s=n.getBoundsInLocal();
-//            if((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY())>=(double)600){
-//                canvas.getChildren().remove(n);
-//                Game.items.remove(0);
-//                System.out.println(Game.items.size());
-//
-//            }
-
-//            if (170 - newpos > diff) {
-//                diff = 170 - newpos;
-//                for (Node n : canvas.getChildren()) {
-//
-//                    if (!(n.getClass() == new Circle(10).getClass() && ((Circle) n).getRadius() == 10))
-//                        n.setTranslateY(base);
-//                    else if ((n.getClass() == new Arc().getClass() && ((Arc) n).getRadiusX() == 12))
-//                        ((Arc) n).setCenterY(((Arc)n).getCenterY()+base);
-//
-//                }
-
-                prevpos = newpos;
-//            }
         }
     }
     public void move_ball(){
-//        up.pause();
-//        down.play();
-        if(ball.getCenterY()==490)
+        if(ball.getCenterY()==490-canvas.getLayoutY())
             down.pause();
         else
             ball.setCenterY(ball.getCenterY()+1);

@@ -40,7 +40,7 @@ public class GameManager {
 
     }
     public void start_game(Stage primaryStage){
-        primaryStage.setScene(Main.hit_screen);
+        primaryStage.setScene(Main.main_screen);
         primaryStage.show();
         Main.new_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
