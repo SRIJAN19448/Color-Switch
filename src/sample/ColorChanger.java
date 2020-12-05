@@ -3,39 +3,27 @@ package sample;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.util.Duration;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class ColorChanger implements Special, Serializable {
     private transient Group grp;
-//    private transient Pane canvas;
     private double pos;
     private transient Arc arc[];
-//    Ball ball;
     private Game game;
     private transient Timeline t;
-//    ArrayList<ColorChanger> clrs;
-//    ArrayList<Object> itms;
     ColorChanger(double pos,Game game){
         this.pos=pos;
-//        this.canvas=game.getCanvas();
         arc=new Arc[4];
         grp=new Group();
         this.game=game;
-//        this.clrs=clrs;
         this.t=new Timeline();
-//        this.ball=ball;
-//        this.itms=itms;
     }
 
     public Group getGrp() {
@@ -67,7 +55,7 @@ public class ColorChanger implements Special, Serializable {
         arc[3].setFill(Color.DARKMAGENTA);
         arc[3].setStrokeLineCap(StrokeLineCap.ROUND);
         grp.getChildren().addAll(arc);
-        t=new Timeline(new KeyFrame(Duration.millis(10), e->special(game.getBall().ball.getCenterY())));
+        t=new Timeline(new KeyFrame(Duration.millis(10), e->special(game.getBall().getBall().getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
 //        canvas.getChildren().addAll(g);
@@ -86,10 +74,10 @@ public class ColorChanger implements Special, Serializable {
             System.out.println("BYUV");
             Random r=new Random();
             int random=r.nextInt(4);
-            while(paints[random]==game.getBall().ball.getFill()) {
+            while(paints[random]==game.getBall().getBall().getFill()) {
                 random = r.nextInt(4);
             }
-            game.getBall().ball.setFill(paints[random]);
+            game.getBall().getBall().setFill(paints[random]);
             game.getCanvas().getChildren().remove(this.grp);
             ColorChanger cl=this;
             this.game.getClrs().remove(cl);

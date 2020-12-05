@@ -2,8 +2,6 @@ package sample;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Group;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
@@ -13,14 +11,13 @@ import javafx.util.Duration;
 public class SquareObs extends Obstacle{
     private static int counter=1;
     private int id;
-//    double pos;
     private transient Line line[];
     private int degree[];
     private int length;
+
     SquareObs(double pos,Ball ball,Game g){
         super(ball,g,pos);
         this.id=counter++;
-//        this.pos=pos;
         line=new Line[4];
         degree=new int[4];
     }
@@ -76,14 +73,14 @@ public class SquareObs extends Obstacle{
     @Override
     public void detect_hit() throws InterruptedException {
         for(int i=0;i<4;i++) {
-            Shape shape = Shape.intersect(ball.ball, line[i]);
-            if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.ball.getFill()){
+            Shape shape = Shape.intersect(ball.getBall(), line[i]);
+            if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.getBall().getFill()){
                 System.out.println("Collision detected");
                 System.out.println("SQUAREOBS "+this.id);
                 this.timeline.pause();
                 this.hit.pause();
-                ball.up.pause();
-                ball.down.pause();
+                ball.getUp().pause();
+                ball.getDown().pause();
                 g.hit_detected();
                 g.setPause_stat(1);
                 break;

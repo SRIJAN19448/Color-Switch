@@ -2,47 +2,59 @@ package sample;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Ball implements Serializable {
-    int color=0;
-    int trans=1;
-    double prevpos;
-    double newpos;
-    double diff=0;
-    double base=0;
-    double centerX,centerY;
-    int radius;
-    transient Pane canvas;
-    transient Timeline up;
-    transient Timeline down;
-    transient Circle ball;
-    Game g;
-    int num1;
-    Ball(double centerx, double centery, int radius,Pane canvas,double base, Game g){
-        this.base=base;
+
+    private double centerX,centerY;
+    private int radius;
+    private transient Timeline up;
+    private transient Timeline down;
+    private transient Circle ball;
+    private Game game;
+    Ball(double centerx, double centery, int radius, Game game){
+
         this.centerX=centerx;
         this.centerY=centery;
         this.radius=radius;
-        this.canvas=canvas;
-        this.g=g;
-        num1=2;
+        this.game=game;
         ball=new Circle(centerx,centery,radius);
-        prevpos=ball.getCenterY();
-        newpos=ball.getCenterY();
 
 
     }
+
+    public double getCenterX() {
+        return centerX;
+    }
+
+    public double getCenterY() {
+        return centerY;
+    }
+
+    public void setCenterY(double centerY) {
+        this.centerY = centerY;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public Timeline getUp() {
+        return up;
+    }
+
+    public Timeline getDown() {
+        return down;
+    }
+
+    public Circle getBall() {
+        return ball;
+    }
+
     public void create(Pane canvas){
         ball.setFill(Color.DARKMAGENTA);
         up=new Timeline(new KeyFrame(Duration.millis(10),e->jump()));
@@ -84,16 +96,16 @@ public class Ball implements Serializable {
         y-=3;
         ball.setCenterY(y);
         if(y<250){
-            if(250-y>canvas.getLayoutY()){
-                canvas.setLayoutY(250-y);
-                g.setTranslate(250-y);
+            if(250-y>game.getCanvas().getLayoutY()){
+                game.getCanvas().setLayoutY(250-y);
+                game.setTranslate(250-y);
                 Main.pausebtn.setLayoutY(y-250);
                 Main.scr.setLayoutY(y-250);
             }
         }
     }
     public void move_ball(){
-        if(ball.getCenterY()==490-canvas.getLayoutY())
+        if(ball.getCenterY()==490-game.getCanvas().getLayoutY())
             down.pause();
         else
             ball.setCenterY(ball.getCenterY()+1);

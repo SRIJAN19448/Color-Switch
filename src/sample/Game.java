@@ -5,14 +5,12 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -23,9 +21,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Game implements Serializable {
@@ -50,7 +48,7 @@ public class Game implements Serializable {
         this.clr_pos=100;
         this.str_pos=225;
         this.canvas=Main.play;
-        this.ball=new Ball(150,490,10,this.canvas,0,this);
+        this.ball=new Ball(150,490,10,this);
         this.pause_stat=0;
         this.scene=Main.play_screen;
         this.obstacles=new ArrayList<>();
@@ -59,14 +57,14 @@ public class Game implements Serializable {
         this.items=new ArrayList<>();
 
     }
-    public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,double base,int ob_ps,int cl_ps,int st_ps){
+    public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,int ob_ps,int cl_ps,int st_ps){
         this.score=score;
         this.translate=trans;
         this.obstacle_pos=ob_ps;
         this.clr_pos=cl_ps;
         this.str_pos=st_ps;
         this.canvas=Main.play;
-        this.ball=new Ball(150,centY,10,this.canvas,base,this);
+        this.ball=new Ball(150,centY,10,this);
         this.pause_stat=0;
         this.scene=Main.play_screen;
         this.clrs=clrs;
@@ -138,7 +136,7 @@ public class Game implements Serializable {
         square.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
         this.obstacle_pos-=300;
-        Star st=new Star(225,canvas,ball,this,this.stars,this.items);
+        Star st=new Star(225,this);
         st.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,st.getGrp());
         this.str_pos-=300;
@@ -150,7 +148,7 @@ public class Game implements Serializable {
         ring.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,ring.grp);
         this.obstacle_pos-=300;
-        Star st1=new Star(-75,canvas,ball,this,this.stars,this.items);
+        Star st1=new Star(-75,this);
         st1.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,st1.getGrp());
         this.str_pos-=300;
@@ -162,7 +160,7 @@ public class Game implements Serializable {
         cross.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,cross.grp);
         this.obstacle_pos-=300;
-        Star st2=new Star(-375,canvas,ball,this,this.stars,this.items);
+        Star st2=new Star(-375,this);
         st2.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,st2.getGrp());
         this.str_pos-=300;
@@ -174,7 +172,7 @@ public class Game implements Serializable {
         line.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,line.grp);
         this.obstacle_pos-=300;
-        Star st3=new Star(-675,canvas,ball,this,this.stars,this.items);
+        Star st3=new Star(-675,this);
         st3.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,st3.getGrp());
         this.str_pos-=300;
@@ -242,8 +240,8 @@ public class Game implements Serializable {
                     i.animation_pause();
                 }
                 pause_stat=1;
-                ball.up.pause();
-                ball.down.pause();
+                ball.getUp().pause();
+                ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
                 Main.getStage().setScene(Main.pause_screen);
             }
@@ -279,7 +277,7 @@ public class Game implements Serializable {
                     for(Obstacle i:obstacles){
                         i.animation_play();
                     }
-                    ball.down.play();
+                    ball.getDown().play();
                     pause_stat=0;
 //                    obstacles.get(0).animation_play();
                 }
@@ -319,92 +317,94 @@ public class Game implements Serializable {
             this.obstacles.remove((Obstacle)rem);
 
         }
-//        if(this.items.size()!=8){
-            if(rem instanceof SquareObs){
-                ((SquareObs)rem).hit.stop();
-                SquareObs sq=new SquareObs(this.obstacle_pos,this.ball,this);
+
+        if(rem instanceof Obstacle) {
+            ((Obstacle)rem).hit.stop();
+            Random r=new Random();
+            int random=r.nextInt(4);
+            if (random==0) {
+//                ((SquareObs) rem).hit.stop();
+                SquareObs sq = new SquareObs(this.obstacle_pos, this.ball, this);
                 sq.create();
-                this.obstacle_pos-=300;
+                this.obstacle_pos -= 300;
 //                System.out.println("index: "+canvas.getChildren().indexOf(sq.grp));
-                canvas.getChildren().add(canvas.getChildren().size()-3,sq.grp);
+                canvas.getChildren().add(canvas.getChildren().size() - 3, sq.grp);
                 items.add(sq);
                 obstacles.add(sq);
-                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+                Star st = new Star(this.str_pos,this);
                 st.create();
-                this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,st.getGrp());
+                this.str_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, st.getGrp());
                 items.add(st);
                 stars.add(st);
-                ColorChanger clr=new ColorChanger(this.clr_pos,this);
+                ColorChanger clr = new ColorChanger(this.clr_pos, this);
                 clr.create();
-                this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,clr.getGrp());
+                this.clr_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, clr.getGrp());
                 items.add(clr);
                 clrs.add(clr);
-            }
-            else if(rem instanceof RingObs){
-                ((RingObs)rem).hit.stop();
-                RingObs ri=new RingObs(this.obstacle_pos,this.ball,this);
+            } else if (random==1) {
+//                ((RingObs) rem).hit.stop();
+                RingObs ri = new RingObs(this.obstacle_pos, this.ball, this);
                 ri.create();
-                this.obstacle_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,ri.grp);
+                this.obstacle_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, ri.grp);
                 items.add(ri);
                 obstacles.add(ri);
-                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+                Star st = new Star(this.str_pos,this);
                 st.create();
-                this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,st.getGrp());
+                this.str_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, st.getGrp());
                 items.add(st);
                 stars.add(st);
-                ColorChanger clr=new ColorChanger(this.clr_pos,this);
+                ColorChanger clr = new ColorChanger(this.clr_pos, this);
                 clr.create();
-                this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,clr.getGrp());
+                this.clr_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, clr.getGrp());
                 items.add(clr);
                 clrs.add(clr);
-            }
-            else if(rem instanceof CrossObs){
-                ((CrossObs)rem).hit.stop();
-                CrossObs cr=new CrossObs(this.obstacle_pos,this.ball,this);
+            } else if (random==2) {
+//                ((CrossObs) rem).hit.stop();
+                CrossObs cr = new CrossObs(this.obstacle_pos, this.ball, this);
                 cr.create();
-                this.obstacle_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,cr.grp);
+                this.obstacle_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, cr.grp);
                 items.add(cr);
                 obstacles.add(cr);
-                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+                Star st = new Star(this.str_pos,this);
                 st.create();
-                this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,st.getGrp());
+                this.str_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, st.getGrp());
                 items.add(st);
                 stars.add(st);
-                ColorChanger clr=new ColorChanger(this.clr_pos,this);
+                ColorChanger clr = new ColorChanger(this.clr_pos, this);
                 clr.create();
-                this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,clr.getGrp());
+                this.clr_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, clr.getGrp());
                 items.add(clr);
                 clrs.add(clr);
-            }
-            else if(rem instanceof LineObs){
-                ((LineObs)rem).hit.stop();
-                LineObs li=new LineObs(this.obstacle_pos,1,this.ball,this);
+            } else if (random==3) {
+//                ((LineObs) rem).hit.stop();
+                LineObs li = new LineObs(this.obstacle_pos, 1, this.ball, this);
                 li.create();
-                this.obstacle_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,li.grp);
+                this.obstacle_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, li.grp);
                 items.add(li);
                 obstacles.add(li);
-                Star st=new Star(this.str_pos,this.canvas,this.ball,this,this.stars,this.items);
+                Star st = new Star(this.str_pos, this);
                 st.create();
-                this.str_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,st.getGrp());
+                this.str_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, st.getGrp());
                 items.add(st);
                 stars.add(st);
-                ColorChanger clr=new ColorChanger(this.clr_pos,this);
+                ColorChanger clr = new ColorChanger(this.clr_pos, this);
                 clr.create();
-                this.clr_pos-=300;
-                canvas.getChildren().add(canvas.getChildren().size()-3,clr.getGrp());
+                this.clr_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, clr.getGrp());
                 items.add(clr);
                 clrs.add(clr);
             }
+        }
     }
 
     public void load_game() throws FileNotFoundException {
@@ -413,7 +413,7 @@ public class Game implements Serializable {
         ArrayList<Star> strs=new ArrayList<>();
         ArrayList<ColorChanger> cls=new ArrayList<>();
         ArrayList<Object> itms=new ArrayList<>();
-        this.ball=new Ball(this.ball.centerX,this.ball.centerY,this.ball.radius,Main.play,this.ball.base,this);
+        this.ball=new Ball(this.ball.getCenterX(),this.ball.getCenterY(),this.ball.getRadius(),this);
         this.ball.create(canvas);
 //        this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
@@ -454,7 +454,7 @@ public class Game implements Serializable {
                 canvas.getChildren().add(canvas.getChildren().size()-3,((ColorChanger) i).getGrp());
             }
             else if(i instanceof Star){
-                i=new Star(((Star) i).getPos(),canvas,this.ball,this,this.stars,this.items);
+                i=new Star(((Star) i).getPos(),this);
                 ((Star) i).create();
                 strs.add(((Star) i));
                 itms.add(i);
@@ -484,8 +484,8 @@ public class Game implements Serializable {
                     i.animation_pause();
                 }
                 pause_stat=1;
-                ball.up.pause();
-                ball.down.pause();
+                ball.getUp().pause();
+                ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
                 Main.getStage().setScene(Main.pause_screen);
             }
@@ -521,7 +521,7 @@ public class Game implements Serializable {
                     for(Obstacle i:obstacles){
                         i.animation_play();
                     }
-                    ball.down.play();
+                    ball.getDown().play();
                     pause_stat=0;
 //                    obstacles.get(0).animation_play();
                 }
@@ -559,10 +559,10 @@ public class Game implements Serializable {
 //            i.itms=itms;
 //            i.strs=strs;
 //        }
-        System.out.println(this.ball.centerY);
+        System.out.println(this.ball.getCenterY());
         Main.scr.setText(String.valueOf(this.score));
         Main.getStage().setScene(Main.play_screen);
-        this.ball.down.play();
+        this.ball.getDown().play();
         Timeline add2=new Timeline(new KeyFrame(Duration.millis(10),e-> {
             try {
                 play_game();
@@ -603,8 +603,8 @@ public class Game implements Serializable {
         ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("saves.txt"));
         System.out.println(canvas.getLayoutY());
 //        this.translate=canvas.getLayoutY();
-        System.out.println(this.ball.ball.getCenterY());
-        this.ball.centerY=this.ball.ball.getCenterY();
+        System.out.println(this.ball.getBall().getCenterY());
+        this.ball.setCenterY(this.ball.getBall().getCenterY());
         out.writeObject(this);
     }
     public void restart_game(ActionEvent e){
@@ -618,12 +618,12 @@ public class Game implements Serializable {
     }
 
     public void jump(Bounds bounds){
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(ball.ball.layoutYProperty(),bounds.getMinY()+ball.ball.getRadius())));
+        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMinY()+ball.getBall().getRadius())));
         //timeline.setCycleCount(1);
         timeline.play();
     }
     public void move_ball(Bounds bounds){
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(3),new KeyValue(ball.ball.layoutYProperty(),bounds.getMaxY()-ball.ball.getRadius())));
+        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(3),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMaxY()-ball.getBall().getRadius())));
         //timeline.setCycleCount(1);
         timeline.play();
     }
