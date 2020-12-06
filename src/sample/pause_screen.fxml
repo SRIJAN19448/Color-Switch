@@ -13,18 +13,18 @@
     <children>
         <Group layoutX="150.0" layoutY="250.0">
             <children>
-                <Arc fx:id="a10" length="90.0" radiusX="80.0" radiusY="80.0" stroke="#19e010" strokeLineCap="ROUND" strokeWidth="10.0" />
-                <Arc fx:id="a11" length="90.0" radiusX="80.0" radiusY="80.0" startAngle="90.0" stroke="#e20e0e" strokeLineCap="ROUND" strokeWidth="10.0" />
-                <Arc fx:id="a12" length="90.0" radiusX="80.0" radiusY="80.0" startAngle="180.0" stroke="#fffb00" strokeLineCap="ROUND" strokeWidth="10.0" />
-                <Arc fx:id="a13" length="90.0" radiusX="80.0" radiusY="80.0" startAngle="270.0" stroke="#12bcde" strokeLineCap="ROUND" strokeWidth="10.0" />
+                <Arc fx:id="a10" length="90.0" radiusX="90.0" radiusY="90.0" stroke="#19e010" strokeLineCap="ROUND" strokeWidth="10.0" />
+                <Arc fx:id="a11" length="90.0" radiusX="90.0" radiusY="90.0" startAngle="90.0" stroke="#e20e0e" strokeLineCap="ROUND" strokeWidth="10.0" />
+                <Arc fx:id="a12" length="90.0" radiusX="90.0" radiusY="90.0" startAngle="180.0" stroke="#fffb00" strokeLineCap="ROUND" strokeWidth="10.0" />
+                <Arc fx:id="a13" length="90.0" radiusX="90.0" radiusY="90.0" startAngle="270.0" stroke="#12bcde" strokeLineCap="ROUND" strokeWidth="10.0" />
             </children>
         </Group>
         <Group layoutX="150.0" layoutY="250.0">
             <children>
-                <Arc fx:id="a14" length="90.0" radiusX="120.0" radiusY="120.0" startAngle="90.0" stroke="#e20e0e" strokeLineCap="ROUND" strokeWidth="15.0" />
-                <Arc fx:id="a15" length="90.0" radiusX="120.0" radiusY="120.0" startAngle="180.0" stroke="#fffb00" strokeLineCap="ROUND" strokeWidth="15.0" />
-                <Arc fx:id="a16" length="90.0" radiusX="120.0" radiusY="120.0" startAngle="270.0" stroke="#12bcde" strokeLineCap="ROUND" strokeWidth="15.0" />
-                <Arc fx:id="a17" length="90.0" radiusX="120.0" radiusY="120.0" stroke="#19e010" strokeLineCap="ROUND" strokeWidth="15.0">
+                <Arc fx:id="a14" length="90.0" radiusX="140.0" radiusY="140.0" startAngle="90.0" stroke="#e20e0e" strokeLineCap="ROUND" strokeWidth="15.0" />
+                <Arc fx:id="a15" length="90.0" radiusX="140.0" radiusY="140.0" startAngle="180.0" stroke="#fffb00" strokeLineCap="ROUND" strokeWidth="15.0" />
+                <Arc fx:id="a16" length="90.0" radiusX="140.0" radiusY="140.0" startAngle="270.0" stroke="#12bcde" strokeLineCap="ROUND" strokeWidth="15.0" />
+                <Arc fx:id="a17" length="90.0" radiusX="140.0" radiusY="140.0" stroke="#19e010" strokeLineCap="ROUND" strokeWidth="15.0">
                <fill>
                   <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                      <stops>
@@ -33,21 +33,28 @@
                      </stops>
                   </RadialGradient>
                </fill></Arc>
+            <Button layoutX="-49.0" layoutY="-74.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Save Game" textFill="#9f1818">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="-47.0" layoutY="-37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Restart" textFill="#b51c1c">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="-47.0" layoutY="35.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Main Menu" textFill="#9f1818">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="-47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Continue" textFill="#9f1818">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
             </children>
         </Group>
-      <Button layoutX="100.0" layoutY="195.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Save Game" textFill="#9f1818">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="100.0" layoutY="235.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Restart" textFill="#b51c1c">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
-      <Button layoutX="100.0" layoutY="275.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-radius: 50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Back" textFill="#9f1818">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
       <Label fx:id="label" layoutX="70.0" layoutY="50.0" stylesheets="@bodybg.css" text="Game Paused" textFill="#df0000">
          <font>
             <Font name="System Bold Italic" size="25.0" />
