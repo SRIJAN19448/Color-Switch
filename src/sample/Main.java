@@ -99,22 +99,22 @@ public class Main extends Application {
         g1.setLayoutX(150);
         g1.setLayoutY(250);
         Arc arcs[]=new Arc[4];
-        arcs[0]=new Arc(0,0,120,120,0,90);
+        arcs[0]=new Arc(0,0,140,140,0,90);
         arcs[0].setStrokeWidth(15);
         arcs[0].setType(ArcType.OPEN);
         arcs[0].setStroke(Color.web("#19e010"));
         arcs[0].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs[1]=new Arc(0,0,120,120,90,90);
+        arcs[1]=new Arc(0,0,140,140,90,90);
         arcs[1].setStrokeWidth(15);
         arcs[1].setType(ArcType.OPEN);
         arcs[1].setStroke(Color.RED);
         arcs[1].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs[2]=new Arc(0,0,120,120,180,90);
+        arcs[2]=new Arc(0,0,140,140,180,90);
         arcs[2].setStrokeWidth(15);
         arcs[2].setType(ArcType.OPEN);
         arcs[2].setStroke(Color.YELLOW);
         arcs[2].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs[3]=new Arc(0,0,120,120,270,90);
+        arcs[3]=new Arc(0,0,140,140,270,90);
         arcs[3].setStrokeWidth(15);
         arcs[3].setType(ArcType.OPEN);
         arcs[3].setStroke(Color.web("#12bcde"));
@@ -124,52 +124,75 @@ public class Main extends Application {
         g2.setLayoutX(150);
         g2.setLayoutY(250);
         Arc arcs2[]=new Arc[4];
-        arcs2[0]=new Arc(0,0,80,80,0,90);
+        arcs2[0]=new Arc(0,0,95,95,0,90);
         arcs2[0].setStrokeWidth(10);
         arcs2[0].setType(ArcType.OPEN);
         arcs2[0].setStroke(Color.web("#19e010"));
         arcs2[0].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs2[1]=new Arc(0,0,80,80,90,90);
+        arcs2[1]=new Arc(0,0,95,95,90,90);
         arcs2[1].setStrokeWidth(10);
         arcs2[1].setType(ArcType.OPEN);
         arcs2[1].setStroke(Color.RED);
         arcs2[1].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs2[2]=new Arc(0,0,80,80,180,90);
+        arcs2[2]=new Arc(0,0,95,95,180,90);
         arcs2[2].setStrokeWidth(10);
         arcs2[2].setType(ArcType.OPEN);
         arcs2[2].setStroke(Color.YELLOW);
         arcs2[2].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs2[3]=new Arc(0,0,80,80,270,90);
+        arcs2[3]=new Arc(0,0,95,95,270,90);
         arcs2[3].setStrokeWidth(10);
         arcs2[3].setType(ArcType.OPEN);
         arcs2[3].setStroke(Color.web("#12bcde"));
         arcs2[3].setStrokeLineCap(StrokeLineCap.ROUND);
         g2.getChildren().addAll(arcs2);
+        
         save_game=new Button("Save Game");
         save_game.setStyle("-fx-background-radius: 50;");
-        save_game.setLayoutX(100);
-        save_game.setLayoutY(195);
+        save_game.setLayoutX(-47.0);
+        save_game.setLayoutY(-74.0);
         save_game.setFont(new Font(14));
         save_game.setTextFill(Color.web("#9f1818"));
         save_game.setPrefWidth(100);
         save_game.setPrefHeight(30);
+
         Button restart=new Button("Restart");
         restart.setStyle("-fx-background-radius: 50;");
-        restart.setLayoutX(100);
-        restart.setLayoutY(235);
+        restart.setLayoutX(-47.0);
+        restart.setLayoutY(-37.0);
         restart.setFont(new Font(14));
         restart.setTextFill(Color.web("#9f1818"));
         restart.setPrefWidth(100);
         restart.setPrefHeight(30);
-        back=new Button("Back");
+
+        Button main_menu=new Button("Main Menu");
+        main_menu.setStyle("-fx-background-radius: 50;");
+        main_menu.setLayoutX(-47.0);
+        main_menu.setLayoutY(37.0);
+        main_menu.setFont(new Font(14));
+        main_menu.setTextFill(Color.web("#9f1818"));
+        main_menu.setPrefWidth(100);
+        main_menu.setPrefHeight(30);
+
+        back=new Button("Continue");
         back.setStyle("-fx-background-radius: 50;");
-        back.setLayoutX(100);
-        back.setLayoutY(275);
+        back.setLayoutX(-47.0);
+        back.setLayoutY(0);
         back.setFont(new Font(14));
         back.setTextFill(Color.web("#9f1818"));
         back.setPrefWidth(100);
         back.setPrefHeight(30);
-        pause.getChildren().addAll(label,g1,g2,save_game,restart,back);
+        g2.getChildren().addAll(save_game,restart,back,main_menu);
+        pause.getChildren().addAll(label,g1,g2);
+
+        //listener of main_menu
+        main_menu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                guiStage.setScene(main_screen);
+            }
+        });
+
+
         back.setOnMouseClicked(new EventHandler<MouseEvent>(){
             int var=3;
             Label timer;
