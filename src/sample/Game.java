@@ -132,7 +132,10 @@ public class Game implements Serializable {
         canvas.setBackground(background);
         Main.getStage().setScene(scene);
 
-        SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
+//        SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
+//        square.create();
+//        canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
+        DoubleCrossObs square=new DoubleCrossObs(this.obstacle_pos,this.ball,this);
         square.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
         this.obstacle_pos-=300;

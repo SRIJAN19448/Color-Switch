@@ -16,8 +16,9 @@ public class CrossObs extends Obstacle {
     private transient Circle pivot;
     CrossObs(double pos,Ball ball,Game g){
         super(ball,g,pos);
-        degree=new int[4];
-        line=new Line[4];
+        this.degree=new int[4];
+        this.line=new Line[4];
+        this.pivot=new Circle();
     }
     @Override
     public void passThrough() {
