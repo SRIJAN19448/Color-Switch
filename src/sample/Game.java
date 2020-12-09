@@ -135,7 +135,7 @@ public class Game implements Serializable {
         SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
         square.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
-//        DoubleCrossObs square=new DoubleCrossObs(this.obstacle_pos,this.ball,this);
+//        DoubleRingObs square=new DoubleRingObs(this.obstacle_pos,this.ball,this);
 //        square.create();
 //        canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
         this.obstacle_pos-=300;
@@ -324,7 +324,7 @@ public class Game implements Serializable {
         if(rem instanceof Obstacle) {
             ((Obstacle)rem).hit.stop();
             Random r=new Random();
-            int random=r.nextInt(5);
+            int random=r.nextInt(6);
             if (random==0) {
 //                ((SquareObs) rem).hit.stop();
                 SquareObs sq = new SquareObs(this.obstacle_pos, this.ball, this);
@@ -414,6 +414,26 @@ public class Game implements Serializable {
                 canvas.getChildren().add(canvas.getChildren().size() - 3, dc.grp);
                 items.add(dc);
                 obstacles.add(dc);
+                Star st = new Star(this.str_pos, this);
+                st.create();
+                this.str_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, st.getGrp());
+                items.add(st);
+                stars.add(st);
+                ColorChanger clr = new ColorChanger(this.clr_pos, this);
+                clr.create();
+                this.clr_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, clr.getGrp());
+                items.add(clr);
+                clrs.add(clr);
+            }
+            else if(random==5){
+                DoubleRingObs dr=new DoubleRingObs(this.obstacle_pos, this.ball, this);
+                dr.create();
+                this.obstacle_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, dr.grp);
+                items.add(dr);
+                obstacles.add(dr);
                 Star st = new Star(this.str_pos, this);
                 st.create();
                 this.str_pos -= 300;
