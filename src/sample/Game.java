@@ -132,12 +132,12 @@ public class Game implements Serializable {
         canvas.setBackground(background);
         Main.getStage().setScene(scene);
 
-//        SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
-//        square.create();
-//        canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
-        DoubleCrossObs square=new DoubleCrossObs(this.obstacle_pos,this.ball,this);
+        SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
         square.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
+//        DoubleCrossObs square=new DoubleCrossObs(this.obstacle_pos,this.ball,this);
+//        square.create();
+//        canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
         this.obstacle_pos-=300;
         Star st=new Star(225,this);
         st.create();
@@ -159,18 +159,18 @@ public class Game implements Serializable {
         clr2.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,clr2.getGrp());
         this.clr_pos-=300;
-        CrossObs cross=new CrossObs(this.obstacle_pos,this.ball,this);
-        cross.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,cross.grp);
-        this.obstacle_pos-=300;
-        Star st2=new Star(-375,this);
-        st2.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,st2.getGrp());
-        this.str_pos-=300;
-        ColorChanger clr3=new ColorChanger(this.clr_pos,this);
-        clr3.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,clr3.getGrp());
-        this.clr_pos-=300;
+//        CrossObs cross=new CrossObs(this.obstacle_pos,this.ball,this);
+//        cross.create();
+//        canvas.getChildren().add(canvas.getChildren().size()-2,cross.grp);
+//        this.obstacle_pos-=300;
+//        Star st2=new Star(-375,this);
+//        st2.create();
+//        canvas.getChildren().add(canvas.getChildren().size()-2,st2.getGrp());
+//        this.str_pos-=300;
+//        ColorChanger clr3=new ColorChanger(this.clr_pos,this);
+//        clr3.create();
+//        canvas.getChildren().add(canvas.getChildren().size()-2,clr3.getGrp());
+//        this.clr_pos-=300;
         LineObs line=new LineObs(this.obstacle_pos,1,this.ball,this);
         line.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,line.grp);
@@ -190,30 +190,30 @@ public class Game implements Serializable {
         items.add(clr);
         items.add(ring);
         items.add(clr2);
-        items.add(cross);
-        items.add(clr3);
+//        items.add(cross);
+//        items.add(clr3);
         items.add(line);
         items.add(clr4);
         items.add(st);
         items.add(st1);
-        items.add(st2);
+//        items.add(st2);
         items.add(st3);
 
 
         obstacles.add(square);
         obstacles.add(ring);
-        obstacles.add(cross);
+//        obstacles.add(cross);
         obstacles.add(line);
 
 
         clrs.add(clr);
         clrs.add(clr2);
-        clrs.add(clr3);
+//        clrs.add(clr3);
         clrs.add(clr4);
 
         stars.add(st);
         stars.add(st1);
-        stars.add(st2);
+//        stars.add(st2);
         stars.add(st3);
         ball.create(canvas);
         for(Node n:canvas.getChildren()){
@@ -324,7 +324,7 @@ public class Game implements Serializable {
         if(rem instanceof Obstacle) {
             ((Obstacle)rem).hit.stop();
             Random r=new Random();
-            int random=r.nextInt(4);
+            int random=r.nextInt(5);
             if (random==0) {
 //                ((SquareObs) rem).hit.stop();
                 SquareObs sq = new SquareObs(this.obstacle_pos, this.ball, this);
@@ -394,6 +394,26 @@ public class Game implements Serializable {
                 canvas.getChildren().add(canvas.getChildren().size() - 3, li.grp);
                 items.add(li);
                 obstacles.add(li);
+                Star st = new Star(this.str_pos, this);
+                st.create();
+                this.str_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, st.getGrp());
+                items.add(st);
+                stars.add(st);
+                ColorChanger clr = new ColorChanger(this.clr_pos, this);
+                clr.create();
+                this.clr_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, clr.getGrp());
+                items.add(clr);
+                clrs.add(clr);
+            }
+            else if(random==4){
+                DoubleCrossObs dc=new DoubleCrossObs(this.obstacle_pos, this.ball, this);
+                dc.create();
+                this.obstacle_pos -= 300;
+                canvas.getChildren().add(canvas.getChildren().size() - 3, dc.grp);
+                items.add(dc);
+                obstacles.add(dc);
                 Star st = new Star(this.str_pos, this);
                 st.create();
                 this.str_pos -= 300;
