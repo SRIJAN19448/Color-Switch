@@ -259,7 +259,7 @@ public class Game implements Serializable {
                 timer.setTextFill(Color.WHITE);
                 timer.setFont(new Font("System Bold Italic",50));
                 timer.setLayoutX(133);
-                timer.setLayoutY(220-canvas.getTranslateY());
+                timer.setLayoutY(220-translate);
                 Main.play.getChildren().add(timer);
 
                 Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
@@ -634,12 +634,43 @@ public class Game implements Serializable {
         Label over=new Label("Game over");
         over.setTextFill(Color.WHITE);
         over.setFont(new Font("System Bold Italic",50));
-        over.setLayoutX(133);
-        over.setLayoutY(300);
+        over.setLayoutX(25);
+        over.setLayoutY(220-translate);
         Main.play.getChildren().add(over);
-        TimeUnit.SECONDS.sleep(2);
-        Main.play.getChildren().remove(over);
-        Main.getStage().setScene(Main.hit_screen);
+//        TimeUnit.SECONDS.sleep(2);
+//        Main.play.getChildren().remove(over);
+        Timeline t=new Timeline(new KeyFrame(Duration.millis(1500)));
+        t.setCycleCount(1);
+        t.play();
+        t.setOnFinished(new EventHandler<ActionEvent>(){
+
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Main.play.getChildren().remove(over);
+                Main.getStage().setScene(Main.hit_screen);
+//                t.stop();
+            }
+        });
+
+
+        Main.use.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(score>=5) {
+                    score -= 5;
+                    Main.scr.setText(String.valueOf(score));
+                    ball.getBall().setCenterY(ball.getBall().getCenterY() + 100);
+                    for (Obstacle i : obstacles) {
+                        i.animation_play();
+                        i.hit.play();
+                    }
+                    Main.getStage().setScene(Main.play_screen);
+                    pause_stat = 0;
+                }
+
+            }
+        });
     }
 
     public void save_game() throws IOException {

@@ -41,7 +41,7 @@ public class Main extends Application {
     public static Pane pause,play,main,load,hit;
     private static Stage guiStage;
     public static Label scr;
-    public static Button new_game,load_game,exit,pausebtn,back,save_game,saves[];
+    public static Button new_game,load_game,exit,pausebtn,back,save_game,saves[],use;
     public static Stage getStage() {
         return guiStage;
     }
@@ -669,7 +669,7 @@ public class Main extends Application {
         h.setLayoutX(55);
         h.setLayoutY(71);
 
-        Button use=new Button("Use Stars");
+        use=new Button("Use Stars");
         use.setStyle("-fx-background-radius: 50;");
         use.setLayoutX(100);
         use.setLayoutY(195);

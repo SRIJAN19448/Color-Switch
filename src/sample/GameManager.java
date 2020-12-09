@@ -39,6 +39,7 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 Main.getStage().setScene(Main.load_screen);
                 try {
+                    Main.make_play();
                     load_game();
                 } catch (IOException e) {
                     e.printStackTrace();
