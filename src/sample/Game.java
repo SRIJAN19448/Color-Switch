@@ -40,6 +40,7 @@ public class Game implements Serializable {
     private int obstacle_pos;
     private int str_pos;
     private ArrayList<Object> items;
+    private int ran;
 //    int flag=1;
     public Game() throws IOException {
 //        this.translate=0;
@@ -55,6 +56,7 @@ public class Game implements Serializable {
         this.clrs=new ArrayList<>();
         this.stars=new ArrayList<>();
         this.items=new ArrayList<>();
+        this.ran=3;
 
     }
     public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,int ob_ps,int cl_ps,int st_ps){
@@ -325,6 +327,10 @@ public class Game implements Serializable {
             ((Obstacle)rem).hit.stop();
             Random r=new Random();
             int random=r.nextInt(6);
+            while(random==ran){
+                random=r.nextInt(6);
+            }
+            ran=random;
             if (random==0) {
 //                ((SquareObs) rem).hit.stop();
                 SquareObs sq = new SquareObs(this.obstacle_pos, this.ball, this);
