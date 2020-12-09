@@ -41,7 +41,7 @@ public class Main extends Application {
     public static Pane pause,play,main,load,hit;
     private static Stage guiStage;
     public static Label scr;
-    public static Button new_game,load_game,exit,pausebtn,back,save_game,saves[],use;
+    public static Button new_game,load_game,exit,pausebtn,back,save_game,saves[],use,restart_hit,restart_pause;
     public static Stage getStage() {
         return guiStage;
     }
@@ -155,14 +155,14 @@ public class Main extends Application {
         save_game.setPrefWidth(100);
         save_game.setPrefHeight(30);
 
-        Button restart=new Button("Restart");
-        restart.setStyle("-fx-background-radius: 50;");
-        restart.setLayoutX(-47.0);
-        restart.setLayoutY(-37.0);
-        restart.setFont(new Font(14));
-        restart.setTextFill(Color.web("#9f1818"));
-        restart.setPrefWidth(100);
-        restart.setPrefHeight(30);
+        restart_pause=new Button("Restart");
+        restart_pause.setStyle("-fx-background-radius: 50;");
+        restart_pause.setLayoutX(-47.0);
+        restart_pause.setLayoutY(-37.0);
+        restart_pause.setFont(new Font(14));
+        restart_pause.setTextFill(Color.web("#9f1818"));
+        restart_pause.setPrefWidth(100);
+        restart_pause.setPrefHeight(30);
 
         Button main_menu=new Button("Main Menu");
         main_menu.setStyle("-fx-background-radius: 50;");
@@ -181,7 +181,7 @@ public class Main extends Application {
         back.setTextFill(Color.web("#9f1818"));
         back.setPrefWidth(100);
         back.setPrefHeight(30);
-        g2.getChildren().addAll(save_game,restart,back,main_menu);
+        g2.getChildren().addAll(save_game,restart_pause,back,main_menu);
         pause.getChildren().addAll(label,g1,g2);
 
         //listener of main_menu
@@ -678,14 +678,14 @@ public class Main extends Application {
         use.setPrefWidth(100);
         use.setPrefHeight(10);
 
-        Button restart=new Button("Restart");
-        restart.setStyle("-fx-background-radius: 50;");
-        restart.setLayoutX(100);
-        restart.setLayoutY(230);
-        restart.setFont(new Font(14));
-        restart.setTextFill(Color.web("#9f1818"));
-        restart.setPrefWidth(100);
-        restart.setPrefHeight(10);
+        restart_hit=new Button("Restart");
+        restart_hit.setStyle("-fx-background-radius: 50;");
+        restart_hit.setLayoutX(100);
+        restart_hit.setLayoutY(230);
+        restart_hit.setFont(new Font(14));
+        restart_hit.setTextFill(Color.web("#9f1818"));
+        restart_hit.setPrefWidth(100);
+        restart_hit.setPrefHeight(10);
 
         Button menu=new Button("Main Menu");
         menu.setStyle("-fx-background-radius: 50;");
@@ -696,7 +696,7 @@ public class Main extends Application {
         menu.setPrefWidth(100);
         menu.setPrefHeight(10);
 
-        hit.getChildren().addAll(h,use,restart,menu);
+        hit.getChildren().addAll(h,use,restart_hit,menu);
 
         menu.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
@@ -706,7 +706,7 @@ public class Main extends Application {
             }
         });
 
-        restart.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        restart_hit.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {

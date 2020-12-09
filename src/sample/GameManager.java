@@ -55,6 +55,30 @@ public class GameManager {
                 System.exit(0);
             }
         });
+        Main.restart_hit.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    Main.make_play();
+                    new_game();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Main.restart_pause.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    Main.make_play();
+                    new_game();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 
