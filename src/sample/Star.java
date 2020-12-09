@@ -33,7 +33,7 @@ public class Star implements Special, Serializable {
     }
 
     public void create() throws FileNotFoundException {
-        FileInputStream path=new FileInputStream("C:\\my_work_space\\Colour_Switch\\src\\sample\\stars.png");
+        FileInputStream path=new FileInputStream("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\src\\sample\\stars.png");
         Image img=new Image(path);
         imv.setImage(img);
         imv.setPreserveRatio(true);
