@@ -47,6 +47,6 @@ public class Controller_of_save_game implements Initializable{
         Parent root1 = FXMLLoader.load(getClass().getResource("Main_Screen.fxml"));
         Scene scene1=new Scene(root1, 600, 600);
         scene1.setFill(Color.BLACK);
-        GameManager.guiStage.setScene(scene1);
+        GameManager.getGuiStage().setScene(scene1);
     }
 }

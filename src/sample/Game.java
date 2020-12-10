@@ -132,7 +132,7 @@ public class Game implements Serializable {
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
         canvas.setBackground(background);
-        GameManager.guiStage.setScene(scene);
+        GameManager.getGuiStage().setScene(scene);
 
         SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
         square.create();
@@ -185,7 +185,7 @@ public class Game implements Serializable {
         clr4.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,clr4.getGrp());
         this.clr_pos-=300;
-        System.out.println("->");
+//        System.out.println("->");
 
 
         items.add(square);
@@ -221,7 +221,7 @@ public class Game implements Serializable {
         for(Node n:canvas.getChildren()){
 
             Bounds s=n.getBoundsInLocal();
-            System.out.println((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY()));
+//            System.out.println((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY()));
         }
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -248,7 +248,7 @@ public class Game implements Serializable {
                 ball.getUp().pause();
                 ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
-                GameManager.guiStage.setScene(GameManager.pause_screen);
+                GameManager.getGuiStage().setScene(GameManager.pause_screen);
             }
         });
         GameManager.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -256,7 +256,7 @@ public class Game implements Serializable {
             Label timer;
             @Override
             public void handle(MouseEvent mouseEvent) {
-                GameManager.guiStage.setScene(GameManager.play_screen);
+                GameManager.getGuiStage().setScene(GameManager.play_screen);
                 timer=new Label("3");
                 timer.setTextFill(Color.WHITE);
                 timer.setFont(new Font("System Bold Italic",50));
@@ -536,7 +536,7 @@ public class Game implements Serializable {
                 ball.getUp().pause();
                 ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
-                GameManager.guiStage.setScene(GameManager.pause_screen);
+                GameManager.getGuiStage().setScene(GameManager.pause_screen);
             }
         });
         GameManager.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -544,7 +544,7 @@ public class Game implements Serializable {
             Label timer;
             @Override
             public void handle(MouseEvent mouseEvent) {
-                GameManager.guiStage.setScene(GameManager.play_screen);
+                GameManager.getGuiStage().setScene(GameManager.play_screen);
                 timer=new Label("3");
                 timer.setTextFill(Color.WHITE);
                 timer.setFont(new Font("System Bold Italic",50));
@@ -608,9 +608,9 @@ public class Game implements Serializable {
 //            i.itms=itms;
 //            i.strs=strs;
 //        }
-        System.out.println(this.ball.getCenterY());
+//        System.out.println(this.ball.getCenterY());
         GameManager.scr.setText(String.valueOf(this.score));
-        GameManager.guiStage.setScene(GameManager.play_screen);
+        GameManager.getGuiStage().setScene(GameManager.play_screen);
 //        this.ball.getDown().play();
         Timeline add2=new Timeline(new KeyFrame(Duration.millis(10),e-> {
             try {
@@ -626,7 +626,7 @@ public class Game implements Serializable {
         Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
         Scene scene2=new Scene(root, 300, 500);
         scene2.setFill(Color.BLACK);
-        GameManager.guiStage.setScene(scene2);
+        GameManager.getGuiStage().setScene(scene2);
 
     }
     public void back(ActionEvent e) {
@@ -653,7 +653,7 @@ public class Game implements Serializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 GameManager.play.getChildren().remove(over);
-                GameManager.guiStage.setScene(GameManager.hit_screen);
+                GameManager.getGuiStage().setScene(GameManager.hit_screen);
 //                t.stop();
             }
         });
@@ -671,7 +671,7 @@ public class Game implements Serializable {
                         i.animation_play();
                         i.hit.play();
                     }
-                    GameManager.guiStage.setScene(GameManager.play_screen);
+                    GameManager.getGuiStage().setScene(GameManager.play_screen);
                     pause_stat = 0;
                 }
 
@@ -681,9 +681,9 @@ public class Game implements Serializable {
 
     public void save_game() throws IOException {
         ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("saves.txt"));
-        System.out.println(canvas.getLayoutY());
+//        System.out.println(canvas.getLayoutY());
 //        this.translate=canvas.getLayoutY();
-        System.out.println(this.ball.getBall().getCenterY());
+//        System.out.println(this.ball.getBall().getCenterY());
         this.ball.setCenterY(this.ball.getBall().getCenterY());
         out.writeObject(this);
     }

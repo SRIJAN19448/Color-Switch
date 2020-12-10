@@ -71,7 +71,7 @@ public class ColorChanger implements Special, Serializable {
         paints[2]=Color.DARKMAGENTA;
         paints[3]=Color.CYAN;
         if(posY>=this.arc[0].getCenterY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+this.arc[0].getRadiusY()/4) {
-            System.out.println("BYUV");
+//            System.out.println("BYUV");
             Random r=new Random();
             int random=r.nextInt(4);
             while(paints[random]==game.getBall().getBall().getFill()) {

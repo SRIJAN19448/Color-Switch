@@ -33,7 +33,8 @@ public class GameManager {
     public static Button new_game,load_game,exit,saves[],pausebtn,use,restart_hit,save_game,restart_pause,back;
     public static Label scr;
     private static Game game;
-    public static Stage guiStage;
+    private static Stage guiStage;
+
     public GameManager(Stage stage) throws IOException {
         guiStage=stage;
         game=new Game();
@@ -43,6 +44,11 @@ public class GameManager {
         make_hit();
         make_pause();
     }
+
+    public static Stage getGuiStage() {
+        return guiStage;
+    }
+
     public static void new_game() throws IOException {
         make_play();
         game=new Game();

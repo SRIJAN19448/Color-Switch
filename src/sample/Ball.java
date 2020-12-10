@@ -72,26 +72,6 @@ public class Ball implements Serializable {
         down.play();
     }
     public void jump(){
-//        if(canvas==null){
-//            System.out.println("NULL");
-//        }
-//        if(ball.getCenterY()<=10)
-//            up.pause();
-//        else
-//            ball.setCenterY(ball.getCenterY()-3);
-//        if(ball.getCenterY()<=170 && newpos<=prevpos) {
-//            newpos = ball.getCenterY();
-//            base += 3;
-//            canvas.setTranslateY(base);
-//            Main.pausebtn.setTranslateY(-base);
-//            Main.scr.setTranslateY(-base);
-//            if(canvas.getTranslateY()>=150*trans) {
-//                trans++;
-//            }
-//            ball.setTranslateY(-base);
-//                prevpos = newpos;
-//        }
-
         double y=ball.getCenterY();
         y-=3;
         ball.setCenterY(y);
