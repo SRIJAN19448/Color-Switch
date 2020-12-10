@@ -48,10 +48,10 @@ public class Game implements Serializable {
         this.obstacle_pos=250;
         this.clr_pos=100;
         this.str_pos=225;
-        this.canvas=Main.play;
+        this.canvas=GameManager.play;
         this.ball=new Ball(150,490,10,this);
         this.pause_stat=0;
-        this.scene=Main.play_screen;
+        this.scene=GameManager.play_screen;
         this.obstacles=new ArrayList<>();
         this.clrs=new ArrayList<>();
         this.stars=new ArrayList<>();
@@ -65,10 +65,10 @@ public class Game implements Serializable {
         this.obstacle_pos=ob_ps;
         this.clr_pos=cl_ps;
         this.str_pos=st_ps;
-        this.canvas=Main.play;
+        this.canvas=GameManager.play;
         this.ball=new Ball(150,centY,10,this);
         this.pause_stat=0;
-        this.scene=Main.play_screen;
+        this.scene=GameManager.play_screen;
         this.clrs=clrs;
         this.stars=stars;
         this.obstacles=obstacles;
@@ -132,7 +132,7 @@ public class Game implements Serializable {
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
         canvas.setBackground(background);
-        Main.getStage().setScene(scene);
+        GameManager.guiStage.setScene(scene);
 
         SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
         square.create();
@@ -237,7 +237,7 @@ public class Game implements Serializable {
                     ball.make_move();
             }
         });
-        Main.pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -248,21 +248,21 @@ public class Game implements Serializable {
                 ball.getUp().pause();
                 ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
-                Main.getStage().setScene(Main.pause_screen);
+                GameManager.guiStage.setScene(GameManager.pause_screen);
             }
         });
-        Main.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
             int var=3;
             Label timer;
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Main.getStage().setScene(Main.play_screen);
+                GameManager.guiStage.setScene(GameManager.play_screen);
                 timer=new Label("3");
                 timer.setTextFill(Color.WHITE);
                 timer.setFont(new Font("System Bold Italic",50));
                 timer.setLayoutX(133);
                 timer.setLayoutY(220-translate);
-                Main.play.getChildren().add(timer);
+                GameManager.play.getChildren().add(timer);
 
                 Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
                 t.setCycleCount(3);
@@ -278,7 +278,7 @@ public class Game implements Serializable {
                 }
                 else{
                     var=3;
-                    Main.play.getChildren().removeAll(timer);
+                    GameManager.play.getChildren().removeAll(timer);
                     for(Obstacle i:obstacles){
                         i.animation_play();
                     }
@@ -289,7 +289,7 @@ public class Game implements Serializable {
             }
         });
 
-        Main.save_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.save_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -525,7 +525,7 @@ public class Game implements Serializable {
                     ball.make_move();
             }
         });
-        Main.pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -536,21 +536,21 @@ public class Game implements Serializable {
                 ball.getUp().pause();
                 ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
-                Main.getStage().setScene(Main.pause_screen);
+                GameManager.guiStage.setScene(GameManager.pause_screen);
             }
         });
-        Main.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
             int var=3;
             Label timer;
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Main.getStage().setScene(Main.play_screen);
+                GameManager.guiStage.setScene(GameManager.play_screen);
                 timer=new Label("3");
                 timer.setTextFill(Color.WHITE);
                 timer.setFont(new Font("System Bold Italic",50));
                 timer.setLayoutX(133);
                 timer.setLayoutY(220-translate);
-                Main.play.getChildren().add(timer);
+                GameManager.play.getChildren().add(timer);
 
                 Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
                 t.setCycleCount(3);
@@ -566,7 +566,7 @@ public class Game implements Serializable {
                 }
                 else{
                     var=3;
-                    Main.play.getChildren().removeAll(timer);
+                    GameManager.play.getChildren().removeAll(timer);
                     for(Obstacle i:obstacles){
                         i.animation_play();
                     }
@@ -576,7 +576,7 @@ public class Game implements Serializable {
                 }
             }
         });
-        Main.save_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.save_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -609,9 +609,9 @@ public class Game implements Serializable {
 //            i.strs=strs;
 //        }
         System.out.println(this.ball.getCenterY());
-        Main.scr.setText(String.valueOf(this.score));
-        Main.getStage().setScene(Main.play_screen);
-        this.ball.getDown().play();
+        GameManager.scr.setText(String.valueOf(this.score));
+        GameManager.guiStage.setScene(GameManager.play_screen);
+//        this.ball.getDown().play();
         Timeline add2=new Timeline(new KeyFrame(Duration.millis(10),e-> {
             try {
                 play_game();
@@ -626,7 +626,7 @@ public class Game implements Serializable {
         Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
         Scene scene2=new Scene(root, 300, 500);
         scene2.setFill(Color.BLACK);
-        Main.getStage().setScene(scene2);
+        GameManager.guiStage.setScene(scene2);
 
     }
     public void back(ActionEvent e) {
@@ -642,9 +642,9 @@ public class Game implements Serializable {
         over.setFont(new Font("System Bold Italic",50));
         over.setLayoutX(25);
         over.setLayoutY(220-translate);
-        Main.play.getChildren().add(over);
+        GameManager.play.getChildren().add(over);
 //        TimeUnit.SECONDS.sleep(2);
-//        Main.play.getChildren().remove(over);
+//        GameManager.play.getChildren().remove(over);
         Timeline t=new Timeline(new KeyFrame(Duration.millis(1500)));
         t.setCycleCount(1);
         t.play();
@@ -652,26 +652,26 @@ public class Game implements Serializable {
 
             @Override
             public void handle(ActionEvent actionEvent) {
-                Main.play.getChildren().remove(over);
-                Main.getStage().setScene(Main.hit_screen);
+                GameManager.play.getChildren().remove(over);
+                GameManager.guiStage.setScene(GameManager.hit_screen);
 //                t.stop();
             }
         });
 
 
-        Main.use.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.use.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(score>=5) {
                     score -= 5;
-                    Main.scr.setText(String.valueOf(score));
+                    GameManager.scr.setText(String.valueOf(score));
                     ball.getBall().setCenterY(ball.getBall().getCenterY() + 100);
                     for (Obstacle i : obstacles) {
                         i.animation_play();
                         i.hit.play();
                     }
-                    Main.getStage().setScene(Main.play_screen);
+                    GameManager.guiStage.setScene(GameManager.play_screen);
                     pause_stat = 0;
                 }
 
