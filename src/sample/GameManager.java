@@ -32,6 +32,7 @@ public class GameManager {
     public static Pane main,load,play,hit,pause;
     public static Button new_game,load_game,exit,saves[],pausebtn,use,restart_hit,save_game,restart_pause,back;
     public static Label scr;
+
     private static Game game;
     private static Stage guiStage;
 
