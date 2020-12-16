@@ -204,62 +204,62 @@ public class GameManager {
         g2.setLayoutX(150);
         g2.setLayoutY(250);
         Arc arcs2[]=new Arc[4];
-        arcs2[0]=new Arc(0,0,95,95,0,90);
-        arcs2[0].setStrokeWidth(10);
+        arcs2[0]=new Arc(0,0,110,110,0,90);
+        arcs2[0].setStrokeWidth(15);
         arcs2[0].setType(ArcType.OPEN);
         arcs2[0].setStroke(Color.web("#19e010"));
         arcs2[0].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs2[1]=new Arc(0,0,95,95,90,90);
-        arcs2[1].setStrokeWidth(10);
+        arcs2[1]=new Arc(0,0,110,110,90,90);
+        arcs2[1].setStrokeWidth(15);
         arcs2[1].setType(ArcType.OPEN);
         arcs2[1].setStroke(Color.RED);
         arcs2[1].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs2[2]=new Arc(0,0,95,95,180,90);
-        arcs2[2].setStrokeWidth(10);
+        arcs2[2]=new Arc(0,0,110,110,180,90);
+        arcs2[2].setStrokeWidth(15);
         arcs2[2].setType(ArcType.OPEN);
         arcs2[2].setStroke(Color.YELLOW);
         arcs2[2].setStrokeLineCap(StrokeLineCap.ROUND);
-        arcs2[3]=new Arc(0,0,95,95,270,90);
-        arcs2[3].setStrokeWidth(10);
+        arcs2[3]=new Arc(0,0,110,110,270,90);
+        arcs2[3].setStrokeWidth(15);
         arcs2[3].setType(ArcType.OPEN);
-        arcs2[3].setStroke(Color.ORANGE);
+        arcs2[3].setStroke(Color.web("#12bcde"));
         arcs2[3].setStrokeLineCap(StrokeLineCap.ROUND);
         g2.getChildren().addAll(arcs2);
 
         save_game=new Button("Save Game");
         save_game.setStyle("-fx-background-radius: 50;");
-        save_game.setLayoutX(-47.0);
-        save_game.setLayoutY(-74.0);
-        save_game.setFont(new Font(14));
+        save_game.setLayoutX(-57.0);
+        save_game.setLayoutY(3);
+        save_game.setFont(new Font(18));
         save_game.setTextFill(Color.ORANGE);
-        save_game.setPrefWidth(100);
+        save_game.setPrefWidth(120);
         save_game.setPrefHeight(30);
 
         restart_pause=new Button("Restart");
         restart_pause.setStyle("-fx-background-radius: 50;");
-        restart_pause.setLayoutX(-47.0);
-        restart_pause.setLayoutY(-37.0);
-        restart_pause.setFont(new Font(14));
+        restart_pause.setLayoutX(-57.0);
+        restart_pause.setLayoutY(-41.0);
+        restart_pause.setFont(new Font(18));
         restart_pause.setTextFill(Color.ORANGE);
-        restart_pause.setPrefWidth(100);
+        restart_pause.setPrefWidth(120);
         restart_pause.setPrefHeight(30);
 
         Button main_menu=new Button("Main Menu");
         main_menu.setStyle("-fx-background-radius: 50;");
-        main_menu.setLayoutX(-47.0);
-        main_menu.setLayoutY(37.0);
-        main_menu.setFont(new Font(14));
+        main_menu.setLayoutX(-57.0);
+        main_menu.setLayoutY(47.0);
+        main_menu.setFont(new Font(18));
         main_menu.setTextFill(Color.ORANGE);
-        main_menu.setPrefWidth(100);
+        main_menu.setPrefWidth(120);
         main_menu.setPrefHeight(30);
 
         back=new Button("Continue");
         back.setStyle("-fx-background-radius: 50;");
-        back.setLayoutX(-47.0);
-        back.setLayoutY(0);
-        back.setFont(new Font(14));
+        back.setLayoutX(-57.0);
+        back.setLayoutY(-85.0);
+        back.setFont(new Font(18));
         back.setTextFill(Color.ORANGE);
-        back.setPrefWidth(100);
+        back.setPrefWidth(120);
         back.setPrefHeight(30);
         g2.getChildren().addAll(save_game,restart_pause,back,main_menu);
         pause.getChildren().addAll(label,g1,g2);
@@ -379,14 +379,16 @@ public class GameManager {
         scr.setLayoutY(3);
         Group g=new Group();
         pausebtn=new Button("II");
-        pausebtn.setStyle("-fx-background-radius: 50;-fx-background-color: #333333");
+        pausebtn.setStyle("-fx-background-radius: 50;");
         pausebtn.setLayoutX(259);
         pausebtn.setLayoutY(3);
         pausebtn.setFont(new Font("System Bold",17));
         pausebtn.setTextFill(Color.WHITE);
         pausebtn.setPrefWidth(38);
         pausebtn.setPrefHeight(38);
+        pausebtn.setId("pause");
         play.getChildren().addAll(scr,pausebtn);
+        play_screen.getStylesheets().add("sample/buttons.css");
         pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
@@ -579,10 +581,10 @@ public class GameManager {
 
         //inner  circle
         Arc arc_inner_circle[]=new Arc[4];
-        arc_inner_circle[0]=new Arc(0,0,150,150,0,90);
-        arc_inner_circle[1]=new Arc(0,0,150,150,90,90);
-        arc_inner_circle[2]=new Arc(0,0,150,150,180,90);
-        arc_inner_circle[3]=new Arc(0,0,150,150,270,90);
+        arc_inner_circle[0]=new Arc(0,0,165,165,0,90);
+        arc_inner_circle[1]=new Arc(0,0,165,165,90,90);
+        arc_inner_circle[2]=new Arc(0,0,165,165,180,90);
+        arc_inner_circle[3]=new Arc(0,0,165,165,270,90);
 
         arc_inner_circle[0].setFill(Color.BLACK);
         arc_inner_circle[0].setStroke(Color.web("#19e010"));
@@ -617,10 +619,10 @@ public class GameManager {
 
         //outer circle started
         Arc arc_outer_circle[]=new Arc[4];
-        arc_outer_circle[0]=new Arc(0,0,225,225,0,90);
-        arc_outer_circle[1]=new Arc(0,0,225,225,90,90);
-        arc_outer_circle[2]=new Arc(0,0,225,225,180,90);
-        arc_outer_circle[3]=new Arc(0,0,225,225,270,90);
+        arc_outer_circle[0]=new Arc(0,0,240,240,0,90);
+        arc_outer_circle[1]=new Arc(0,0,240,240,90,90);
+        arc_outer_circle[2]=new Arc(0,0,240,240,180,90);
+        arc_outer_circle[3]=new Arc(0,0,240,240,270,90);
 
         arc_outer_circle[0].setFill(Color.BLACK);
         arc_outer_circle[0].setStroke(Color.web("#19e010"));
@@ -797,29 +799,29 @@ public class GameManager {
 
         new_game=new Button("New Game");
         new_game.setStyle("-fx-background-radius: 50;");
-        new_game.setLayoutX(240);
-        new_game.setLayoutY(238);
-        new_game.setFont(new Font(18));
+        new_game.setLayoutX(228);
+        new_game.setLayoutY(222);
+        new_game.setFont(new Font(25));
         new_game.setTextFill(Color.ORANGE);
-        new_game.setPrefWidth(150);
+        new_game.setPrefWidth(170);
         new_game.setPrefHeight(40);
 
         load_game=new Button("Load Game");
         load_game.setStyle("-fx-background-radius: 50;");
-        load_game.setLayoutX(240);
-        load_game.setLayoutY(288);
-        load_game.setFont(new Font(18));
+        load_game.setLayoutX(228);
+        load_game.setLayoutY(287);
+        load_game.setFont(new Font(25));
         load_game.setTextFill(Color.ORANGE);
-        load_game.setPrefWidth(150);
+        load_game.setPrefWidth(170);
         load_game.setPrefHeight(40);
 
         exit=new Button("Exit");
         exit.setStyle("-fx-background-radius: 50;");
-        exit.setLayoutX(240);
-        exit.setLayoutY(338);
-        exit.setFont(new Font(18));
+        exit.setLayoutX(228);
+        exit.setLayoutY(352);
+        exit.setFont(new Font(25));
         exit.setTextFill(Color.ORANGE);
-        exit.setPrefWidth(150);
+        exit.setPrefWidth(170);
         exit.setPrefHeight(40);
 
         main.getChildren().addAll(c,l,rest,new_game,load_game,exit,g1,g2,g3,g4);

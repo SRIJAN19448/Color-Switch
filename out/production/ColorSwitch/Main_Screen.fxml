@@ -56,12 +56,12 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="new_game" layoutX="240.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#new_game" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: #4CAF50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="New Game" textFill="#fc0101">
+      <Button fx:id="new_game" layoutX="229.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#new_game" prefHeight="40.0" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #4CAF50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="New Game" textFill="#fc0101">
          <font>
-            <Font size="18.0" />
+            <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="load_game" layoutX="240.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#load_game" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: #4CAF50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Load Game" textFill="#fc0101">
+      <Button fx:id="load_game" layoutX="240.0" layoutY="309.0" mnemonicParsing="false" onMouseClicked="#load_game" prefHeight="40.0" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #4CAF50;" styleClass="circlebutton" stylesheets="@bodybg.css" text="Load Game" textFill="#fc0101">
          <font>
             <Font size="18.0" />
          </font>
