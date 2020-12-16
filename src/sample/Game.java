@@ -494,6 +494,20 @@ public class Game implements Serializable {
                 itms.add(i);
                 canvas.getChildren().add(canvas.getChildren().size()-3,((LineObs) i).grp);
             }
+            else if(i instanceof DoubleRingObs){
+                i=new DoubleRingObs((((DoubleRingObs) i).getPos()), this.ball,this);
+                ((DoubleRingObs) i).create();
+                obs.add(((DoubleRingObs) i));
+                itms.add(i);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((DoubleRingObs) i).grp);
+            }
+            else if(i instanceof DoubleCrossObs){
+                i=new DoubleCrossObs((((DoubleCrossObs) i).getPos()), this.ball,this);
+                ((DoubleCrossObs) i).create();
+                obs.add(((DoubleCrossObs) i));
+                itms.add(i);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((DoubleCrossObs) i).grp);
+            }
             else if(i instanceof ColorChanger){
 
                 i=new ColorChanger(((ColorChanger) i).getPos(),this);
