@@ -78,7 +78,7 @@ public class DoubleCrossObs extends Obstacle{
         line[7].setStroke(Color.CYAN);
         line[7].setStrokeLineCap(StrokeLineCap.ROUND);
 
-        timeline=new Timeline(new KeyFrame(Duration.millis(20),e->rotateL(line[0],0)),new KeyFrame(Duration.millis(20),e->rotateL(line[1],1)),new KeyFrame(Duration.millis(20),e->rotateL(line[2],2)),new KeyFrame(Duration.millis(20),e->rotateL(line[3],3)),new KeyFrame(Duration.millis(20),e->rotateR(line[4],4)),new KeyFrame(Duration.millis(20),e->rotateR(line[5],5)),new KeyFrame(Duration.millis(20),e->rotateR(line[6],6)),new KeyFrame(Duration.millis(20),e->rotateR(line[7],7)));
+        timeline=new Timeline(new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateL(line[0],0)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateL(line[1],1)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateL(line[2],2)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateL(line[3],3)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateR(line[4],4)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateR(line[5],5)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateR(line[6],6)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateR(line[7],7)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
         hit=new Timeline(new KeyFrame(Duration.millis(10),e-> {

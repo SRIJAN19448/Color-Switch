@@ -948,7 +948,7 @@ public class GameManager {
                 double t=game.getTranslate();
                         System.out.println(game.getBall().getCenterY());
                         double cent=game.getBall().getCenterY();
-                        game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                        game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos(),game.getDifficulty());
                         game.setTranslate(t);
                 try {
                     game.load_game();
@@ -990,7 +990,7 @@ public class GameManager {
                 double t=game.getTranslate();
                 System.out.println(game.getBall().getCenterY());
                 double cent=game.getBall().getCenterY();
-                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos(),game.getDifficulty());
                 game.setTranslate(t);
                 try {
                     game.load_game();
@@ -1032,7 +1032,7 @@ public class GameManager {
                 double t=game.getTranslate();
                 System.out.println(game.getBall().getCenterY());
                 double cent=game.getBall().getCenterY();
-                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos(),game.getDifficulty());
                 game.setTranslate(t);
                 try {
                     game.load_game();
@@ -1073,7 +1073,7 @@ public class GameManager {
                 double t=game.getTranslate();
                 System.out.println(game.getBall().getCenterY());
                 double cent=game.getBall().getCenterY();
-                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos(),game.getDifficulty());
                 game.setTranslate(t);
                 try {
                     game.load_game();
@@ -1115,7 +1115,7 @@ public class GameManager {
                 double t=game.getTranslate();
                 System.out.println(game.getBall().getCenterY());
                 double cent=game.getBall().getCenterY();
-                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos(),game.getDifficulty());
                 game.setTranslate(t);
                 try {
                     game.load_game();
@@ -1157,7 +1157,7 @@ public class GameManager {
                 double t=game.getTranslate();
                 System.out.println(game.getBall().getCenterY());
                 double cent=game.getBall().getCenterY();
-                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos(),game.getDifficulty());
                 game.setTranslate(t);
                 try {
                     game.load_game();

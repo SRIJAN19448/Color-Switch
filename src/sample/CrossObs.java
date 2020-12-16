@@ -53,7 +53,7 @@ public class CrossObs extends Obstacle {
         line[3].setStroke(Color.CYAN);
         line[3].setStrokeLineCap(StrokeLineCap.ROUND);
 
-        timeline=new Timeline(new KeyFrame(Duration.millis(20),e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20),e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20),e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20),e->rotateX(line[3],3)));
+        timeline=new Timeline(new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateX(line[3],3)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
         hit=new Timeline(new KeyFrame(Duration.millis(10),e-> {

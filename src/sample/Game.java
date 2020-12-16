@@ -40,6 +40,8 @@ public class Game implements Serializable {
     private int str_pos;
     private ArrayList<Object> items;
     private int ran;
+    private int count;
+    private int difficulty;
     public Game() throws IOException {
         this.score=0;
         this.obstacle_pos=250;
@@ -56,7 +58,7 @@ public class Game implements Serializable {
         this.ran=3;
 
     }
-    public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,int ob_ps,int cl_ps,int st_ps){
+    public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,int ob_ps,int cl_ps,int st_ps,int difficulty){
         this.score=score;
         this.translate=trans;
         this.obstacle_pos=ob_ps;
@@ -70,6 +72,7 @@ public class Game implements Serializable {
         this.stars=stars;
         this.obstacles=obstacles;
         this.items=item;
+        this.difficulty=difficulty;
     }
 
     public Pane getCanvas() {
@@ -122,6 +125,10 @@ public class Game implements Serializable {
 
     public ArrayList<Object> getItems() {
         return items;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
     }
 
     public void new_game() throws IOException {
@@ -333,6 +340,13 @@ public class Game implements Serializable {
             rem=this.items.get(0);
             this.items.remove(rem);
             this.obstacles.remove((Obstacle)rem);
+            if(count<4){
+                count++;
+            }
+            else if(count==4){
+                count=0;
+                difficulty+=5;
+            }
 
         }
 

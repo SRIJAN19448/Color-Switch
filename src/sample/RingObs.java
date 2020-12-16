@@ -46,7 +46,7 @@ public class RingObs extends Obstacle{
         arc[3].setStroke(Color.DARKMAGENTA);
         arc[3].setStrokeLineCap(StrokeLineCap.ROUND);
 
-        timeline=new Timeline(new KeyFrame(Duration.seconds(5),new KeyValue(arc[0].startAngleProperty(),-360),new KeyValue(arc[1].startAngleProperty(),-270),new KeyValue(arc[2].startAngleProperty(),-180),new KeyValue(arc[3].startAngleProperty(),-90)));
+        timeline=new Timeline(new KeyFrame(Duration.millis(5000-250*g.getDifficulty()),new KeyValue(arc[0].startAngleProperty(),-360),new KeyValue(arc[1].startAngleProperty(),-270),new KeyValue(arc[2].startAngleProperty(),-180),new KeyValue(arc[3].startAngleProperty(),-90)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
         hit=new Timeline(new KeyFrame(Duration.millis(10),e-> {
