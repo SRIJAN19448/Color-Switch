@@ -680,12 +680,32 @@ public class Game implements Serializable {
     }
 
     public void save_game() throws IOException {
-        ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("saves.txt"));
+        int name_offset;
+        if(GameManager.load_array.size()==0)
+            name_offset=GameManager.load_array.size()+1;
+        else {
+            String name=GameManager.load_array.get(GameManager.load_array.size()-1);
+            String sub=name.substring(5,name.length()-4);
+            System.out.println(sub);
+            name_offset =Integer.valueOf(sub)+1;
+        }
+        String save_name="saves"+name_offset+".txt";
+        ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream(save_name));
 //        System.out.println(canvas.getLayoutY());
 //        this.translate=canvas.getLayoutY();
 //        System.out.println(this.ball.getBall().getCenterY());
         this.ball.setCenterY(this.ball.getBall().getCenterY());
         out.writeObject(this);
+        out.close();
+        GameManager.load_array.add(save_name);
+        if(GameManager.load_array.size()>6){
+            File f=new File(GameManager.load_array.get(0));
+            f.delete();
+            GameManager.load_array.remove(0);
+        }
+        ObjectOutputStream out2=new ObjectOutputStream(new FileOutputStream("load.txt"));
+        out2.writeObject(GameManager.load_array);
+        out2.close();
     }
     public void restart_game(ActionEvent e){
 

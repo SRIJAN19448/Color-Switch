@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class GameManager {
 
@@ -32,13 +33,27 @@ public class GameManager {
     public static Pane main,load,play,hit,pause;
     public static Button new_game,load_game,exit,saves[],pausebtn,use,restart_hit,save_game,restart_pause,back;
     public static Label scr;
-
+    public static ArrayList<String> load_array;
     private static Game game;
     private static Stage guiStage;
 
-    public GameManager(Stage stage) throws IOException {
+    public GameManager(Stage stage) throws IOException, ClassNotFoundException {
         guiStage=stage;
         game=new Game();
+        load_array=new ArrayList<String>();
+        File f=new File("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\load.txt");
+        if(f.exists()){
+            System.out.println("exists");
+            ObjectInputStream in=new ObjectInputStream(new FileInputStream("load.txt"));
+            load_array=(ArrayList<String>)in.readObject();
+            in.close();
+        }
+        else{
+            System.out.println("doesnt");
+            ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("load.txt"));
+            out.writeObject(load_array);
+            out.close();
+        }
         make_main();
         make_load();
         make_play();
@@ -739,14 +754,17 @@ public class GameManager {
 
             @Override
             public void handle(MouseEvent mouseEvent) {
-                guiStage.setScene(load_screen);
-                try {
-                    make_play();
-                    load_game();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                System.out.println("size: "+load_array.size());
+                if(load_array.size()!=0) {
+                    guiStage.setScene(load_screen);
+                    try {
+                        make_play();
+                        load_game();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -788,21 +806,207 @@ public class GameManager {
 
 
     public static void load_game() throws IOException, ClassNotFoundException {
-        ObjectInputStream in=new ObjectInputStream(new FileInputStream("saves.txt"));
-        game=(Game)in.readObject();
-        double t=game.getTranslate();
-        System.out.println(game.getBall().getCenterY());
-        double cent=game.getBall().getCenterY();
-        game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
-        game.setTranslate(t);
-        game.load_game();
-//        ArrayList<Obstacle> obs=new ArrayList<>();
-//        ArrayList<Star> strs=new ArrayList<>();
-//        ArrayList<ColorChanger> cls=new ArrayList<>();
-//        ArrayList<Object> itms=new ArrayList<>();
-//        if(game.items==null){
-//            System.out.println("NULL");
-//        }
+        if(load_array.size()==0)
+            return;
+
+        saves[0].setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(load_array.size()<0+1)
+                    return;
+                ObjectInputStream in= null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream(load_array.get(0)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    game=(Game)in.readObject();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                double t=game.getTranslate();
+                        System.out.println(game.getBall().getCenterY());
+                        double cent=game.getBall().getCenterY();
+                        game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                        game.setTranslate(t);
+                try {
+                    game.load_game();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        saves[1].setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(load_array.size()<1+1)
+                    return;
+                ObjectInputStream in= null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream(load_array.get(1)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    game=(Game)in.readObject();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                double t=game.getTranslate();
+                System.out.println(game.getBall().getCenterY());
+                double cent=game.getBall().getCenterY();
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game.setTranslate(t);
+                try {
+                    game.load_game();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        saves[2].setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(load_array.size()<2+1)
+                    return;
+                ObjectInputStream in= null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream(load_array.get(2)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    game=(Game)in.readObject();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                double t=game.getTranslate();
+                System.out.println(game.getBall().getCenterY());
+                double cent=game.getBall().getCenterY();
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game.setTranslate(t);
+                try {
+                    game.load_game();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        saves[3].setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(load_array.size()<3+1)
+                    return;
+                ObjectInputStream in= null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream(load_array.get(3)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    game=(Game)in.readObject();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                double t=game.getTranslate();
+                System.out.println(game.getBall().getCenterY());
+                double cent=game.getBall().getCenterY();
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game.setTranslate(t);
+                try {
+                    game.load_game();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        saves[4].setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(load_array.size()<4+1)
+                    return;
+                ObjectInputStream in= null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream(load_array.get(4)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    game=(Game)in.readObject();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                double t=game.getTranslate();
+                System.out.println(game.getBall().getCenterY());
+                double cent=game.getBall().getCenterY();
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game.setTranslate(t);
+                try {
+                    game.load_game();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        saves[5].setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(load_array.size()<5+1)
+                    return;
+                ObjectInputStream in= null;
+                try {
+                    in = new ObjectInputStream(new FileInputStream(load_array.get(5)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    game=(Game)in.readObject();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                double t=game.getTranslate();
+                System.out.println(game.getBall().getCenterY());
+                double cent=game.getBall().getCenterY();
+                game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+                game.setTranslate(t);
+                try {
+                    game.load_game();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+//        ObjectInputStream in=new ObjectInputStream(new FileInputStream("saves.txt"));
+//        game=(Game)in.readObject();
+//        double t=game.getTranslate();
+//        System.out.println(game.getBall().getCenterY());
+//        double cent=game.getBall().getCenterY();
+//        game=new Game(game.getScore(),game.getClrs(),game.getStars(),game.getObstacles(),game.getItems(),cent,game.getTranslate(),game.getObstacle_pos(),game.getClr_pos(),game.getStr_pos());
+//        game.setTranslate(t);
+//        game.load_game();
 
 
     }
