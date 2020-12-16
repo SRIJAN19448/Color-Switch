@@ -321,32 +321,35 @@ public class GameManager {
 
         use=new Button("Use Stars");
         use.setStyle("-fx-background-radius: 50;");
-        use.setLayoutX(100);
-        use.setLayoutY(195);
-        use.setFont(new Font(14));
+        use.setLayoutX(-82);
+        use.setLayoutY(-66);
+        use.setFont(new Font(23));
         use.setTextFill(Color.ORANGE);
-        use.setPrefWidth(100);
-        use.setPrefHeight(10);
+        use.setPrefWidth(150);
+        use.setPrefHeight(30);
 
         restart_hit=new Button("Restart");
         restart_hit.setStyle("-fx-background-radius: 50;");
-        restart_hit.setLayoutX(100);
-        restart_hit.setLayoutY(230);
-        restart_hit.setFont(new Font(14));
+        restart_hit.setLayoutX(-82);
+        restart_hit.setLayoutY(0);
+        restart_hit.setFont(new Font(23));
         restart_hit.setTextFill(Color.ORANGE);
-        restart_hit.setPrefWidth(100);
-        restart_hit.setPrefHeight(10);
+        restart_hit.setPrefWidth(150);
+        restart_hit.setPrefHeight(30);
 
         Button menu=new Button("Main Menu");
         menu.setStyle("-fx-background-radius: 50;");
-        menu.setLayoutX(100);
-        menu.setLayoutY(265);
-        menu.setFont(new Font(14));
+        menu.setLayoutX(-82);
+        menu.setLayoutY(66);
+        menu.setFont(new Font(23));
         menu.setTextFill(Color.ORANGE);
-        menu.setPrefWidth(100);
-        menu.setPrefHeight(10);
-
-        hit.getChildren().addAll(h,use,restart_hit,menu);
+        menu.setPrefWidth(150);
+        menu.setPrefHeight(30);
+        Group g=new Group();
+        g.setLayoutX(155);
+        g.setLayoutY(231);
+        g.getChildren().addAll(use,restart_hit,menu);
+        hit.getChildren().addAll(h,g);
         hit_screen.getStylesheets().add("sample/buttons.css");
         menu.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
