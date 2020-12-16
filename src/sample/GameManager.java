@@ -768,7 +768,11 @@ public class GameManager {
                     }
                 }
                 else{
-                    Alert alert=new Alert(Alert.AlertType.INFORMATION,"No saved games!!!");
+                    Alert alert=new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("WARNING");
+                    alert.setHeaderText("No Saved Games!!!");
+                    alert.setContentText("You haven't saved any games yet");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
                 }
@@ -820,7 +824,10 @@ public class GameManager {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<0+1){
-                    Alert alert=new Alert(Alert.AlertType.WARNING,"This is empty");
+                    Alert alert=new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Empty!!!");
+                    alert.setContentText("This is an empty slot.");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
                 }
@@ -855,7 +862,10 @@ public class GameManager {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<1+1){
-                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    Alert alert=new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Empty!!!");
+                    alert.setContentText("This is an empty slot.");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
                 }
@@ -890,7 +900,10 @@ public class GameManager {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<2+1){
-                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    Alert alert=new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Empty!!!");
+                    alert.setContentText("This is an empty slot.");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
                 }
@@ -924,7 +937,10 @@ public class GameManager {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<3+1){
-                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    Alert alert=new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Empty!!!");
+                    alert.setContentText("This is an empty slot.");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
                 }
@@ -959,7 +975,10 @@ public class GameManager {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<4+1){
-                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    Alert alert=new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Empty!!!");
+                    alert.setContentText("This is an empty slot.");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
                 }
@@ -994,7 +1013,10 @@ public class GameManager {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<5+1) {
-                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    Alert alert=new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Empty!!!");
+                    alert.setContentText("This is an empty slot.");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
                 }

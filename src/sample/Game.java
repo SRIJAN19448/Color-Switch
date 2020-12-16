@@ -11,7 +11,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -249,6 +251,22 @@ public class Game implements Serializable {
                 ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
                 GameManager.getGuiStage().setScene(GameManager.pause_screen);
+            }
+        });
+        GameManager.pausebtn.setOnKeyPressed(new EventHandler<KeyEvent>(){
+
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(keyEvent.getCode()== KeyCode.P){
+                    for (Obstacle i:obstacles){
+                        i.animation_pause();
+                    }
+                    pause_stat=1;
+                    ball.getUp().pause();
+                    ball.getDown().pause();
+//                obstacles.get(1).animation_pause();
+                    GameManager.getGuiStage().setScene(GameManager.pause_screen);
+                }
             }
         });
         GameManager.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -553,6 +571,22 @@ public class Game implements Serializable {
                 GameManager.getGuiStage().setScene(GameManager.pause_screen);
             }
         });
+        GameManager.pausebtn.setOnKeyPressed(new EventHandler<KeyEvent>(){
+
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(keyEvent.getCode()== KeyCode.P){
+                    for (Obstacle i:obstacles){
+                        i.animation_pause();
+                    }
+                    pause_stat=1;
+                    ball.getUp().pause();
+                    ball.getDown().pause();
+//                obstacles.get(1).animation_pause();
+                    GameManager.getGuiStage().setScene(GameManager.pause_screen);
+                }
+            }
+        });
         GameManager.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
             int var=3;
             Label timer;
@@ -636,16 +670,16 @@ public class Game implements Serializable {
         add2.setCycleCount(Timeline.INDEFINITE);
         add2.play();
     }
-    public void pause_game() throws IOException{
-        Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
-        Scene scene2=new Scene(root, 300, 500);
-        scene2.setFill(Color.BLACK);
-        GameManager.getGuiStage().setScene(scene2);
-
-    }
-    public void back(ActionEvent e) {
-
-    }
+//    public void pause_game() throws IOException{
+//        Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
+//        Scene scene2=new Scene(root, 300, 500);
+//        scene2.setFill(Color.BLACK);
+//        GameManager.getGuiStage().setScene(scene2);
+//
+//    }
+//    public void back(ActionEvent e) {
+//
+//    }
     public void hit_detected() throws InterruptedException {
         for (Obstacle i:obstacles){
             i.animation_pause();
@@ -688,6 +722,13 @@ public class Game implements Serializable {
                     GameManager.getGuiStage().setScene(GameManager.play_screen);
                     pause_stat = 0;
                 }
+                else{
+                    Alert alert=new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Not enough stars!!!");
+                    alert.setContentText("You should have atleast 5 stars to use this feature.");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
+                    alert.show();
+                }
 
             }
         });
@@ -720,10 +761,15 @@ public class Game implements Serializable {
         ObjectOutputStream out2=new ObjectOutputStream(new FileOutputStream("load.txt"));
         out2.writeObject(GameManager.load_array);
         out2.close();
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Game saved");
+        alert.setContentText("Your current game has been saved.");
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
+        alert.show();
     }
-    public void restart_game(ActionEvent e){
-
-    }
+//    public void restart_game(ActionEvent e){
+//
+//    }
     public int getScore(){
         return score;
     }
@@ -731,14 +777,14 @@ public class Game implements Serializable {
         this.score=score;
     }
 
-    public void jump(Bounds bounds){
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMinY()+ball.getBall().getRadius())));
-        //timeline.setCycleCount(1);
-        timeline.play();
-    }
-    public void move_ball(Bounds bounds){
-        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(3),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMaxY()-ball.getBall().getRadius())));
-        //timeline.setCycleCount(1);
-        timeline.play();
-    }
+//    public void jump(Bounds bounds){
+//        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMinY()+ball.getBall().getRadius())));
+//        //timeline.setCycleCount(1);
+//        timeline.play();
+//    }
+//    public void move_ball(Bounds bounds){
+//        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(3),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMaxY()-ball.getBall().getRadius())));
+//        //timeline.setCycleCount(1);
+//        timeline.play();
+//    }
 }
