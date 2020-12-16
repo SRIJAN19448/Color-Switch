@@ -21,11 +21,6 @@ public class DoubleRingObs extends Obstacle{
     }
 
     @Override
-    public void passThrough() {
-
-    }
-
-    @Override
     public void create() {
 
         arc[0]=new Arc(80,pos,70,70,0,78);
@@ -97,9 +92,6 @@ public class DoubleRingObs extends Obstacle{
         for(int i=0;i<4;i++) {
             Shape shape = Shape.intersect(ball.getBall(), arc[i]);
             if(shape.getBoundsInLocal().getWidth()!=-1 && arc[i].getStroke()!=ball.getBall().getFill()){
-                System.out.println("width: "+shape.getBoundsInLocal().getWidth());
-                System.out.println("COLORball: "+ball.getBall().getFill());
-                System.out.println("COLOR: "+arc[i].getStroke());
                 System.out.println("Collision detected");
                 timeline.pause();
                 hit.pause();

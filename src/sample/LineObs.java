@@ -26,10 +26,6 @@ public class LineObs extends Obstacle {
         this.orientation = orientation;
     }
 
-    @Override
-    public void passThrough() {
-
-    }
     public void create(){
         line=new Line[8];
         line[0]=new Line(-440,pos,-343,pos);
@@ -96,9 +92,6 @@ public class LineObs extends Obstacle {
         for(int i=0;i<8;i++) {
             Shape shape = Shape.intersect(ball.getBall(), line[i]);
             if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.getBall().getFill()){
-                System.out.println("width: "+shape.getBoundsInLocal().getWidth());
-                System.out.println("COLORball: "+ball.getBall().getFill());
-                System.out.println("COLOR: "+line[i].getStroke());
                 System.out.println("Collision detected");
                 System.out.println("LINEOBS");
                 timeline.pause();

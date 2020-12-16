@@ -1,18 +1,17 @@
 package sample;
 
+import java.io.*;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -23,10 +22,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class Game implements Serializable {
     private transient static Scene scene;
@@ -43,17 +40,15 @@ public class Game implements Serializable {
     private int str_pos;
     private ArrayList<Object> items;
     private int ran;
-//    int flag=1;
     public Game() throws IOException {
-//        this.translate=0;
         this.score=0;
         this.obstacle_pos=250;
         this.clr_pos=100;
         this.str_pos=225;
-        this.canvas=GameManager.play;
+        this.canvas=GameManager.getPlay();
         this.ball=new Ball(150,490,10,this);
         this.pause_stat=0;
-        this.scene=GameManager.play_screen;
+        this.scene=GameManager.getPlay_screen();
         this.obstacles=new ArrayList<>();
         this.clrs=new ArrayList<>();
         this.stars=new ArrayList<>();
@@ -67,10 +62,10 @@ public class Game implements Serializable {
         this.obstacle_pos=ob_ps;
         this.clr_pos=cl_ps;
         this.str_pos=st_ps;
-        this.canvas=GameManager.play;
+        this.canvas=GameManager.getPlay();
         this.ball=new Ball(150,centY,10,this);
         this.pause_stat=0;
-        this.scene=GameManager.play_screen;
+        this.scene=GameManager.getPlay_screen();
         this.clrs=clrs;
         this.stars=stars;
         this.obstacles=obstacles;
@@ -138,10 +133,10 @@ public class Game implements Serializable {
 
         SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
         square.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2, square.getGrp());
 //        DoubleRingObs square=new DoubleRingObs(this.obstacle_pos,this.ball,this);
 //        square.create();
-//        canvas.getChildren().add(canvas.getChildren().size()-2,square.grp);
+//        canvas.getChildren().add(canvas.getChildren().size()-2,square.getGrp());
         this.obstacle_pos-=300;
         Star st=new Star(225,this);
         st.create();
@@ -153,7 +148,7 @@ public class Game implements Serializable {
         this.clr_pos-=300;
         RingObs ring=new RingObs(this.obstacle_pos,this.ball,this);
         ring.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,ring.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2,ring.getGrp());
         this.obstacle_pos-=300;
         Star st1=new Star(-75,this);
         st1.create();
@@ -165,7 +160,7 @@ public class Game implements Serializable {
         this.clr_pos-=300;
 //        CrossObs cross=new CrossObs(this.obstacle_pos,this.ball,this);
 //        cross.create();
-//        canvas.getChildren().add(canvas.getChildren().size()-2,cross.grp);
+//        canvas.getChildren().add(canvas.getChildren().size()-2,cross.getGrp());
 //        this.obstacle_pos-=300;
 //        Star st2=new Star(-375,this);
 //        st2.create();
@@ -177,7 +172,7 @@ public class Game implements Serializable {
 //        this.clr_pos-=300;
         LineObs line=new LineObs(this.obstacle_pos,1,this.ball,this);
         line.create();
-        canvas.getChildren().add(canvas.getChildren().size()-2,line.grp);
+        canvas.getChildren().add(canvas.getChildren().size()-2, line.getGrp());
         this.obstacle_pos-=300;
         Star st3=new Star(-675,this);
         st3.create();
@@ -239,7 +234,7 @@ public class Game implements Serializable {
                     ball.make_move();
             }
         });
-        GameManager.pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.getPausebtn().setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -250,10 +245,10 @@ public class Game implements Serializable {
                 ball.getUp().pause();
                 ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
-                GameManager.getGuiStage().setScene(GameManager.pause_screen);
+                GameManager.getGuiStage().setScene(GameManager.getPause_screen());
             }
         });
-        GameManager.pausebtn.setOnKeyPressed(new EventHandler<KeyEvent>(){
+        GameManager.getPausebtn().setOnKeyPressed(new EventHandler<KeyEvent>(){
 
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -265,22 +260,22 @@ public class Game implements Serializable {
                     ball.getUp().pause();
                     ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
-                    GameManager.getGuiStage().setScene(GameManager.pause_screen);
+                    GameManager.getGuiStage().setScene(GameManager.getPause_screen());
                 }
             }
         });
-        GameManager.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.getBack().setOnMouseClicked(new EventHandler<MouseEvent>(){
             int var=3;
             Label timer;
             @Override
             public void handle(MouseEvent mouseEvent) {
-                GameManager.getGuiStage().setScene(GameManager.play_screen);
+                GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
                 timer=new Label("3");
                 timer.setTextFill(Color.WHITE);
                 timer.setFont(new Font("System Bold Italic",50));
                 timer.setLayoutX(133);
                 timer.setLayoutY(220-translate);
-                GameManager.play.getChildren().add(timer);
+                GameManager.getPlay().getChildren().add(timer);
 
                 Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
                 t.setCycleCount(3);
@@ -296,7 +291,7 @@ public class Game implements Serializable {
                 }
                 else{
                     var=3;
-                    GameManager.play.getChildren().removeAll(timer);
+                    GameManager.getPlay().getChildren().removeAll(timer);
                     for(Obstacle i:obstacles){
                         i.animation_play();
                     }
@@ -307,7 +302,7 @@ public class Game implements Serializable {
             }
         });
 
-        GameManager.save_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -342,7 +337,7 @@ public class Game implements Serializable {
         }
 
         if(rem instanceof Obstacle) {
-            ((Obstacle)rem).hit.stop();
+            ((Obstacle)rem).getHit().stop();
             Random r=new Random();
             int random=r.nextInt(6);
             while(random==ran){
@@ -350,12 +345,12 @@ public class Game implements Serializable {
             }
             ran=random;
             if (random==0) {
-//                ((SquareObs) rem).hit.stop();
+//                ((SquareObs) rem).getHit().stop();
                 SquareObs sq = new SquareObs(this.obstacle_pos, this.ball, this);
                 sq.create();
                 this.obstacle_pos -= 300;
-//                System.out.println("index: "+canvas.getChildren().indexOf(sq.grp));
-                canvas.getChildren().add(canvas.getChildren().size() - 3, sq.grp);
+//                System.out.println("index: "+canvas.getChildren().indexOf(sq.getGrp()));
+                canvas.getChildren().add(canvas.getChildren().size() - 3, sq.getGrp());
                 items.add(sq);
                 obstacles.add(sq);
                 Star st = new Star(this.str_pos,this);
@@ -371,11 +366,11 @@ public class Game implements Serializable {
                 items.add(clr);
                 clrs.add(clr);
             } else if (random==1) {
-//                ((RingObs) rem).hit.stop();
+//                ((RingObs) rem).getHit().stop();
                 RingObs ri = new RingObs(this.obstacle_pos, this.ball, this);
                 ri.create();
                 this.obstacle_pos -= 300;
-                canvas.getChildren().add(canvas.getChildren().size() - 3, ri.grp);
+                canvas.getChildren().add(canvas.getChildren().size() - 3, ri.getGrp());
                 items.add(ri);
                 obstacles.add(ri);
                 Star st = new Star(this.str_pos,this);
@@ -391,11 +386,11 @@ public class Game implements Serializable {
                 items.add(clr);
                 clrs.add(clr);
             } else if (random==2) {
-//                ((CrossObs) rem).hit.stop();
+//                ((CrossObs) rem).getHit().stop();
                 CrossObs cr = new CrossObs(this.obstacle_pos, this.ball, this);
                 cr.create();
                 this.obstacle_pos -= 300;
-                canvas.getChildren().add(canvas.getChildren().size() - 3, cr.grp);
+                canvas.getChildren().add(canvas.getChildren().size() - 3, cr.getGrp());
                 items.add(cr);
                 obstacles.add(cr);
                 Star st = new Star(this.str_pos,this);
@@ -411,11 +406,11 @@ public class Game implements Serializable {
                 items.add(clr);
                 clrs.add(clr);
             } else if (random==3) {
-//                ((LineObs) rem).hit.stop();
+//                ((LineObs) rem).getHit().stop();
                 LineObs li = new LineObs(this.obstacle_pos, 1, this.ball, this);
                 li.create();
                 this.obstacle_pos -= 300;
-                canvas.getChildren().add(canvas.getChildren().size() - 3, li.grp);
+                canvas.getChildren().add(canvas.getChildren().size() - 3, li.getGrp());
                 items.add(li);
                 obstacles.add(li);
                 Star st = new Star(this.str_pos, this);
@@ -435,7 +430,7 @@ public class Game implements Serializable {
                 DoubleCrossObs dc=new DoubleCrossObs(this.obstacle_pos, this.ball, this);
                 dc.create();
                 this.obstacle_pos -= 300;
-                canvas.getChildren().add(canvas.getChildren().size() - 3, dc.grp);
+                canvas.getChildren().add(canvas.getChildren().size() - 3, dc.getGrp());
                 items.add(dc);
                 obstacles.add(dc);
                 Star st = new Star(this.str_pos, this);
@@ -455,7 +450,7 @@ public class Game implements Serializable {
                 DoubleRingObs dr=new DoubleRingObs(this.obstacle_pos, this.ball, this);
                 dr.create();
                 this.obstacle_pos -= 300;
-                canvas.getChildren().add(canvas.getChildren().size() - 3, dr.grp);
+                canvas.getChildren().add(canvas.getChildren().size() - 3, dr.getGrp());
                 items.add(dr);
                 obstacles.add(dr);
                 Star st = new Star(this.str_pos, this);
@@ -489,42 +484,42 @@ public class Game implements Serializable {
                 ((SquareObs)i).create();
                 obs.add(((SquareObs)i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((SquareObs)i).getGrp());
             }
             else if(i instanceof RingObs){
                 i=new RingObs((((RingObs) i).getPos()), this.ball,this);
                 ((RingObs) i).create();
                 obs.add(((RingObs) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((RingObs) i).getGrp());
             }
             else if(i instanceof CrossObs){
                 i=new CrossObs((((CrossObs) i).getPos()), this.ball,this);
                 ((CrossObs) i).create();
                 obs.add(((CrossObs) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((CrossObs) i).getGrp());
             }
             else if(i instanceof LineObs){
                 i=new LineObs((((LineObs) i).getPos()),((LineObs) i).getOrientation(), this.ball,this);
                 ((LineObs) i).create();
                 obs.add(((LineObs) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((LineObs) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((LineObs) i).getGrp());
             }
             else if(i instanceof DoubleRingObs){
                 i=new DoubleRingObs((((DoubleRingObs) i).getPos()), this.ball,this);
                 ((DoubleRingObs) i).create();
                 obs.add(((DoubleRingObs) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((DoubleRingObs) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((DoubleRingObs) i).getGrp());
             }
             else if(i instanceof DoubleCrossObs){
                 i=new DoubleCrossObs((((DoubleCrossObs) i).getPos()), this.ball,this);
                 ((DoubleCrossObs) i).create();
                 obs.add(((DoubleCrossObs) i));
                 itms.add(i);
-                canvas.getChildren().add(canvas.getChildren().size()-3,((DoubleCrossObs) i).grp);
+                canvas.getChildren().add(canvas.getChildren().size()-3,((DoubleCrossObs) i).getGrp());
             }
             else if(i instanceof ColorChanger){
 
@@ -557,7 +552,7 @@ public class Game implements Serializable {
                     ball.make_move();
             }
         });
-        GameManager.pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.getPausebtn().setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -568,10 +563,10 @@ public class Game implements Serializable {
                 ball.getUp().pause();
                 ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
-                GameManager.getGuiStage().setScene(GameManager.pause_screen);
+                GameManager.getGuiStage().setScene(GameManager.getPause_screen());
             }
         });
-        GameManager.pausebtn.setOnKeyPressed(new EventHandler<KeyEvent>(){
+        GameManager.getPausebtn().setOnKeyPressed(new EventHandler<KeyEvent>(){
 
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -583,22 +578,22 @@ public class Game implements Serializable {
                     ball.getUp().pause();
                     ball.getDown().pause();
 //                obstacles.get(1).animation_pause();
-                    GameManager.getGuiStage().setScene(GameManager.pause_screen);
+                    GameManager.getGuiStage().setScene(GameManager.getPause_screen());
                 }
             }
         });
-        GameManager.back.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.getBack().setOnMouseClicked(new EventHandler<MouseEvent>(){
             int var=3;
             Label timer;
             @Override
             public void handle(MouseEvent mouseEvent) {
-                GameManager.getGuiStage().setScene(GameManager.play_screen);
+                GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
                 timer=new Label("3");
                 timer.setTextFill(Color.WHITE);
                 timer.setFont(new Font("System Bold Italic",50));
                 timer.setLayoutX(133);
                 timer.setLayoutY(220-translate);
-                GameManager.play.getChildren().add(timer);
+                GameManager.getPlay().getChildren().add(timer);
 
                 Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
                 t.setCycleCount(3);
@@ -614,7 +609,7 @@ public class Game implements Serializable {
                 }
                 else{
                     var=3;
-                    GameManager.play.getChildren().removeAll(timer);
+                    GameManager.getPlay().getChildren().removeAll(timer);
                     for(Obstacle i:obstacles){
                         i.animation_play();
                     }
@@ -624,7 +619,7 @@ public class Game implements Serializable {
                 }
             }
         });
-        GameManager.save_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -657,8 +652,8 @@ public class Game implements Serializable {
 //            i.strs=strs;
 //        }
 //        System.out.println(this.ball.getCenterY());
-        GameManager.scr.setText(String.valueOf(this.score));
-        GameManager.getGuiStage().setScene(GameManager.play_screen);
+        GameManager.getScr().setText(String.valueOf(this.score));
+        GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
 //        this.ball.getDown().play();
         Timeline add2=new Timeline(new KeyFrame(Duration.millis(10),e-> {
             try {
@@ -690,7 +685,7 @@ public class Game implements Serializable {
         over.setFont(new Font("System Bold Italic",50));
         over.setLayoutX(25);
         over.setLayoutY(220-translate);
-        GameManager.play.getChildren().add(over);
+        GameManager.getPlay().getChildren().add(over);
 //        TimeUnit.SECONDS.sleep(2);
 //        GameManager.play.getChildren().remove(over);
         Timeline t=new Timeline(new KeyFrame(Duration.millis(1500)));
@@ -700,31 +695,35 @@ public class Game implements Serializable {
 
             @Override
             public void handle(ActionEvent actionEvent) {
-                GameManager.play.getChildren().remove(over);
-                GameManager.getGuiStage().setScene(GameManager.hit_screen);
+                GameManager.getPlay().getChildren().remove(over);
+                GameManager.getGuiStage().setScene(GameManager.getHit_screen());
 //                t.stop();
             }
         });
 
 
-        GameManager.use.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        GameManager.getUse().setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(score>=5) {
                     score -= 5;
-                    GameManager.scr.setText(String.valueOf(score));
+                    GameManager.getScr().setText(String.valueOf(score));
                     ball.getBall().setCenterY(ball.getBall().getCenterY() + 100);
                     for (Obstacle i : obstacles) {
                         i.animation_play();
-                        i.hit.play();
+                        i.getHit().play();
                     }
-                    GameManager.getGuiStage().setScene(GameManager.play_screen);
+                    GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
                     pause_stat = 0;
                 }
                 else{
                     Alert alert=new Alert(Alert.AlertType.WARNING);
-                    alert.setHeaderText("Not enough stars!!!");
+                    ImageView icon=new ImageView("insuf.png");
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48);
+                    alert.getDialogPane().setGraphic(icon);
+                    alert.setHeaderText("Insufficient stars!!!");
                     alert.setContentText("You should have atleast 5 stars to use this feature.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
@@ -736,10 +735,10 @@ public class Game implements Serializable {
 
     public void save_game() throws IOException {
         int name_offset;
-        if(GameManager.load_array.size()==0)
-            name_offset=GameManager.load_array.size()+1;
+        if(GameManager.getLoad_array().size()==0)
+            name_offset=GameManager.getLoad_array().size()+1;
         else {
-            String name=GameManager.load_array.get(GameManager.load_array.size()-1);
+            String name=GameManager.getLoad_array().get(GameManager.getLoad_array().size()-1);
             String sub=name.substring(5,name.length()-4);
             System.out.println(sub);
             name_offset =Integer.valueOf(sub)+1;
@@ -752,16 +751,20 @@ public class Game implements Serializable {
         this.ball.setCenterY(this.ball.getBall().getCenterY());
         out.writeObject(this);
         out.close();
-        GameManager.load_array.add(save_name);
-        if(GameManager.load_array.size()>6){
-            File f=new File(GameManager.load_array.get(0));
+        GameManager.getLoad_array().add(save_name);
+        if(GameManager.getLoad_array().size()>6){
+            File f=new File(GameManager.getLoad_array().get(0));
             f.delete();
-            GameManager.load_array.remove(0);
+            GameManager.getLoad_array().remove(0);
         }
         ObjectOutputStream out2=new ObjectOutputStream(new FileOutputStream("load.txt"));
-        out2.writeObject(GameManager.load_array);
+        out2.writeObject(GameManager.getLoad_array());
         out2.close();
         Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        ImageView icon=new ImageView("save_icon.png");
+        icon.setFitHeight(48);
+        icon.setFitWidth(48);
+        alert.getDialogPane().setGraphic(icon);
         alert.setHeaderText("Game saved");
         alert.setContentText("Your current game has been saved.");
         alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());

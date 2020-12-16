@@ -20,10 +20,6 @@ public class CrossObs extends Obstacle {
         this.line=new Line[4];
         this.pivot=new Circle();
     }
-    @Override
-    public void passThrough() {
-
-    }
 
     public void create(){
         length=80;
@@ -81,9 +77,6 @@ public class CrossObs extends Obstacle {
         for(int i=0;i<4;i++) {
             Shape shape = Shape.intersect(ball.getBall(), line[i]);
             if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.getBall().getFill()){
-                System.out.println("width: "+shape.getBoundsInLocal().getWidth());
-                System.out.println("COLORball: "+ball.getBall().getFill());
-                System.out.println("COLOR: "+line[i].getStroke());
                 System.out.println("Collision detected");
                 System.out.println("CROSSOBS");
                 timeline.pause();

@@ -2,7 +2,6 @@ package sample;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
@@ -16,10 +15,6 @@ public class TriangleObs extends Obstacle{
         super(ball,g,pos);
         line=new Line[3];
         degree=new int[3];
-    }
-    @Override
-    public void passThrough() {
-
     }
 
     public void create(){

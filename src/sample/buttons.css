@@ -1,0 +1,19 @@
+.button{
+    -fx-background-radius: 50;
+    -fx-background-color: PURPLE;
+    -fx-text-fill: #ffd55a;
+}
+.button:hover{
+    -fx-background-color: #ffd55a;
+    -fx-text-fill: PURPLE;
+}
+.button#back{
+    -fx-background-radius: 50;
+    -fx-background-color: #35C54D;
+    -fx-text-fill: #ffd55a;
+}
+.button#back:hover{
+    -fx-background-radius: 50;
+    -fx-background-color: #ffd55a;
+    -fx-text-fill: #35C54D;
+}

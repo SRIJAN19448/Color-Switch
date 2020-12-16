@@ -18,10 +18,7 @@ public class RingObs extends Obstacle{
         super(ball,g,pos);
         arc=new Arc[4];
     }
-    @Override
-    public void passThrough() {
 
-    }
     public void create(){
         arc=new Arc[4];
 
@@ -70,9 +67,6 @@ public class RingObs extends Obstacle{
         for(int i=0;i<4;i++) {
             Shape shape = Shape.intersect(ball.getBall(), arc[i]);
             if(shape.getBoundsInLocal().getWidth()!=-1 && arc[i].getStroke()!=ball.getBall().getFill()){
-                System.out.println("width: "+shape.getBoundsInLocal().getWidth());
-                System.out.println("COLORball: "+ball.getBall().getFill());
-                System.out.println("COLOR: "+arc[i].getStroke());
                 System.out.println("Collision detected");
                 timeline.pause();
                 hit.pause();

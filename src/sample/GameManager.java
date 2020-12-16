@@ -1,5 +1,7 @@
 package sample;
 
+import java.io.*;
+import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -10,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -24,17 +28,16 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.*;
-import java.util.ArrayList;
+
 
 public class GameManager {
 
 
-    public static Scene main_screen,load_screen,play_screen,hit_screen,pause_screen;
-    public static Pane main,load,play,hit,pause;
-    public static Button new_game,load_game,exit,saves[],pausebtn,use,restart_hit,save_game,restart_pause,back;
-    public static Label scr;
-    public static ArrayList<String> load_array;
+    private static Scene main_screen,load_screen,play_screen,hit_screen,pause_screen;
+    private static Pane main,load,play,hit,pause;
+    private static Button new_game,load_game,exit,saves[],pausebtn,use,restart_hit,save_game,restart_pause,back;
+    private static Label scr;
+    private static ArrayList<String> load_array;
     private static Game game;
     private static Stage guiStage;
 
@@ -64,6 +67,94 @@ public class GameManager {
 
     public static Stage getGuiStage() {
         return guiStage;
+    }
+
+    public static ArrayList<String> getLoad_array() {
+        return load_array;
+    }
+
+    public static Label getScr() {
+        return scr;
+    }
+
+    public static Button getNew_game() {
+        return new_game;
+    }
+
+    public static Button getLoad_game() {
+        return load_game;
+    }
+
+    public static Button getExit() {
+        return exit;
+    }
+
+    public static Button[] getSaves() {
+        return saves;
+    }
+
+    public static Button getPausebtn() {
+        return pausebtn;
+    }
+
+    public static Button getUse() {
+        return use;
+    }
+
+    public static Button getRestart_hit() {
+        return restart_hit;
+    }
+
+    public static Button getSave_game() {
+        return save_game;
+    }
+
+    public static Button getRestart_pause() {
+        return restart_pause;
+    }
+
+    public static Button getBack() {
+        return back;
+    }
+
+    public static Pane getMain() {
+        return main;
+    }
+
+    public static Pane getLoad() {
+        return load;
+    }
+
+    public static Pane getPlay() {
+        return play;
+    }
+
+    public static Pane getHit() {
+        return hit;
+    }
+
+    public static Pane getPause() {
+        return pause;
+    }
+
+    public static Scene getMain_screen() {
+        return main_screen;
+    }
+
+    public static Scene getLoad_screen() {
+        return load_screen;
+    }
+
+    public static Scene getPlay_screen() {
+        return play_screen;
+    }
+
+    public static Scene getHit_screen() {
+        return hit_screen;
+    }
+
+    public static Scene getPause_screen() {
+        return pause_screen;
     }
 
     public static void new_game() throws IOException {
@@ -131,7 +222,7 @@ public class GameManager {
         arcs2[3]=new Arc(0,0,95,95,270,90);
         arcs2[3].setStrokeWidth(10);
         arcs2[3].setType(ArcType.OPEN);
-        arcs2[3].setStroke(Color.web("#12bcde"));
+        arcs2[3].setStroke(Color.ORANGE);
         arcs2[3].setStrokeLineCap(StrokeLineCap.ROUND);
         g2.getChildren().addAll(arcs2);
 
@@ -140,7 +231,7 @@ public class GameManager {
         save_game.setLayoutX(-47.0);
         save_game.setLayoutY(-74.0);
         save_game.setFont(new Font(14));
-        save_game.setTextFill(Color.web("#9f1818"));
+        save_game.setTextFill(Color.ORANGE);
         save_game.setPrefWidth(100);
         save_game.setPrefHeight(30);
 
@@ -149,7 +240,7 @@ public class GameManager {
         restart_pause.setLayoutX(-47.0);
         restart_pause.setLayoutY(-37.0);
         restart_pause.setFont(new Font(14));
-        restart_pause.setTextFill(Color.web("#9f1818"));
+        restart_pause.setTextFill(Color.ORANGE);
         restart_pause.setPrefWidth(100);
         restart_pause.setPrefHeight(30);
 
@@ -158,7 +249,7 @@ public class GameManager {
         main_menu.setLayoutX(-47.0);
         main_menu.setLayoutY(37.0);
         main_menu.setFont(new Font(14));
-        main_menu.setTextFill(Color.web("#9f1818"));
+        main_menu.setTextFill(Color.ORANGE);
         main_menu.setPrefWidth(100);
         main_menu.setPrefHeight(30);
 
@@ -167,11 +258,12 @@ public class GameManager {
         back.setLayoutX(-47.0);
         back.setLayoutY(0);
         back.setFont(new Font(14));
-        back.setTextFill(Color.web("#9f1818"));
+        back.setTextFill(Color.ORANGE);
         back.setPrefWidth(100);
         back.setPrefHeight(30);
         g2.getChildren().addAll(save_game,restart_pause,back,main_menu);
         pause.getChildren().addAll(label,g1,g2);
+        pause_screen.getStylesheets().add("sample/buttons.css");
 
         //listener of main_menu
         main_menu.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -232,7 +324,7 @@ public class GameManager {
         use.setLayoutX(100);
         use.setLayoutY(195);
         use.setFont(new Font(14));
-        use.setTextFill(Color.web("#9f1818"));
+        use.setTextFill(Color.ORANGE);
         use.setPrefWidth(100);
         use.setPrefHeight(10);
 
@@ -241,7 +333,7 @@ public class GameManager {
         restart_hit.setLayoutX(100);
         restart_hit.setLayoutY(230);
         restart_hit.setFont(new Font(14));
-        restart_hit.setTextFill(Color.web("#9f1818"));
+        restart_hit.setTextFill(Color.ORANGE);
         restart_hit.setPrefWidth(100);
         restart_hit.setPrefHeight(10);
 
@@ -250,12 +342,12 @@ public class GameManager {
         menu.setLayoutX(100);
         menu.setLayoutY(265);
         menu.setFont(new Font(14));
-        menu.setTextFill(Color.web("#9f1818"));
+        menu.setTextFill(Color.ORANGE);
         menu.setPrefWidth(100);
         menu.setPrefHeight(10);
 
         hit.getChildren().addAll(h,use,restart_hit,menu);
-
+        hit_screen.getStylesheets().add("sample/buttons.css");
         menu.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
@@ -320,56 +412,56 @@ public class GameManager {
         saves=new Button[6];
 
         saves[0]=new Button("Saved Game 1");
-        saves[0].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[0].setStyle("-fx-background-radius: 50;");
         saves[0].setLayoutX(187);
         saves[0].setLayoutY(108);
         saves[0].setFont(new Font(25));
-        saves[0].setTextFill(Color.web("#fc0101"));
+        saves[0].setTextFill(Color.ORANGE);
         saves[0].setPrefWidth(225);
         saves[0].setPrefHeight(15);
 
         saves[1]=new Button("Saved Game 2");
-        saves[1].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[1].setStyle("-fx-background-radius: 50;");
         saves[1].setLayoutX(187);
         saves[1].setLayoutY(167);
         saves[1].setFont(new Font(25));
-        saves[1].setTextFill(Color.web("#fc0101"));
+        saves[1].setTextFill(Color.ORANGE);
         saves[1].setPrefWidth(225);
         saves[1].setPrefHeight(15);
 
         saves[2]=new Button("Saved Game 3");
-        saves[2].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[2].setStyle("-fx-background-radius: 50;");
         saves[2].setLayoutX(187);
         saves[2].setLayoutY(226);
         saves[2].setFont(new Font(25));
-        saves[2].setTextFill(Color.web("#fc0101"));
+        saves[2].setTextFill(Color.ORANGE);
         saves[2].setPrefWidth(225);
         saves[2].setPrefHeight(15);
 
         saves[3]=new Button("Saved Game 4");
-        saves[3].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[3].setStyle("-fx-background-radius: 50;");
         saves[3].setLayoutX(187);
         saves[3].setLayoutY(285);
         saves[3].setFont(new Font(25));
-        saves[3].setTextFill(Color.web("#fc0101"));
+        saves[3].setTextFill(Color.ORANGE);
         saves[3].setPrefWidth(225);
         saves[3].setPrefHeight(15);
 
         saves[4]=new Button("Saved Game 5");
-        saves[4].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[4].setStyle("-fx-background-radius: 50;");
         saves[4].setLayoutX(187);
         saves[4].setLayoutY(344);
         saves[4].setFont(new Font(25));
-        saves[4].setTextFill(Color.web("#fc0101"));
+        saves[4].setTextFill(Color.ORANGE);
         saves[4].setPrefWidth(225);
         saves[4].setPrefHeight(15);
 
         saves[5]=new Button("Saved Game 6");
-        saves[5].setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        saves[5].setStyle("-fx-background-radius: 50;");
         saves[5].setLayoutX(187);
         saves[5].setLayoutY(403);
         saves[5].setFont(new Font(25));
-        saves[5].setTextFill(Color.web("#fc0101"));
+        saves[5].setTextFill(Color.ORANGE);
         saves[5].setPrefWidth(225);
         saves[5].setPrefHeight(15);
 
@@ -381,10 +473,10 @@ public class GameManager {
         back.setTextFill(Color.web("#9f1818"));
         back.setPrefWidth(100);
         back.setPrefHeight(15);
-
+        back.setId("back");
         load.getChildren().addAll(save,back);
         load.getChildren().addAll(saves);
-
+        load_screen.getStylesheets().add("sample/buttons.css");
         back.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
@@ -704,34 +796,34 @@ public class GameManager {
 
 
         new_game=new Button("New Game");
-        new_game.setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        new_game.setStyle("-fx-background-radius: 50;");
         new_game.setLayoutX(240);
         new_game.setLayoutY(238);
         new_game.setFont(new Font(18));
-        new_game.setTextFill(Color.web("#fc0101"));
+        new_game.setTextFill(Color.ORANGE);
         new_game.setPrefWidth(150);
         new_game.setPrefHeight(40);
 
         load_game=new Button("Load Game");
-        load_game.setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        load_game.setStyle("-fx-background-radius: 50;");
         load_game.setLayoutX(240);
         load_game.setLayoutY(288);
         load_game.setFont(new Font(18));
-        load_game.setTextFill(Color.web("#fc0101"));
+        load_game.setTextFill(Color.ORANGE);
         load_game.setPrefWidth(150);
         load_game.setPrefHeight(40);
 
         exit=new Button("Exit");
-        exit.setStyle("-fx-background-radius: 50;-fx-background-color:#4CAF50;");
+        exit.setStyle("-fx-background-radius: 50;");
         exit.setLayoutX(240);
         exit.setLayoutY(338);
         exit.setFont(new Font(18));
-        exit.setTextFill(Color.web("#fc0101"));
+        exit.setTextFill(Color.ORANGE);
         exit.setPrefWidth(150);
         exit.setPrefHeight(40);
 
         main.getChildren().addAll(c,l,rest,new_game,load_game,exit,g1,g2,g3,g4);
-
+        main_screen.getStylesheets().add("sample/buttons.css");
 
 
     }
@@ -739,7 +831,7 @@ public class GameManager {
     public void start_game(Stage primaryStage){
         primaryStage.setScene(main_screen);
         primaryStage.show();
-        new_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        new_game.setOnMouseReleased(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -825,6 +917,10 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<0+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
+                    ImageView icon=new ImageView("empty_icon.jpg");
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48);
+                    alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
                     alert.setContentText("This is an empty slot.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
@@ -863,6 +959,10 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<1+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
+                    ImageView icon=new ImageView("empty_icon.jpg");
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48);
+                    alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
                     alert.setContentText("This is an empty slot.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
@@ -901,6 +1001,10 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<2+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
+                    ImageView icon=new ImageView("empty_icon.jpg");
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48);
+                    alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
                     alert.setContentText("This is an empty slot.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
@@ -938,6 +1042,10 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<3+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
+                    ImageView icon=new ImageView("empty_icon.jpg");
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48);
+                    alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
                     alert.setContentText("This is an empty slot.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
@@ -976,6 +1084,10 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<4+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
+                    ImageView icon=new ImageView("empty_icon.jpg");
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48);
+                    alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
                     alert.setContentText("This is an empty slot.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
@@ -1014,6 +1126,10 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(load_array.size()<5+1) {
                     Alert alert=new Alert(Alert.AlertType.WARNING);
+                    ImageView icon=new ImageView("empty_icon.jpg");
+                    icon.setFitHeight(48);
+                    icon.setFitWidth(48);
+                    alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
                     alert.setContentText("This is an empty slot.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());

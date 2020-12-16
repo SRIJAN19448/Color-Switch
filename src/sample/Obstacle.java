@@ -2,7 +2,6 @@ package sample;
 
 import javafx.animation.Timeline;
 import javafx.scene.Group;
-
 import java.io.Serializable;
 
 public abstract class Obstacle implements Serializable {
@@ -12,13 +11,7 @@ public abstract class Obstacle implements Serializable {
     protected transient Group grp;
     protected transient Timeline timeline;
     protected transient Timeline hit;
-    public abstract void passThrough();
-    public void animation_pause(){
-        timeline.pause();
-    }
-    public void animation_play(){
-        timeline.play();
-    }
+
     Obstacle(Ball ball,Game g,double pos){
         this.grp=new Group();
         this.ball=ball;
@@ -28,8 +21,34 @@ public abstract class Obstacle implements Serializable {
         this.hit=new Timeline();
     }
 
+    public Ball getBall() {
+        return ball;
+    }
+
+    public Game getG() {
+        return g;
+    }
+
     public double getPos() {
         return pos;
+    }
+
+    public Group getGrp() {
+        return grp;
+    }
+
+    public Timeline getTimeline() {
+        return timeline;
+    }
+
+    public Timeline getHit() {
+        return hit;
+    }
+    public void animation_pause(){
+        timeline.pause();
+    }
+    public void animation_play(){
+        timeline.play();
     }
 
     public abstract void create();
