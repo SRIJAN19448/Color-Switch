@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -766,6 +767,11 @@ public class GameManager {
                         e.printStackTrace();
                     }
                 }
+                else{
+                    Alert alert=new Alert(Alert.AlertType.INFORMATION,"No saved games!!!");
+                    alert.show();
+                    return;
+                }
             }
         });
         exit.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -806,15 +812,18 @@ public class GameManager {
 
 
     public static void load_game() throws IOException, ClassNotFoundException {
-        if(load_array.size()==0)
-            return;
+//        if(load_array.size()==0)
+//            return;
 
         saves[0].setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(load_array.size()<0+1)
+                if(load_array.size()<0+1){
+                    Alert alert=new Alert(Alert.AlertType.WARNING,"This is empty");
+                    alert.show();
                     return;
+                }
                 ObjectInputStream in= null;
                 try {
                     in = new ObjectInputStream(new FileInputStream(load_array.get(0)));
@@ -845,8 +854,11 @@ public class GameManager {
 
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(load_array.size()<1+1)
+                if(load_array.size()<1+1){
+                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    alert.show();
                     return;
+                }
                 ObjectInputStream in= null;
                 try {
                     in = new ObjectInputStream(new FileInputStream(load_array.get(1)));
@@ -877,8 +889,11 @@ public class GameManager {
 
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(load_array.size()<2+1)
+                if(load_array.size()<2+1){
+                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    alert.show();
                     return;
+                }
                 ObjectInputStream in= null;
                 try {
                     in = new ObjectInputStream(new FileInputStream(load_array.get(2)));
@@ -908,8 +923,11 @@ public class GameManager {
 
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(load_array.size()<3+1)
+                if(load_array.size()<3+1){
+                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    alert.show();
                     return;
+                }
                 ObjectInputStream in= null;
                 try {
                     in = new ObjectInputStream(new FileInputStream(load_array.get(3)));
@@ -940,8 +958,11 @@ public class GameManager {
 
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(load_array.size()<4+1)
+                if(load_array.size()<4+1){
+                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    alert.show();
                     return;
+                }
                 ObjectInputStream in= null;
                 try {
                     in = new ObjectInputStream(new FileInputStream(load_array.get(4)));
@@ -972,8 +993,11 @@ public class GameManager {
 
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(load_array.size()<5+1)
+                if(load_array.size()<5+1) {
+                    Alert alert=new Alert(Alert.AlertType.WARNING,"Empty Slot!!!");
+                    alert.show();
                     return;
+                }
                 ObjectInputStream in= null;
                 try {
                     in = new ObjectInputStream(new FileInputStream(load_array.get(5)));
