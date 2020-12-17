@@ -59,7 +59,7 @@ public class GameManager {
             out.close();
         }
         make_main();
-        make_load();
+//        make_load();
         make_play();
         make_hit();
         make_pause();
@@ -403,6 +403,7 @@ public class GameManager {
     }
 
     public static void make_load(){
+        System.out.println("save size:"+save_games.size());
         load=new Pane();
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
         Background background=new Background(background_fill);
@@ -416,58 +417,72 @@ public class GameManager {
 
         saves=new Button[6];
 
-        saves[0]=new Button("Saved Game 1");
+        saves[0]=new Button("Slot 1");
+        if(save_games.size()>0) {
+            saves[0].setText(save_games.get(0).getGameName());
+            System.out.println("TRUE");
+        }
         saves[0].setStyle("-fx-background-radius: 50;");
-        saves[0].setLayoutX(187);
+        saves[0].setLayoutX(159);
         saves[0].setLayoutY(108);
         saves[0].setFont(new Font(25));
         saves[0].setTextFill(Color.ORANGE);
-        saves[0].setPrefWidth(225);
+        saves[0].setPrefWidth(270);
         saves[0].setPrefHeight(15);
 
-        saves[1]=new Button("Saved Game 2");
+        saves[1]=new Button("Slot 2");
+        if(save_games.size()>1)
+            saves[1].setText(save_games.get(1).getGameName());
         saves[1].setStyle("-fx-background-radius: 50;");
-        saves[1].setLayoutX(187);
+        saves[1].setLayoutX(159);
         saves[1].setLayoutY(167);
         saves[1].setFont(new Font(25));
         saves[1].setTextFill(Color.ORANGE);
-        saves[1].setPrefWidth(225);
+        saves[1].setPrefWidth(270);
         saves[1].setPrefHeight(15);
 
-        saves[2]=new Button("Saved Game 3");
+        saves[2]=new Button("Slot 3");
+        if(save_games.size()>2)
+            saves[2].setText(save_games.get(2).getGameName());
         saves[2].setStyle("-fx-background-radius: 50;");
-        saves[2].setLayoutX(187);
+        saves[2].setLayoutX(159);
         saves[2].setLayoutY(226);
         saves[2].setFont(new Font(25));
         saves[2].setTextFill(Color.ORANGE);
-        saves[2].setPrefWidth(225);
+        saves[2].setPrefWidth(270);
         saves[2].setPrefHeight(15);
 
-        saves[3]=new Button("Saved Game 4");
+        saves[3]=new Button("Slot 4");
+        if(save_games.size()>3)
+            saves[3].setText(save_games.get(3).getGameName());
         saves[3].setStyle("-fx-background-radius: 50;");
-        saves[3].setLayoutX(187);
+        saves[3].setLayoutX(159);
         saves[3].setLayoutY(285);
         saves[3].setFont(new Font(25));
         saves[3].setTextFill(Color.ORANGE);
-        saves[3].setPrefWidth(225);
+        saves[3].setPrefWidth(270);
         saves[3].setPrefHeight(15);
 
-        saves[4]=new Button("Saved Game 5");
+        saves[4]=new Button("Slot 5");
+        if(save_games.size()>4)
+            saves[4].setText(save_games.get(4).getGameName());
         saves[4].setStyle("-fx-background-radius: 50;");
-        saves[4].setLayoutX(187);
+        saves[4].setLayoutX(159);
         saves[4].setLayoutY(344);
         saves[4].setFont(new Font(25));
         saves[4].setTextFill(Color.ORANGE);
-        saves[4].setPrefWidth(225);
+        saves[4].setPrefWidth(270);
         saves[4].setPrefHeight(15);
 
-        saves[5]=new Button("Saved Game 6");
+        saves[5]=new Button("Slot 6");
+        if(save_games.size()>5)
+            saves[5].setText(save_games.get(5).getGameName());
         saves[5].setStyle("-fx-background-radius: 50;");
-        saves[5].setLayoutX(187);
+        saves[5].setLayoutX(159);
         saves[5].setLayoutY(403);
         saves[5].setFont(new Font(25));
         saves[5].setTextFill(Color.ORANGE);
-        saves[5].setPrefWidth(225);
+        saves[5].setPrefWidth(270);
         saves[5].setPrefHeight(15);
 
         Button back=new Button("Back");
@@ -846,6 +861,7 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 System.out.println("size: "+save_games.size());
                 if(save_games.size()!=0) {
+                    make_load();
                     guiStage.setScene(load_screen);
                     try {
                         make_play();

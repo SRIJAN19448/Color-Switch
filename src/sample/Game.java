@@ -22,7 +22,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class Game implements Serializable {
@@ -42,6 +45,7 @@ public class Game implements Serializable {
     private int ran;
     private int count;
     private int difficulty;
+    private String gameName;
     public Game() throws IOException {
         this.score=0;
         this.obstacle_pos=250;
@@ -56,6 +60,7 @@ public class Game implements Serializable {
         this.stars=new ArrayList<>();
         this.items=new ArrayList<>();
         this.ran=3;
+        this.gameName="";
 
     }
     public Game(int score,ArrayList<ColorChanger> clrs,ArrayList<Star> stars,ArrayList<Obstacle> obstacles,ArrayList<Object> item,double centY,double trans,int ob_ps,int cl_ps,int st_ps,int difficulty){
@@ -139,6 +144,10 @@ public class Game implements Serializable {
         this.score=score;
     }
 
+    public String getGameName() {
+        return gameName;
+    }
+
     public void new_game() throws IOException {
 
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
@@ -211,109 +220,6 @@ public class Game implements Serializable {
         stars.add(st1);
         stars.add(st3);
         ball.create(canvas);
-        for(Node n:canvas.getChildren()){
-
-            Bounds s=n.getBoundsInLocal();
-        }
-//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                if(pause_stat==0)
-//                    ball.make_jump();
-//            }
-//        });
-//        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                if(pause_stat==0)
-//                    ball.make_move();
-//            }
-//        });
-//        GameManager.getPausebtn().setOnMouseClicked(new EventHandler<MouseEvent>(){
-//
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                for (Obstacle i:obstacles){
-//                    i.animation_pause();
-//                }
-//                pause_stat=1;
-//                ball.getUp().pause();
-//                ball.getDown().pause();
-//                GameManager.getGuiStage().setScene(GameManager.getPause_screen());
-//            }
-//        });
-//        GameManager.getPausebtn().setOnKeyPressed(new EventHandler<KeyEvent>(){
-//
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                if(keyEvent.getCode()== KeyCode.P){
-//                    for (Obstacle i:obstacles){
-//                        i.animation_pause();
-//                    }
-//                    pause_stat=1;
-//                    ball.getUp().pause();
-//                    ball.getDown().pause();
-//                    GameManager.getGuiStage().setScene(GameManager.getPause_screen());
-//                }
-//            }
-//        });
-//        GameManager.getBack().setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            int var=3;
-//            Label timer;
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
-//                timer=new Label("3");
-//                timer.setTextFill(Color.WHITE);
-//                timer.setFont(new Font("System Bold Italic",50));
-//                timer.setLayoutX(133);
-//                timer.setLayoutY(220-translate);
-//                GameManager.getPlay().getChildren().add(timer);
-//
-//                Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
-//                t.setCycleCount(3);
-//                t.play();
-//
-//            }
-//
-//            public void times() {
-//                if(var!=1){
-//                    var--;
-//                    timer.setText(String.valueOf(var));
-//
-//                }
-//                else{
-//                    var=3;
-//                    GameManager.getPlay().getChildren().removeAll(timer);
-//                    for(Obstacle i:obstacles){
-//                        i.animation_play();
-//                    }
-//                    ball.getDown().play();
-//                    pause_stat=0;
-//                }
-//            }
-//        });
-//
-//        GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
-//
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                try {
-//                    save_game();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e-> {
-//            try {
-//                play_game();
-//            } catch (FileNotFoundException fileNotFoundException) {
-//                fileNotFoundException.printStackTrace();
-//            }
-//        }));
-//        add.setCycleCount(Timeline.INDEFINITE);
-//        add.play();
         activate_event_handlers();
     }
     public void play_game() throws FileNotFoundException {
@@ -531,105 +437,6 @@ public class Game implements Serializable {
             }
 
         }
-//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                if(pause_stat==0)
-//                    ball.make_jump();
-//            }
-//        });
-//        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                if(pause_stat==0)
-//                    ball.make_move();
-//            }
-//        });
-//        GameManager.getPausebtn().setOnMouseClicked(new EventHandler<MouseEvent>(){
-//
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                for (Obstacle i:obstacles){
-//                    i.animation_pause();
-//                }
-//                pause_stat=1;
-//                ball.getUp().pause();
-//                ball.getDown().pause();
-//                GameManager.getGuiStage().setScene(GameManager.getPause_screen());
-//            }
-//        });
-//        GameManager.getPausebtn().setOnKeyPressed(new EventHandler<KeyEvent>(){
-//
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                if(keyEvent.getCode()== KeyCode.P){
-//                    for (Obstacle i:obstacles){
-//                        i.animation_pause();
-//                    }
-//                    pause_stat=1;
-//                    ball.getUp().pause();
-//                    ball.getDown().pause();
-//                    GameManager.getGuiStage().setScene(GameManager.getPause_screen());
-//                }
-//            }
-//        });
-//        GameManager.getBack().setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            int var=3;
-//            Label timer;
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
-//                timer=new Label("3");
-//                timer.setTextFill(Color.WHITE);
-//                timer.setFont(new Font("System Bold Italic",50));
-//                timer.setLayoutX(133);
-//                timer.setLayoutY(220-translate);
-//                GameManager.getPlay().getChildren().add(timer);
-//
-//                Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
-//                t.setCycleCount(3);
-//                t.play();
-//
-//            }
-//
-//            public void times() {
-//                if(var!=1){
-//                    var--;
-//                    timer.setText(String.valueOf(var));
-//
-//                }
-//                else{
-//                    var=3;
-//                    GameManager.getPlay().getChildren().removeAll(timer);
-//                    for(Obstacle i:obstacles){
-//                        i.animation_play();
-//                    }
-//                    ball.getDown().play();
-//                    pause_stat=0;
-//                }
-//            }
-//        });
-//
-//        GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
-//
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                try {
-//                    save_game();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e-> {
-//            try {
-//                play_game();
-//            } catch (FileNotFoundException fileNotFoundException) {
-//                fileNotFoundException.printStackTrace();
-//            }
-//        }));
-//        add.setCycleCount(Timeline.INDEFINITE);
-//        add.play();
         activate_event_handlers();
         this.clrs=cls;
         this.obstacles=obs;
@@ -804,6 +611,10 @@ public class Game implements Serializable {
     }
 
     public void save_game() throws IOException {
+        Date d1=new Date();
+        SimpleDateFormat formatter=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        this.gameName=formatter.format(d1);
         this.translate=canvas.getLayoutY();
         this.ball.setCenterY(this.ball.getBall().getCenterY());
         GameManager.getSave_games().add(this);
