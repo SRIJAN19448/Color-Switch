@@ -6,6 +6,8 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 
 public class Star implements Special, Serializable {
@@ -30,8 +32,9 @@ public class Star implements Special, Serializable {
         return pos;
     }
 
-    public void create(){
-        Image img=new Image("sample/stars.png");
+    public void create() throws FileNotFoundException {
+        FileInputStream path=new FileInputStream("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\src\\sample\\stars.png");
+        Image img=new Image(path);
         imv.setImage(img);
         imv.setPreserveRatio(true);
         imv.setFitHeight(50);
@@ -39,6 +42,7 @@ public class Star implements Special, Serializable {
         imv.setX(125);
         imv.setY(pos);
         grp.getChildren().add(imv);
+//        System.out.println(game.getBall().getBall()==null);
         t=new Timeline(new KeyFrame(Duration.millis(10),e->special(game.getBall().getBall().getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
@@ -46,6 +50,7 @@ public class Star implements Special, Serializable {
 
     @Override
     public int special(double posY) {
+//        System.out.println(this.canvas==null);
         if(posY>=this.imv.getY()+10 && posY<=this.imv.getY()+40){
             game.setScore(game.getScore()+1);
             GameManager.getScr().setText(String.valueOf(game.getScore()));

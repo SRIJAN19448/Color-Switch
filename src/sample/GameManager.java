@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -44,16 +45,16 @@ public class GameManager {
         guiStage=stage;
         game=new Game();
         save_games=new ArrayList<Game>();
-        File f1=new File("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\src\\sample\\savegames.txt");
+        File f1=new File("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\savegames.txt");
         if(f1.exists()){
             System.out.println("exists");
-            ObjectInputStream in=new ObjectInputStream(new FileInputStream("src/sample/savegames.txt"));
+            ObjectInputStream in=new ObjectInputStream(new FileInputStream("savegames.txt"));
             save_games=(ArrayList<Game>)in.readObject();
             in.close();
         }
         else{
             System.out.println("doesnt");
-            ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("src/sample/savegames.txt"));
+            ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("savegames.txt"));
             out.writeObject(save_games);
             out.close();
         }
@@ -156,7 +157,7 @@ public class GameManager {
         return pause_screen;
     }
 
-    public static void new_game(){
+    public static void new_game() throws IOException {
         make_play();
         game=new Game();
         game.new_game();
@@ -265,7 +266,12 @@ public class GameManager {
         pause_screen.getStylesheets().add("sample/buttons.css");
 
         //listener of main_menu
-        main_menu.setOnMouseClicked(mouseEvent -> guiStage.setScene(GameManager.main_screen));
+        main_menu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                guiStage.setScene(GameManager.main_screen);
+            }
+        });
 
 
         back.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -345,7 +351,21 @@ public class GameManager {
         g.getChildren().addAll(use,restart_hit,menu);
         hit.getChildren().addAll(h,g);
         hit_screen.getStylesheets().add("sample/buttons.css");
-        menu.setOnMouseClicked(mouseEvent -> guiStage.setScene(GameManager.main_screen));
+        menu.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                guiStage.setScene(GameManager.main_screen);
+            }
+        });
+
+        restart_hit.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
     }
 
     public static void make_play(){
@@ -360,6 +380,7 @@ public class GameManager {
         scr.setFont(new Font("System Bold",25));
         scr.setLayoutX(11);
         scr.setLayoutY(3);
+        Group g=new Group();
         pausebtn=new Button("II");
         pausebtn.setStyle("-fx-background-radius: 50;");
         pausebtn.setLayoutX(259);
@@ -371,7 +392,14 @@ public class GameManager {
         pausebtn.setId("pause");
         play.getChildren().addAll(scr,pausebtn);
         play_screen.getStylesheets().add("sample/buttons.css");
-        pausebtn.setOnMouseClicked(mouseEvent -> guiStage.setScene(pause_screen));
+        pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                guiStage.setScene(pause_screen);
+            }
+        });
     }
 
     public static void make_load(){
@@ -454,7 +482,13 @@ public class GameManager {
         load.getChildren().addAll(save,back);
         load.getChildren().addAll(saves);
         load_screen.getStylesheets().add("sample/buttons.css");
-        back.setOnMouseClicked(mouseEvent -> guiStage.setScene(GameManager.main_screen));
+        back.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                guiStage.setScene(GameManager.main_screen);
+            }
+        });
 
     }
 
@@ -587,7 +621,7 @@ public class GameManager {
         g3.setLayoutY(312);
 
         //outer circle started
-        Arc arc_outer_circle[] =new Arc[4];
+        Arc arc_outer_circle[]=new Arc[4];
         arc_outer_circle[0]=new Arc(0,0,240,240,0,90);
         arc_outer_circle[1]=new Arc(0,0,240,240,90,90);
         arc_outer_circle[2]=new Arc(0,0,240,240,180,90);
@@ -794,9 +828,17 @@ public class GameManager {
     public void start_game(Stage primaryStage){
         primaryStage.setScene(main_screen);
         primaryStage.show();
-        new_game.setOnMouseReleased(mouseEvent -> {
-            make_play();
-            new_game();
+        new_game.setOnMouseReleased(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    make_play();
+                    new_game();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
         load_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
@@ -805,8 +847,14 @@ public class GameManager {
                 System.out.println("size: "+save_games.size());
                 if(save_games.size()!=0) {
                     guiStage.setScene(load_screen);
-                    make_play();
-                    load_game();
+                    try {
+                        make_play();
+                        load_game();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
                 else{
                     Alert alert=new Alert(Alert.AlertType.WARNING);
@@ -819,14 +867,36 @@ public class GameManager {
                 }
             }
         });
-        exit.setOnMouseClicked(mouseEvent -> System.exit(0));
-        restart_hit.setOnMouseClicked(mouseEvent -> {
-            make_play();
-            new_game();
+        exit.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.exit(0);
+            }
         });
-        restart_pause.setOnMouseClicked(mouseEvent -> {
-            make_play();
-            new_game();
+        restart_hit.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    make_play();
+                    new_game();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        restart_pause.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                try {
+                    make_play();
+                    new_game();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 
@@ -834,7 +904,7 @@ public class GameManager {
 
 
 
-    public static void load_game() {
+    public static void load_game() throws IOException, ClassNotFoundException {
 
         saves[0].setOnMouseClicked(new EventHandler<MouseEvent>(){
 

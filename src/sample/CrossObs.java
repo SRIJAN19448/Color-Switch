@@ -56,7 +56,13 @@ public class CrossObs extends Obstacle {
         timeline=new Timeline(new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateX(line[0],0)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateX(line[1],1)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateX(line[2],2)),new KeyFrame(Duration.millis(20-g.getDifficulty()),e->rotateX(line[3],3)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        hit=new Timeline(new KeyFrame(Duration.millis(10),e-> detect_hit()));
+        hit=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+            try {
+                detect_hit();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+        }));
         hit.setCycleCount(Timeline.INDEFINITE);
         hit.play();
         grp.getChildren().addAll(line);
@@ -65,7 +71,7 @@ public class CrossObs extends Obstacle {
     }
 
     @Override
-    public void detect_hit(){
+    public void detect_hit() throws InterruptedException {
         for(int i=0;i<4;i++) {
             Shape shape = Shape.intersect(ball.getBall(), line[i]);
             if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.getBall().getFill()){

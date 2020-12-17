@@ -58,7 +58,13 @@ public class Ball implements Serializable {
     public void create(Pane canvas){
         ball.setFill(Color.DARKMAGENTA);
         up=new Timeline(new KeyFrame(Duration.millis(10),e->jump()));
-        down=new Timeline(new KeyFrame(Duration.millis(10),e-> move_ball()));
+        down=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+            try {
+                move_ball();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+        }));
         up.setCycleCount(Timeline.INDEFINITE);
         down.setCycleCount(Timeline.INDEFINITE);
         canvas.getChildren().addAll(ball);
@@ -84,7 +90,7 @@ public class Ball implements Serializable {
             }
         }
     }
-    public void move_ball(){
+    public void move_ball() throws InterruptedException {
         if(ball.getCenterY()>=490-game.getCanvas().getLayoutY())
             if(game.getTranslate()==0)
                 down.pause();

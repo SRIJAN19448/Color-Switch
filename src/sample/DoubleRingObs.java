@@ -74,14 +74,20 @@ public class DoubleRingObs extends Obstacle{
         timeline=new Timeline(new KeyFrame(Duration.millis(5000-250*g.getDifficulty()),new KeyValue(arc[0].startAngleProperty(),360),new KeyValue(arc[1].startAngleProperty(),450),new KeyValue(arc[2].startAngleProperty(),540),new KeyValue(arc[3].startAngleProperty(),630),new KeyValue(arc[4].startAngleProperty(),-348),new KeyValue(arc[5].startAngleProperty(),-258),new KeyValue(arc[6].startAngleProperty(),-168),new KeyValue(arc[7].startAngleProperty(),-78)));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        hit=new Timeline(new KeyFrame(Duration.millis(10),e-> detect_hit()));
+        hit=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+            try {
+                detect_hit();
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+        }));
         hit.setCycleCount(Timeline.INDEFINITE);
         hit.play();
         grp.getChildren().addAll(arc);
     }
 
     @Override
-    public void detect_hit(){
+    public void detect_hit() throws InterruptedException {
 
         for(int i=0;i<4;i++) {
             Shape shape = Shape.intersect(ball.getBall(), arc[i]);
