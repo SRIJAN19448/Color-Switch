@@ -79,14 +79,14 @@ public class SquareObs extends Obstacle{
     public void rotateX(Line line, int number){
 
         if(number==0) {
-            degree[0] = (degree[0] + 1) % 360;
+            degree[0] = (degree[0] - 1) % 360;
             line.setStartX(150+ length * Math.cos(Math.toRadians(degree[0])));
             line.setStartY(pos- length * Math.sin(Math.toRadians(degree[0])));
             line.setEndX(150+ length * Math.cos(Math.toRadians(degree[0]+90)));
             line.setEndY(pos- length * Math.sin(Math.toRadians(degree[0]+90)));
         }
         else if(number==1) {
-            degree[1] = (degree[1] + 1) % 360;
+            degree[1] = (degree[1] - 1) % 360;
             line.setStartX(150+ length * Math.cos(Math.toRadians(degree[1])));
             line.setStartY(pos- length * Math.sin(Math.toRadians(degree[1])));
             line.setEndX(150+ length * Math.cos(Math.toRadians(degree[1]+90)));
@@ -94,7 +94,7 @@ public class SquareObs extends Obstacle{
 
         }
         else if(number==2){
-            degree[2] = (degree[2] + 1) % 360;
+            degree[2] = (degree[2] - 1) % 360;
             line.setStartX(150+ length * Math.cos(Math.toRadians(degree[2])));
             line.setStartY(pos- length * Math.sin(Math.toRadians(degree[2])));
             line.setEndX(150+ length * Math.cos(Math.toRadians(degree[2]+90)));
@@ -103,7 +103,7 @@ public class SquareObs extends Obstacle{
 
         }
         else if(number==3){
-            degree[3] = (degree[3] + 1) % 360;
+            degree[3] = (degree[3] - 1) % 360;
             line.setStartX(150+ length * Math.cos(Math.toRadians(degree[3])));
             line.setStartY(pos- length * Math.sin(Math.toRadians(degree[3])));
             line.setEndX(150+ length * Math.cos(Math.toRadians(degree[3]+90)));
