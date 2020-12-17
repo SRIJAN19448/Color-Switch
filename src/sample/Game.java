@@ -370,6 +370,8 @@ public class Game implements Serializable {
         ArrayList<Star> strs=new ArrayList<>();
         ArrayList<ColorChanger> cls=new ArrayList<>();
         ArrayList<Object> itms=new ArrayList<>();
+        GameManager.getPausebtn().setLayoutY(-this.translate);
+        GameManager.getScr().setLayoutY(-this.translate);
         this.ball=new Ball(this.ball.getCenterX(),this.ball.getCenterY(),this.ball.getRadius(),this);
         this.ball.create(canvas);
         for(Object i:this.items){
