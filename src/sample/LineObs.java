@@ -103,12 +103,12 @@ public class LineObs extends Obstacle {
         if(line.getLayoutX()>=440)
             line.setLayoutX(-2);
         else
-            line.setLayoutX(line.getLayoutX()+1);
+            line.setLayoutX(line.getLayoutX()+2);
     }
     public void move2(Line line){
         if(line.getLayoutX()<=0)
             line.setLayoutX(440);
         else
-            line.setLayoutX(line.getLayoutX()-1);
+            line.setLayoutX(line.getLayoutX()-2);
     }
 }

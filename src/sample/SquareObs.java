@@ -29,22 +29,22 @@ public class SquareObs extends Obstacle{
         length=80;
 
         line[0]=new Line(150+length,pos,150,pos-length);
-        line[0].setStrokeWidth(10);
+        line[0].setStrokeWidth(15);
         line[0].setStroke(Color.YELLOW);
         line[0].setStrokeLineCap(StrokeLineCap.ROUND);
 
         line[1]=new Line(150,pos-length,150-length,pos);
-        line[1].setStrokeWidth(10);
+        line[1].setStrokeWidth(15);
         line[1].setStroke(Color.DARKVIOLET);
         line[1].setStrokeLineCap(StrokeLineCap.ROUND);
 
         line[2]=new Line(150-length,pos,150,pos+length);
-        line[2].setStrokeWidth(10);
+        line[2].setStrokeWidth(15);
         line[2].setStroke(Color.DARKMAGENTA);
         line[2].setStrokeLineCap(StrokeLineCap.ROUND);
 
         line[3]=new Line(150,pos+length,150+length,pos);
-        line[3].setStrokeWidth(10);
+        line[3].setStrokeWidth(15);
         line[3].setStroke(Color.CYAN);
         line[3].setStrokeLineCap(StrokeLineCap.ROUND);
 

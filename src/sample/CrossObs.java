@@ -28,28 +28,28 @@ public class CrossObs extends Obstacle {
         degree[2]=180;
         degree[3]=270;
 
-        pivot=new Circle(9);
+        pivot=new Circle(12);
         pivot.setCenterX(120);
         pivot.setCenterY(pos);
         pivot.setFill(Color.WHITE);
 
         line[0]=new Line(120,pos,120+length ,pos);
-        line[0].setStrokeWidth(10);
+        line[0].setStrokeWidth(15);
         line[0].setStroke(Color.YELLOW);
         line[0].setStrokeLineCap(StrokeLineCap.ROUND);
 
         line[1]=new Line(120,pos,120 ,pos-length);
-        line[1].setStrokeWidth(10);
+        line[1].setStrokeWidth(15);
         line[1].setStroke(Color.DARKVIOLET);
         line[1].setStrokeLineCap(StrokeLineCap.ROUND);
 
         line[2]=new Line(120,pos,120-length ,pos);
-        line[2].setStrokeWidth(10);
+        line[2].setStrokeWidth(15);
         line[2].setStroke(Color.DARKMAGENTA);
         line[2].setStrokeLineCap(StrokeLineCap.ROUND);
 
         line[3]=new Line(120,pos,120 ,pos+length);
-        line[3].setStrokeWidth(10);
+        line[3].setStrokeWidth(15);
         line[3].setStroke(Color.CYAN);
         line[3].setStrokeLineCap(StrokeLineCap.ROUND);
 

@@ -231,7 +231,7 @@ public class Game implements Serializable {
             }
             else if(count==4){
                 count=0;
-                difficulty+=5;
+                difficulty+=3;
             }
 
         }
