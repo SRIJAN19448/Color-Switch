@@ -84,7 +84,6 @@ public class LineObs extends Obstacle {
         hit.setCycleCount(Timeline.INDEFINITE);
         hit.play();
         grp.getChildren().addAll(line);
-//        canvas.getChildren().addAll(grp);
     }
 
     @Override

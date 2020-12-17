@@ -131,6 +131,14 @@ public class Game implements Serializable {
         return difficulty;
     }
 
+    public int getScore(){
+        return score;
+    }
+
+    public void setScore(int score){
+        this.score=score;
+    }
+
     public void new_game() throws IOException {
 
         BackgroundFill background_fill=new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
@@ -165,18 +173,6 @@ public class Game implements Serializable {
         clr2.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,clr2.getGrp());
         this.clr_pos-=300;
-//        CrossObs cross=new CrossObs(this.obstacle_pos,this.ball,this);
-//        cross.create();
-//        canvas.getChildren().add(canvas.getChildren().size()-2,cross.getGrp());
-//        this.obstacle_pos-=300;
-//        Star st2=new Star(-375,this);
-//        st2.create();
-//        canvas.getChildren().add(canvas.getChildren().size()-2,st2.getGrp());
-//        this.str_pos-=300;
-//        ColorChanger clr3=new ColorChanger(this.clr_pos,this);
-//        clr3.create();
-//        canvas.getChildren().add(canvas.getChildren().size()-2,clr3.getGrp());
-//        this.clr_pos-=300;
         LineObs line=new LineObs(this.obstacle_pos,1,this.ball,this);
         line.create();
         canvas.getChildren().add(canvas.getChildren().size()-2, line.getGrp());
@@ -189,149 +185,138 @@ public class Game implements Serializable {
         clr4.create();
         canvas.getChildren().add(canvas.getChildren().size()-2,clr4.getGrp());
         this.clr_pos-=300;
-//        System.out.println("->");
 
 
         items.add(square);
         items.add(clr);
         items.add(ring);
         items.add(clr2);
-//        items.add(cross);
-//        items.add(clr3);
         items.add(line);
         items.add(clr4);
         items.add(st);
         items.add(st1);
-//        items.add(st2);
         items.add(st3);
 
 
         obstacles.add(square);
         obstacles.add(ring);
-//        obstacles.add(cross);
         obstacles.add(line);
 
 
         clrs.add(clr);
         clrs.add(clr2);
-//        clrs.add(clr3);
         clrs.add(clr4);
 
         stars.add(st);
         stars.add(st1);
-//        stars.add(st2);
         stars.add(st3);
         ball.create(canvas);
         for(Node n:canvas.getChildren()){
 
             Bounds s=n.getBoundsInLocal();
-//            System.out.println((double)(((s.getMinY()+s.getMaxY())/2)+canvas.getTranslateY()));
         }
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(pause_stat==0)
-                    ball.make_jump();
-            }
-        });
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(pause_stat==0)
-                    ball.make_move();
-            }
-        });
-        GameManager.getPausebtn().setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                for (Obstacle i:obstacles){
-                    i.animation_pause();
-                }
-                pause_stat=1;
-                ball.getUp().pause();
-                ball.getDown().pause();
-//                obstacles.get(1).animation_pause();
-                GameManager.getGuiStage().setScene(GameManager.getPause_screen());
-            }
-        });
-        GameManager.getPausebtn().setOnKeyPressed(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(keyEvent.getCode()== KeyCode.P){
-                    for (Obstacle i:obstacles){
-                        i.animation_pause();
-                    }
-                    pause_stat=1;
-                    ball.getUp().pause();
-                    ball.getDown().pause();
-//                obstacles.get(1).animation_pause();
-                    GameManager.getGuiStage().setScene(GameManager.getPause_screen());
-                }
-            }
-        });
-        GameManager.getBack().setOnMouseClicked(new EventHandler<MouseEvent>(){
-            int var=3;
-            Label timer;
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
-                timer=new Label("3");
-                timer.setTextFill(Color.WHITE);
-                timer.setFont(new Font("System Bold Italic",50));
-                timer.setLayoutX(133);
-                timer.setLayoutY(220-translate);
-                GameManager.getPlay().getChildren().add(timer);
-
-                Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
-                t.setCycleCount(3);
-                t.play();
-
-            }
-
-            public void times() {
-                if(var!=1){
-                    var--;
-                    timer.setText(String.valueOf(var));
-
-                }
-                else{
-                    var=3;
-                    GameManager.getPlay().getChildren().removeAll(timer);
-                    for(Obstacle i:obstacles){
-                        i.animation_play();
-                    }
-                    ball.getDown().play();
-                    pause_stat=0;
-//                    obstacles.get(0).animation_play();
-                }
-            }
-        });
-
-        GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    save_game();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e-> {
-            try {
-                play_game();
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-        }));
-        add.setCycleCount(Timeline.INDEFINITE);
-        add.play();
+//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                if(pause_stat==0)
+//                    ball.make_jump();
+//            }
+//        });
+//        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                if(pause_stat==0)
+//                    ball.make_move();
+//            }
+//        });
+//        GameManager.getPausebtn().setOnMouseClicked(new EventHandler<MouseEvent>(){
+//
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                for (Obstacle i:obstacles){
+//                    i.animation_pause();
+//                }
+//                pause_stat=1;
+//                ball.getUp().pause();
+//                ball.getDown().pause();
+//                GameManager.getGuiStage().setScene(GameManager.getPause_screen());
+//            }
+//        });
+//        GameManager.getPausebtn().setOnKeyPressed(new EventHandler<KeyEvent>(){
+//
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                if(keyEvent.getCode()== KeyCode.P){
+//                    for (Obstacle i:obstacles){
+//                        i.animation_pause();
+//                    }
+//                    pause_stat=1;
+//                    ball.getUp().pause();
+//                    ball.getDown().pause();
+//                    GameManager.getGuiStage().setScene(GameManager.getPause_screen());
+//                }
+//            }
+//        });
+//        GameManager.getBack().setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            int var=3;
+//            Label timer;
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
+//                timer=new Label("3");
+//                timer.setTextFill(Color.WHITE);
+//                timer.setFont(new Font("System Bold Italic",50));
+//                timer.setLayoutX(133);
+//                timer.setLayoutY(220-translate);
+//                GameManager.getPlay().getChildren().add(timer);
+//
+//                Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
+//                t.setCycleCount(3);
+//                t.play();
+//
+//            }
+//
+//            public void times() {
+//                if(var!=1){
+//                    var--;
+//                    timer.setText(String.valueOf(var));
+//
+//                }
+//                else{
+//                    var=3;
+//                    GameManager.getPlay().getChildren().removeAll(timer);
+//                    for(Obstacle i:obstacles){
+//                        i.animation_play();
+//                    }
+//                    ball.getDown().play();
+//                    pause_stat=0;
+//                }
+//            }
+//        });
+//
+//        GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
+//
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                try {
+//                    save_game();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+//            try {
+//                play_game();
+//            } catch (FileNotFoundException fileNotFoundException) {
+//                fileNotFoundException.printStackTrace();
+//            }
+//        }));
+//        add.setCycleCount(Timeline.INDEFINITE);
+//        add.play();
+        activate_event_handlers();
     }
     public void play_game() throws FileNotFoundException {
-//        System.out.println("size : "+this.items.size());
         Node n=canvas.getChildren().get(0);
         Bounds s=n.getBoundsInLocal();
         Object rem=new Object();
@@ -359,11 +344,9 @@ public class Game implements Serializable {
             }
             ran=random;
             if (random==0) {
-//                ((SquareObs) rem).getHit().stop();
                 SquareObs sq = new SquareObs(this.obstacle_pos, this.ball, this);
                 sq.create();
                 this.obstacle_pos -= 300;
-//                System.out.println("index: "+canvas.getChildren().indexOf(sq.getGrp()));
                 canvas.getChildren().add(canvas.getChildren().size() - 3, sq.getGrp());
                 items.add(sq);
                 obstacles.add(sq);
@@ -380,7 +363,6 @@ public class Game implements Serializable {
                 items.add(clr);
                 clrs.add(clr);
             } else if (random==1) {
-//                ((RingObs) rem).getHit().stop();
                 RingObs ri = new RingObs(this.obstacle_pos, this.ball, this);
                 ri.create();
                 this.obstacle_pos -= 300;
@@ -400,7 +382,6 @@ public class Game implements Serializable {
                 items.add(clr);
                 clrs.add(clr);
             } else if (random==2) {
-//                ((CrossObs) rem).getHit().stop();
                 CrossObs cr = new CrossObs(this.obstacle_pos, this.ball, this);
                 cr.create();
                 this.obstacle_pos -= 300;
@@ -420,7 +401,6 @@ public class Game implements Serializable {
                 items.add(clr);
                 clrs.add(clr);
             } else if (random==3) {
-//                ((LineObs) rem).getHit().stop();
                 LineObs li = new LineObs(this.obstacle_pos, 1, this.ball, this);
                 li.create();
                 this.obstacle_pos -= 300;
@@ -491,7 +471,6 @@ public class Game implements Serializable {
         ArrayList<Object> itms=new ArrayList<>();
         this.ball=new Ball(this.ball.getCenterX(),this.ball.getCenterY(),this.ball.getRadius(),this);
         this.ball.create(canvas);
-//        this.ball.ball.setTranslateY(-this.translate);
         for(Object i:this.items){
             if(i instanceof SquareObs) {
                 i=new SquareObs(((SquareObs) i).getPos(),this.ball,this);
@@ -552,6 +531,123 @@ public class Game implements Serializable {
             }
 
         }
+//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                if(pause_stat==0)
+//                    ball.make_jump();
+//            }
+//        });
+//        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                if(pause_stat==0)
+//                    ball.make_move();
+//            }
+//        });
+//        GameManager.getPausebtn().setOnMouseClicked(new EventHandler<MouseEvent>(){
+//
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                for (Obstacle i:obstacles){
+//                    i.animation_pause();
+//                }
+//                pause_stat=1;
+//                ball.getUp().pause();
+//                ball.getDown().pause();
+//                GameManager.getGuiStage().setScene(GameManager.getPause_screen());
+//            }
+//        });
+//        GameManager.getPausebtn().setOnKeyPressed(new EventHandler<KeyEvent>(){
+//
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                if(keyEvent.getCode()== KeyCode.P){
+//                    for (Obstacle i:obstacles){
+//                        i.animation_pause();
+//                    }
+//                    pause_stat=1;
+//                    ball.getUp().pause();
+//                    ball.getDown().pause();
+//                    GameManager.getGuiStage().setScene(GameManager.getPause_screen());
+//                }
+//            }
+//        });
+//        GameManager.getBack().setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            int var=3;
+//            Label timer;
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
+//                timer=new Label("3");
+//                timer.setTextFill(Color.WHITE);
+//                timer.setFont(new Font("System Bold Italic",50));
+//                timer.setLayoutX(133);
+//                timer.setLayoutY(220-translate);
+//                GameManager.getPlay().getChildren().add(timer);
+//
+//                Timeline t=new Timeline(new KeyFrame(Duration.millis(1000),e->times()));
+//                t.setCycleCount(3);
+//                t.play();
+//
+//            }
+//
+//            public void times() {
+//                if(var!=1){
+//                    var--;
+//                    timer.setText(String.valueOf(var));
+//
+//                }
+//                else{
+//                    var=3;
+//                    GameManager.getPlay().getChildren().removeAll(timer);
+//                    for(Obstacle i:obstacles){
+//                        i.animation_play();
+//                    }
+//                    ball.getDown().play();
+//                    pause_stat=0;
+//                }
+//            }
+//        });
+//
+//        GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
+//
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                try {
+//                    save_game();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//        Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+//            try {
+//                play_game();
+//            } catch (FileNotFoundException fileNotFoundException) {
+//                fileNotFoundException.printStackTrace();
+//            }
+//        }));
+//        add.setCycleCount(Timeline.INDEFINITE);
+//        add.play();
+        activate_event_handlers();
+        this.clrs=cls;
+        this.obstacles=obs;
+        this.stars=strs;
+        this.items=itms;
+        GameManager.getScr().setText(String.valueOf(this.score));
+        GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
+        Timeline add2=new Timeline(new KeyFrame(Duration.millis(10),e-> {
+            try {
+                play_game();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        }));
+        add2.setCycleCount(Timeline.INDEFINITE);
+        add2.play();
+    }
+    public void activate_event_handlers(){
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -576,7 +672,6 @@ public class Game implements Serializable {
                 pause_stat=1;
                 ball.getUp().pause();
                 ball.getDown().pause();
-//                obstacles.get(1).animation_pause();
                 GameManager.getGuiStage().setScene(GameManager.getPause_screen());
             }
         });
@@ -591,7 +686,6 @@ public class Game implements Serializable {
                     pause_stat=1;
                     ball.getUp().pause();
                     ball.getDown().pause();
-//                obstacles.get(1).animation_pause();
                     GameManager.getGuiStage().setScene(GameManager.getPause_screen());
                 }
             }
@@ -629,10 +723,10 @@ public class Game implements Serializable {
                     }
                     ball.getDown().play();
                     pause_stat=0;
-//                    obstacles.get(0).animation_play();
                 }
             }
         });
+
         GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
@@ -653,43 +747,8 @@ public class Game implements Serializable {
         }));
         add.setCycleCount(Timeline.INDEFINITE);
         add.play();
-        this.clrs=cls;
-        this.obstacles=obs;
-        this.stars=strs;
-        this.items=itms;
-//        for(ColorChanger i:clrs){
-//            i.itms=itms;
-//            i.clrs=cls;
-//        }
-//        for(Star i:stars){
-//            i.itms=itms;
-//            i.strs=strs;
-//        }
-//        System.out.println(this.ball.getCenterY());
-        GameManager.getScr().setText(String.valueOf(this.score));
-        GameManager.getGuiStage().setScene(GameManager.getPlay_screen());
-//        this.ball.getDown().play();
-        Timeline add2=new Timeline(new KeyFrame(Duration.millis(10),e-> {
-            try {
-                play_game();
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-        }));
-        add2.setCycleCount(Timeline.INDEFINITE);
-        add2.play();
     }
-//    public void pause_game() throws IOException{
-//        Parent root=FXMLLoader.load(getClass().getResource("pause_screen.fxml"));
-//        Scene scene2=new Scene(root, 300, 500);
-//        scene2.setFill(Color.BLACK);
-//        GameManager.getGuiStage().setScene(scene2);
-//
-//    }
-//    public void back(ActionEvent e) {
-//
-//    }
-    public void hit_detected() throws InterruptedException {
+    public void hit_detected(){
         for (Obstacle i:obstacles){
             i.animation_pause();
         }
@@ -700,8 +759,6 @@ public class Game implements Serializable {
         over.setLayoutX(25);
         over.setLayoutY(220-translate);
         GameManager.getPlay().getChildren().add(over);
-//        TimeUnit.SECONDS.sleep(2);
-//        GameManager.play.getChildren().remove(over);
         Timeline t=new Timeline(new KeyFrame(Duration.millis(1500)));
         t.setCycleCount(1);
         t.play();
@@ -711,7 +768,6 @@ public class Game implements Serializable {
             public void handle(ActionEvent actionEvent) {
                 GameManager.getPlay().getChildren().remove(over);
                 GameManager.getGuiStage().setScene(GameManager.getHit_screen());
-//                t.stop();
             }
         });
 
@@ -748,32 +804,14 @@ public class Game implements Serializable {
     }
 
     public void save_game() throws IOException {
-        int name_offset;
-        if(GameManager.getLoad_array().size()==0)
-            name_offset=GameManager.getLoad_array().size()+1;
-        else {
-            String name=GameManager.getLoad_array().get(GameManager.getLoad_array().size()-1);
-            String sub=name.substring(5,name.length()-4);
-            System.out.println(sub);
-            name_offset =Integer.valueOf(sub)+1;
-        }
-        String save_name="saves"+name_offset+".txt";
-        ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream(save_name));
-//        System.out.println(canvas.getLayoutY());
-//        this.translate=canvas.getLayoutY();
-//        System.out.println(this.ball.getBall().getCenterY());
+        this.translate=canvas.getLayoutY();
         this.ball.setCenterY(this.ball.getBall().getCenterY());
-        out.writeObject(this);
+        GameManager.getSave_games().add(this);
+        if(GameManager.getSave_games().size()>6)
+            GameManager.getSave_games().remove(0);
+        ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("savegames.txt"));
+        out.writeObject(GameManager.getSave_games());
         out.close();
-        GameManager.getLoad_array().add(save_name);
-        if(GameManager.getLoad_array().size()>6){
-            File f=new File(GameManager.getLoad_array().get(0));
-            f.delete();
-            GameManager.getLoad_array().remove(0);
-        }
-        ObjectOutputStream out2=new ObjectOutputStream(new FileOutputStream("load.txt"));
-        out2.writeObject(GameManager.getLoad_array());
-        out2.close();
         Alert alert=new Alert(Alert.AlertType.INFORMATION);
         ImageView icon=new ImageView("save_icon.png");
         icon.setFitHeight(48);
@@ -784,24 +822,5 @@ public class Game implements Serializable {
         alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
         alert.show();
     }
-//    public void restart_game(ActionEvent e){
-//
-//    }
-    public int getScore(){
-        return score;
-    }
-    public void setScore(int score){
-        this.score=score;
-    }
 
-//    public void jump(Bounds bounds){
-//        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(0.75),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMinY()+ball.getBall().getRadius())));
-//        //timeline.setCycleCount(1);
-//        timeline.play();
-//    }
-//    public void move_ball(Bounds bounds){
-//        Timeline timeline=new Timeline(new KeyFrame(Duration.seconds(3),new KeyValue(ball.getBall().layoutYProperty(),bounds.getMaxY()-ball.getBall().getRadius())));
-//        //timeline.setCycleCount(1);
-//        timeline.play();
-//    }
 }

@@ -61,7 +61,6 @@ public class SquareObs extends Obstacle{
         hit.setCycleCount(Timeline.INDEFINITE);
         hit.play();
         this.grp.getChildren().addAll(line);
-//        canvas.getChildren().addAll(grp);
 
     }
 

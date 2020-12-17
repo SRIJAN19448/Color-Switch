@@ -67,8 +67,6 @@ public class CrossObs extends Obstacle {
         hit.play();
         grp.getChildren().addAll(line);
         grp.getChildren().add(pivot);
-//        canvas.getChildren().addAll(grp);
-//        canvas.getChildren().addAll(pivot);
 
     }
 

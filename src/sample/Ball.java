@@ -91,7 +91,7 @@ public class Ball implements Serializable {
         }
     }
     public void move_ball() throws InterruptedException {
-        if(ball.getCenterY()==490-game.getCanvas().getLayoutY())
+        if(ball.getCenterY()>=490-game.getCanvas().getLayoutY())
             if(game.getTranslate()==0)
                 down.pause();
             else{

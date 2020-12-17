@@ -59,7 +59,6 @@ public class RingObs extends Obstacle{
         hit.setCycleCount(Timeline.INDEFINITE);
         hit.play();
         grp.getChildren().addAll(arc);
-//        canvas.getChildren().addAll(grp);
     }
 
     @Override
