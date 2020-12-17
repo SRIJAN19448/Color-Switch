@@ -58,20 +58,16 @@ public class ColorChanger implements Special, Serializable {
         t=new Timeline(new KeyFrame(Duration.millis(10), e->special(game.getBall().getBall().getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
-//        canvas.getChildren().addAll(g);
     }
 
     @Override
     public int special(double posY) {
-//        if(this.canvas==null)
-//            System.out.println("NULL");
         Paint paints[]=new Paint[4];
         paints[0]=Color.YELLOW;
         paints[1]=Color.DARKVIOLET;
         paints[2]=Color.DARKMAGENTA;
         paints[3]=Color.CYAN;
         if(posY>=this.arc[0].getCenterY()-this.arc[0].getRadiusY()/4 && posY<=this.arc[0].getCenterY()+this.arc[0].getRadiusY()/4) {
-//            System.out.println("BYUV");
             Random r=new Random();
             int random=r.nextInt(4);
             while(paints[random]==game.getBall().getBall().getFill()) {

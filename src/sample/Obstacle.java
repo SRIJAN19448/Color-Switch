@@ -52,6 +52,6 @@ public abstract class Obstacle implements Serializable {
     }
 
     public abstract void create();
-    public abstract void detect_hit() throws InterruptedException;
+    public abstract void detect_hit();
 }
 
