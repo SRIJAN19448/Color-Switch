@@ -3,7 +3,6 @@ package sample;
 import java.io.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -13,7 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -29,7 +27,7 @@ import java.util.Date;
 import java.util.Random;
 
 public class Game implements Serializable {
-    private transient static Scene scene;
+    private transient Scene scene;
     private transient Pane canvas;
     private double translate;
     private ArrayList<Obstacle> obstacles;
@@ -46,7 +44,7 @@ public class Game implements Serializable {
     private int count;
     private int difficulty;
     private String gameName;
-    public Game() throws IOException {
+    public Game(){
         this.score=0;
         this.obstacle_pos=250;
         this.clr_pos=100;
@@ -158,9 +156,6 @@ public class Game implements Serializable {
         SquareObs square=new SquareObs(this.obstacle_pos,this.ball,this);
         square.create();
         canvas.getChildren().add(canvas.getChildren().size()-2, square.getGrp());
-//        DoubleRingObs square=new DoubleRingObs(this.obstacle_pos,this.ball,this);
-//        square.create();
-//        canvas.getChildren().add(canvas.getChildren().size()-2,square.getGrp());
         this.obstacle_pos-=300;
         Star st=new Star(225,this);
         st.create();
@@ -455,24 +450,25 @@ public class Game implements Serializable {
         add2.play();
     }
     public void activate_event_handlers(){
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(pause_stat==0)
-                    ball.make_jump();
-            }
+        scene.setOnKeyPressed(keyEvent -> {
+            if(pause_stat==0)
+                ball.make_jump();
         });
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(pause_stat==0)
-                    ball.make_move();
-            }
+        scene.setOnKeyReleased(keyEvent -> {
+            if(pause_stat==0)
+                ball.make_move();
         });
-        GameManager.getPausebtn().setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        GameManager.getPausebtn().setOnMouseClicked(mouseEvent -> {
+            for (Obstacle i:obstacles){
+                i.animation_pause();
+            }
+            pause_stat=1;
+            ball.getUp().pause();
+            ball.getDown().pause();
+            GameManager.getGuiStage().setScene(GameManager.getPause_screen());
+        });
+        GameManager.getPausebtn().setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode()== KeyCode.P){
                 for (Obstacle i:obstacles){
                     i.animation_pause();
                 }
@@ -480,21 +476,6 @@ public class Game implements Serializable {
                 ball.getUp().pause();
                 ball.getDown().pause();
                 GameManager.getGuiStage().setScene(GameManager.getPause_screen());
-            }
-        });
-        GameManager.getPausebtn().setOnKeyPressed(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(keyEvent.getCode()== KeyCode.P){
-                    for (Obstacle i:obstacles){
-                        i.animation_pause();
-                    }
-                    pause_stat=1;
-                    ball.getUp().pause();
-                    ball.getDown().pause();
-                    GameManager.getGuiStage().setScene(GameManager.getPause_screen());
-                }
             }
         });
         GameManager.getBack().setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -534,15 +515,11 @@ public class Game implements Serializable {
             }
         });
 
-        GameManager.getSave_game().setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    save_game();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        GameManager.getSave_game().setOnMouseClicked(mouseEvent -> {
+            try {
+                save_game();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
         Timeline add=new Timeline(new KeyFrame(Duration.millis(10),e-> {
@@ -569,13 +546,9 @@ public class Game implements Serializable {
         Timeline t=new Timeline(new KeyFrame(Duration.millis(1500)));
         t.setCycleCount(1);
         t.play();
-        t.setOnFinished(new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                GameManager.getPlay().getChildren().remove(over);
-                GameManager.getGuiStage().setScene(GameManager.getHit_screen());
-            }
+        t.setOnFinished(actionEvent -> {
+            GameManager.getPlay().getChildren().remove(over);
+            GameManager.getGuiStage().setScene(GameManager.getHit_screen());
         });
 
 
@@ -586,7 +559,7 @@ public class Game implements Serializable {
                 if(score>=5) {
                     score -= 5;
                     GameManager.getScr().setText(String.valueOf(score));
-                    ball.getBall().setCenterY(ball.getBall().getCenterY() + 100);
+                    ball.getBall().setCenterY(ball.getBall().getCenterY() + 50);
                     for (Obstacle i : obstacles) {
                         i.animation_play();
                         i.getHit().play();
@@ -596,7 +569,7 @@ public class Game implements Serializable {
                 }
                 else{
                     Alert alert=new Alert(Alert.AlertType.WARNING);
-                    ImageView icon=new ImageView("insuf.png");
+                    ImageView icon=new ImageView("sample/images/insuf.png");
                     icon.setFitHeight(48);
                     icon.setFitWidth(48);
                     alert.getDialogPane().setGraphic(icon);
@@ -620,11 +593,11 @@ public class Game implements Serializable {
         GameManager.getSave_games().add(this);
         if(GameManager.getSave_games().size()>6)
             GameManager.getSave_games().remove(0);
-        ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("savegames.txt"));
+        ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("src/sample/saved_games/savegames.txt"));
         out.writeObject(GameManager.getSave_games());
         out.close();
         Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        ImageView icon=new ImageView("save_icon.png");
+        ImageView icon=new ImageView("sample/images/save_icon.png");
         icon.setFitHeight(48);
         icon.setFitWidth(48);
         alert.getDialogPane().setGraphic(icon);

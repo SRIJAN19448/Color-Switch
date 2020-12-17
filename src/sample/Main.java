@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("Color Switch");
-        FileInputStream path=new FileInputStream("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\src\\icon.png");
+        FileInputStream path=new FileInputStream("src/sample/images/icon.png");
         primaryStage.getIcons().add(new Image(path));
         GameManager gm=new GameManager(primaryStage);
         gm.start_game(primaryStage);

@@ -74,20 +74,14 @@ public class LineObs extends Obstacle {
             timeline=new Timeline(new KeyFrame(Duration.millis(20-g.getDifficulty()),e -> move2(line[0])),new KeyFrame(Duration.millis(20-g.getDifficulty()),e1 -> move2(line[1])),new KeyFrame(Duration.millis(20-g.getDifficulty()),e2 -> move2(line[2])),new KeyFrame(Duration.millis(20-g.getDifficulty()),e3 -> move2(line[3])),new KeyFrame(Duration.millis(20-g.getDifficulty()),e4 -> move2(line[4])),new KeyFrame(Duration.millis(20-g.getDifficulty()),e5 -> move2(line[5])),new KeyFrame(Duration.millis(20-g.getDifficulty()),e6 -> move2(line[6])),new KeyFrame(Duration.millis(20-g.getDifficulty()),e7 -> move2(line[7])));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        hit=new Timeline(new KeyFrame(Duration.millis(10),e-> {
-            try {
-                detect_hit();
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
-            }
-        }));
+        hit=new Timeline(new KeyFrame(Duration.millis(10),e-> detect_hit()));
         hit.setCycleCount(Timeline.INDEFINITE);
         hit.play();
         grp.getChildren().addAll(line);
     }
 
     @Override
-    public void detect_hit() throws InterruptedException {
+    public void detect_hit(){
         for(int i=0;i<8;i++) {
             Shape shape = Shape.intersect(ball.getBall(), line[i]);
             if(shape.getBoundsInLocal().getWidth()!=-1 && line[i].getStroke()!=ball.getBall().getFill()){

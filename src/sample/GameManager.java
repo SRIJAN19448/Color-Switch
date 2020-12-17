@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -45,21 +44,20 @@ public class GameManager {
         guiStage=stage;
         game=new Game();
         save_games=new ArrayList<Game>();
-        File f1=new File("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\savegames.txt");
+        File f1=new File("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\src\\sample\\saved_games\\savegames.txt");
         if(f1.exists()){
             System.out.println("exists");
-            ObjectInputStream in=new ObjectInputStream(new FileInputStream("savegames.txt"));
+            ObjectInputStream in=new ObjectInputStream(new FileInputStream("src/sample/saved_games/savegames.txt"));
             save_games=(ArrayList<Game>)in.readObject();
             in.close();
         }
         else{
             System.out.println("doesnt");
-            ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("savegames.txt"));
+            ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("src/sample/saved_games/savegames.txt"));
             out.writeObject(save_games);
             out.close();
         }
         make_main();
-//        make_load();
         make_play();
         make_hit();
         make_pause();
@@ -266,12 +264,7 @@ public class GameManager {
         pause_screen.getStylesheets().add("sample/buttons.css");
 
         //listener of main_menu
-        main_menu.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                guiStage.setScene(GameManager.main_screen);
-            }
-        });
+        main_menu.setOnMouseClicked(mouseEvent -> guiStage.setScene(GameManager.main_screen));
 
 
         back.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -351,20 +344,10 @@ public class GameManager {
         g.getChildren().addAll(use,restart_hit,menu);
         hit.getChildren().addAll(h,g);
         hit_screen.getStylesheets().add("sample/buttons.css");
-        menu.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        menu.setOnMouseClicked(mouseEvent -> guiStage.setScene(GameManager.main_screen));
 
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                guiStage.setScene(GameManager.main_screen);
-            }
-        });
+        restart_hit.setOnMouseClicked(mouseEvent -> {
 
-        restart_hit.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-            }
         });
     }
 
@@ -380,7 +363,6 @@ public class GameManager {
         scr.setFont(new Font("System Bold",25));
         scr.setLayoutX(11);
         scr.setLayoutY(3);
-        Group g=new Group();
         pausebtn=new Button("II");
         pausebtn.setStyle("-fx-background-radius: 50;");
         pausebtn.setLayoutX(259);
@@ -392,14 +374,7 @@ public class GameManager {
         pausebtn.setId("pause");
         play.getChildren().addAll(scr,pausebtn);
         play_screen.getStylesheets().add("sample/buttons.css");
-        pausebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-                guiStage.setScene(pause_screen);
-            }
-        });
+        pausebtn.setOnMouseClicked(mouseEvent -> guiStage.setScene(pause_screen));
     }
 
     public static void make_load(){
@@ -497,13 +472,7 @@ public class GameManager {
         load.getChildren().addAll(save,back);
         load.getChildren().addAll(saves);
         load_screen.getStylesheets().add("sample/buttons.css");
-        back.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                guiStage.setScene(GameManager.main_screen);
-            }
-        });
+        back.setOnMouseClicked(mouseEvent -> guiStage.setScene(GameManager.main_screen));
 
     }
 
@@ -843,16 +812,12 @@ public class GameManager {
     public void start_game(Stage primaryStage){
         primaryStage.setScene(main_screen);
         primaryStage.show();
-        new_game.setOnMouseReleased(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    make_play();
-                    new_game();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        new_game.setOnMouseReleased(mouseEvent -> {
+            try {
+                make_play();
+                new_game();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
         load_game.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -863,14 +828,8 @@ public class GameManager {
                 if(save_games.size()!=0) {
                     make_load();
                     guiStage.setScene(load_screen);
-                    try {
-                        make_play();
-                        load_game();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    make_play();
+                    load_game();
                 }
                 else{
                     Alert alert=new Alert(Alert.AlertType.WARNING);
@@ -879,39 +838,24 @@ public class GameManager {
                     alert.setContentText("You haven't saved any games yet");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
-                    return;
                 }
             }
         });
-        exit.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.exit(0);
+        exit.setOnMouseClicked(mouseEvent -> System.exit(0));
+        restart_hit.setOnMouseClicked(mouseEvent -> {
+            try {
+                make_play();
+                new_game();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
-        restart_hit.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    make_play();
-                    new_game();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        restart_pause.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                try {
-                    make_play();
-                    new_game();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        restart_pause.setOnMouseClicked(mouseEvent -> {
+            try {
+                make_play();
+                new_game();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
@@ -920,7 +864,7 @@ public class GameManager {
 
 
 
-    public static void load_game() throws IOException, ClassNotFoundException {
+    public static void load_game(){
 
         saves[0].setOnMouseClicked(new EventHandler<MouseEvent>(){
 
@@ -928,12 +872,12 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(save_games.size()<0+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
-                    ImageView icon=new ImageView("empty_icon.jpg");
+                    ImageView icon=new ImageView("sample/images/empty_icon.jpg");
                     icon.setFitHeight(48);
                     icon.setFitWidth(48);
                     alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
-                    alert.setContentText("This is an empty slot.");
+                    alert.setContentText("No saved game in this slot yet.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
@@ -958,12 +902,12 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(save_games.size()<1+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
-                    ImageView icon=new ImageView("empty_icon.jpg");
+                    ImageView icon=new ImageView("sample/images/empty_icon.jpg");
                     icon.setFitHeight(48);
                     icon.setFitWidth(48);
                     alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
-                    alert.setContentText("This is an empty slot.");
+                    alert.setContentText("No saved game in this slot yet.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
@@ -988,12 +932,12 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(save_games.size()<2+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
-                    ImageView icon=new ImageView("empty_icon.jpg");
+                    ImageView icon=new ImageView("sample/images/empty_icon.jpg");
                     icon.setFitHeight(48);
                     icon.setFitWidth(48);
                     alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
-                    alert.setContentText("This is an empty slot.");
+                    alert.setContentText("No saved game in this slot yet.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
@@ -1017,12 +961,12 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(save_games.size()<3+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
-                    ImageView icon=new ImageView("empty_icon.jpg");
+                    ImageView icon=new ImageView("sample/images/empty_icon.jpg");
                     icon.setFitHeight(48);
                     icon.setFitWidth(48);
                     alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
-                    alert.setContentText("This is an empty slot.");
+                    alert.setContentText("No saved game in this slot yet.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
@@ -1047,12 +991,12 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(save_games.size()<4+1){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
-                    ImageView icon=new ImageView("empty_icon.jpg");
+                    ImageView icon=new ImageView("sample/images/empty_icon.jpg");
                     icon.setFitHeight(48);
                     icon.setFitWidth(48);
                     alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
-                    alert.setContentText("This is an empty slot.");
+                    alert.setContentText("No saved game in this slot yet.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;
@@ -1077,12 +1021,12 @@ public class GameManager {
             public void handle(MouseEvent mouseEvent) {
                 if(save_games.size()<5+1) {
                     Alert alert=new Alert(Alert.AlertType.WARNING);
-                    ImageView icon=new ImageView("empty_icon.jpg");
+                    ImageView icon=new ImageView("sample/images/empty_icon.jpg");
                     icon.setFitHeight(48);
                     icon.setFitWidth(48);
                     alert.getDialogPane().setGraphic(icon);
                     alert.setHeaderText("Empty!!!");
-                    alert.setContentText("This is an empty slot.");
+                    alert.setContentText("No saved game in this slot yet.");
                     alert.getDialogPane().getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
                     alert.show();
                     return;

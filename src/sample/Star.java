@@ -33,7 +33,7 @@ public class Star implements Special, Serializable {
     }
 
     public void create() throws FileNotFoundException {
-        FileInputStream path=new FileInputStream("C:\\Users\\srija\\IdeaProjects\\ColorSwitch\\src\\sample\\stars.png");
+        FileInputStream path=new FileInputStream("src/sample/images/stars.png");
         Image img=new Image(path);
         imv.setImage(img);
         imv.setPreserveRatio(true);
@@ -42,15 +42,13 @@ public class Star implements Special, Serializable {
         imv.setX(125);
         imv.setY(pos);
         grp.getChildren().add(imv);
-//        System.out.println(game.getBall().getBall()==null);
         t=new Timeline(new KeyFrame(Duration.millis(10),e->special(game.getBall().getBall().getCenterY())));
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
     }
 
     @Override
-    public int special(double posY) {
-//        System.out.println(this.canvas==null);
+    public void special(double posY) {
         if(posY>=this.imv.getY()+10 && posY<=this.imv.getY()+40){
             game.setScore(game.getScore()+1);
             GameManager.getScr().setText(String.valueOf(game.getScore()));
@@ -61,6 +59,5 @@ public class Star implements Special, Serializable {
             t.stop();
         }
 
-        return -1;
     }
 }
