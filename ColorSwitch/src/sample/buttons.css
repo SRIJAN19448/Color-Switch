@@ -1,0 +1,27 @@
+.button{
+    -fx-background-radius: 50;
+    -fx-background-color: PURPLE;
+    -fx-text-fill: #ffd55a;
+}
+.button:hover{
+    -fx-background-color: #ffd55a;
+    -fx-text-fill: PURPLE;
+}
+.button#back{
+    -fx-background-radius: 50;
+    -fx-background-color: #35C54D;
+    -fx-text-fill: #ffd55a;
+}
+.button#back:hover{
+    -fx-background-color: #ffd55a;
+    -fx-text-fill: #35C54D;
+}
+.button#pause{
+    -fx-background-radius: 50;
+    -fx-background-color: #333333;
+    -fx-text-fill: WHITE;
+}
+.button#pause:hover{
+    -fx-background-color: WHITE;
+    -fx-text-fill: #333333;
+}
