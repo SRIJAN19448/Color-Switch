@@ -1,1 +1,1 @@
-[embed](Class_diagram.pdf)
+<embed src="Class_diagram.pdf" type="application/pdf"/>
