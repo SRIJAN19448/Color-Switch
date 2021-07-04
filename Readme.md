@@ -1,1 +1,1 @@
-![embed](Class_diagram.pdf)
+[embed](Class_diagram.pdf)
