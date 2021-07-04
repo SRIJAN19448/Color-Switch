@@ -1,4 +1,5 @@
 # Color Switch
+
 ColorSwitch folder contains the project files for IntelliJ.
 <br><br>
 Presentation.pdf is the ppt of the project.
